@@ -1,13 +1,48 @@
 {
-  "pages":[
+  "pages": [
+    "pages/Q&A/Q&A",
+    "pages/Forum/Forum",
+    "pages/MyAccount/MyAccount",
+    "pages/Kit/Kit",
     "pages/index/index",
     "pages/addCgi/addCgi"
   ],
-  "window":{
-    "backgroundColor":"#F6F6F6",
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "Wafer Quick Start",
-    "navigationBarTextStyle":"black"
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#4C98E1",
+    "navigationBarTitleText": "Cross-culture",
+    "navigationBarTextStyle": "#FFFFFF"
+  },
+  "tabBar": {
+    "position": "bottom",
+    "color": "#666666",
+    "selectedColor": "#4C98E1",
+    "list": [
+      {
+        "text": "Q&A",
+        "pagePath": "pages/Q&A/Q&A",
+        "iconPath": "assets/icon/Q&A_on@3x.png",
+        "selectedIconPath": "assets/icon/Q&A@3x.png"
+      },
+      {
+        "text": "Kit",
+        "pagePath": "pages/Kit/Kit",
+        "iconPath": "assets/icon/Kit_on@3x.png",
+        "selectedIconPath": "assets/icon/Kit@3x.png"
+      },
+      {
+        "text": "Forum",
+        "pagePath": "pages/Forum/Forum",
+        "iconPath": "assets/icon/Forum_on@3x.png",
+        "selectedIconPath": "assets/icon/Forum@3x.png"
+      },
+      {
+        "text": "My Account",
+        "pagePath": "pages/MyAccount/MyAccount",
+        "iconPath": "assets/icon/My Account_on@3x.png",
+        "selectedIconPath": "assets/icon/My Account@3x.png"
+      }
+    ]
   }
 }

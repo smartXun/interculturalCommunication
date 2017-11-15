@@ -1,0 +1,24 @@
+<view class='header_view'>
+  <image class='header_bg'></image> 
+  <image class='header_icon' src='../../assets/icon/Unlogin.png'></image>
+  <text class='header_name'>Unlogin</text>
+</view>
+
+<view class='list'>
+  <view class='item'>
+    <image class='item_icon' src='../../assets/icon/like_1@3x.png'></image>
+    <text class='item_text'>I Like</text>
+  </view>
+  <view class='item'>
+    <image class='item_icon' src='../../assets/icon/Comment@3x.png'></image>
+    <text class='item_text'>My Comment</text>
+  </view>
+  <view class='item'>
+    <image class='item_icon' src='../../assets/icon/HistoricalRecords@3x.png'></image>
+    <text class='item_text'>Historical Records</text>
+  </view>
+  <view class='item'>
+    <image class='item_icon' src='../../assets/icon/Account@3x.png'></image>
+    <text class='item_text'>Account</text>
+  </view>
+</view>
