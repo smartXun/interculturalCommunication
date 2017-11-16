@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/SignIn/SignIn",
     "pages/Q&A/Q&A",
     "pages/Forum/Forum",
     "pages/MyAccount/MyAccount",

@@ -1,13 +1,20 @@
-// pages/MyAccount/MyAccount.js
+var app = getApp();
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
   
   },
+  tapHeader: (event) => {
+    if (app.globalData.userInfo){
 
+    }else{
+      wx.navigateTo({
+        url: '../SignIn/SignIn',
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */

@@ -1,24 +1,24 @@
-<view class='header_view'>
-  <image class='header_bg'></image> 
+<view class='header_view' bindtap='tapHeader'>
+  <image class='header_bg' src='../../assets/background/user_bg.png'></image> 
   <image class='header_icon' src='../../assets/icon/Unlogin.png'></image>
-  <text class='header_name'>Unlogin</text>
+  <text class='header_name mt-15'>Unlogin</text>
 </view>
 
 <view class='list'>
   <view class='item'>
     <image class='item_icon' src='../../assets/icon/like_1@3x.png'></image>
-    <text class='item_text'>I Like</text>
+    <text class='fz-15'>I Like</text>
   </view>
   <view class='item'>
     <image class='item_icon' src='../../assets/icon/Comment@3x.png'></image>
-    <text class='item_text'>My Comment</text>
+    <text class='fz-15'>My Comment</text>
   </view>
   <view class='item'>
     <image class='item_icon' src='../../assets/icon/HistoricalRecords@3x.png'></image>
-    <text class='item_text'>Historical Records</text>
+    <text class='fz-15'>Historical Records</text>
   </view>
   <view class='item'>
     <image class='item_icon' src='../../assets/icon/Account@3x.png'></image>
-    <text class='item_text'>Account</text>
+    <text class='fz-15'>Account</text>
   </view>
 </view>

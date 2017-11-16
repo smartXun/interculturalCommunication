@@ -5,7 +5,7 @@ page{
 .header_view{
   width: 750rpx;
   height: 520rpx;
-  background: #FFF;
+  background: #FFFFFF;
 }
 .header_bg{
   width: 750rpx;
@@ -23,7 +23,6 @@ page{
 .header_name{
   width: 750rpx;
   display: block;
-  margin-top: 30rpx;
   position: relative;
   top: -80rpx;
   text-align: center;
@@ -44,7 +43,4 @@ page{
   margin: 0 40rpx;
   width: 36rpx;
   height: 36rpx;
-}
-.item_text{
-  font-size: 30rpx;
 }
