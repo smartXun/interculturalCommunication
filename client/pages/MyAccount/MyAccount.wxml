@@ -1,7 +1,7 @@
 <view class='header_view' bindtap='tapHeader'>
   <image class='header_bg' src='../../assets/background/user_bg.png'></image> 
-  <image class='header_icon' src='../../assets/icon/Unlogin.png'></image>
-  <text class='header_name mt-15'>Unlogin</text>
+  <image class='header_icon' src="{{userInfo.avatarUrl||'../../assets/icon/Unlogin.png'}}"></image>
+  <text class='header_name mt-15'>{{userInfo.nickName||"Unlogin"}}</text>
 </view>
 
 <view class='list'>

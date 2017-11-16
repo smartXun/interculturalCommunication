@@ -4,10 +4,8 @@ const CONF = {
 
     // 微信小程序 App ID
     appId: 'wxfc75c4fc0a8a32d1',
-
     // 微信小程序 App Secret
     appSecret: 'd568d68e0006aa12422e8b2c0c2d8c99',
-
     // 是否使用腾讯云代理登录小程序
     useQcloudLogin: true,
 
@@ -41,7 +39,6 @@ const CONF = {
         // 文件夹
         uploadFolder: ''
     },
-
     // 微信登录态有效期
     wxLoginExpires: 7200,
     wxMessageToken: 'abcdefgh'

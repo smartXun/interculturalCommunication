@@ -1,10 +1,10 @@
 {
   "pages": [
-    "pages/SignIn/SignIn",
     "pages/Q&A/Q&A",
     "pages/Forum/Forum",
     "pages/MyAccount/MyAccount",
     "pages/Kit/Kit",
+    "pages/SignIn/SignIn",
     "pages/index/index",
     "pages/addCgi/addCgi"
   ],
