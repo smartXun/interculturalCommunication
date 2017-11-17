@@ -4,10 +4,31 @@ var util = require('../../utils/util.js')
 var app = getApp()
 Page({
   data: {
+    accValue:'',
+    pwdValue:''
   },
-  onLoad: function (options) {
+  signup: function () {
+    wx.navigateTo({ url: '../SignUp/SignUp' })
   },
-  onReady: function () {
+  accKeyInput: function (e) {
+    this.setData({ accValue: e.detail.value })
+  },
+  pwdKeyInput: function (e) {
+    this.setData({ pwdValue: e.detail.value })
+  },
+  localLogin:function () {
+    console.log(this.data.accValue)
+    wx.request({
+      url: config.urls.LocalLogin,
+      method: "POST",
+      data:{
+        acc: this.data.accValue,
+        pwd: this.data.pwdValue
+      },
+      success: (res)=>{
+        console.log(res)
+      }
+    })
   },
   wechat_login_success: (userInfo)=>{
     util.showSuccess('登录成功')

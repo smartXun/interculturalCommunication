@@ -1,10 +1,10 @@
-<input class='input underline' type="text" placeholder="Username" />
-<input class='input' type="idcard" placeholder="Password" />
-<view class='btn blue'>
+<input class='input underline' bindinput="accKeyInput" type="text" placeholder="Username" />
+<input class='input' bindinput="pwdKeyInput" type="idcard" placeholder="Password" />
+<view class='btn blue' bindtap='localLogin'>
   <text class='fz-15'>Login</text>
 </view>
 <view class='btn flex-h black' bindtap='wechatLogin'>
   <image class='icon' src='../../assets/icon/wechat_icon.png'></image>
   <text class='fz-12'>Log in using the WeChat account</text>
 </view>
-<text class='flex-h mt-15 fz-12 underline'>Don't have an account?Sign Up!</text>
+<text class='flex-h mt-15 fz-12 underline' bindtap='signup'>Don't have an account?Sign Up!</text>

@@ -6,7 +6,8 @@
     "pages/Kit/Kit",
     "pages/SignIn/SignIn",
     "pages/index/index",
-    "pages/addCgi/addCgi"
+    "pages/addCgi/addCgi",
+    "pages/SignUp/SignUp"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

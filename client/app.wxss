@@ -18,6 +18,15 @@
   justify-content: center;
 }
 
+.fullWidth{
+  width: 750rpx;
+}
+
+.bottom{
+  position: absolute;
+  bottom: 0;
+}
+
 .fz-12{
   font-size: 24rpx;
 }
@@ -42,6 +51,7 @@ view.underline{
   height: 110rpx;
   padding-left: 40rpx;
   font-size: 24rpx;
+  background: #FFFFFF;
 }
 
 .btn{

@@ -1,0 +1,14 @@
+page{
+  background-color: #D8D8D8; 
+}
+
+.add_view{
+  height: 360rpx;
+  background-color: #D8D8D8;
+}
+.add_view image{
+  width: 160rpx;
+  height: 160rpx;
+  margin-left: 295rpx;
+  margin-top: 100rpx;
+}

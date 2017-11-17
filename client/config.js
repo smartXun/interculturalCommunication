@@ -6,7 +6,6 @@
 var host = 'https://5pa2v70w.qcloud.la';
 
 var config = {
-
     // 下面的地址配合云端 Demo 工作
     service: {
         host,
@@ -18,6 +17,9 @@ var config = {
         tunnelUrl: `${host}/weapp/tunnel`,
         // 上传图片接口
         uploadUrl: `${host}/weapp/upload`
+    },
+    urls:{
+      LocalLogin: host +'/weapp/login_local'
     }
 };
 
