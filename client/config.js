@@ -15,7 +15,8 @@ var config = {
         uploadUrl: `${host}/weapp/upload`
     },
     urls:{
-      LocalLogin: host +'/weapp/login_local'
+      LocalLogin: host + '/weapp/login_local',
+      LocalRegister: host + '/weapp/register_local'
     }
 };
 

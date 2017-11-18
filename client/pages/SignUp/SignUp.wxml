@@ -1,11 +1,11 @@
-<view class="add_view">
+<view class="add_view" bindtap='chooseImageTap'>
   <image src='../../assets/icon/add.png'></image>
 </view>
-<input class='input underline' placeholder="Username"></input>
-<input class='input underline' placeholder="Email"></input>
-<input class='input underline' placeholder="Password"></input>
-<input class='input' placeholder="Confirm Password"></input>
+<input class='input underline' placeholder="Username" bindinput='accKeyInput'></input>
+<input class='input underline' placeholder="Email" bindinput='emailKeyInput'></input>
+<input class='input underline' placeholder="Password" bindinput='pwdKeyInput'></input>
+<input class='input' placeholder="Confirm Password" bindinput='pwd2KeyInput'></input>
 <text class='flex-h mt-15 fz-12 underline' bindtap='signin'>Already account?login immediately!</text>
-<view class='btn blue bottom fullWidth' bindtap=''>
+<view class='btn blue bottom fullWidth' bindtap='signup'>
   <text class='fz-15'>Sign up</text>
 </view>

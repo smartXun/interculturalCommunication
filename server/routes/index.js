@@ -1,22 +1,27 @@
-/**
- * ajax 服务路由集合
- */
-const router = require('koa-router')({
-    prefix: '/weapp'
-})
+const path = require('path')
+const router = require('koa-router')({ prefix: '/weapp' })
 const controllers = require('../controllers')
+// const { auth: { authorizationMiddleware, validationMiddleware } } = require('../qcloud')
+const auth = require('../middlewares/auth.js')
 
-// 从 sdk 中取出中间件
-// 这里展示如何使用 Koa 中间件完成登录态的颁发与验证
-const { auth: { authorizationMiddleware, validationMiddleware } } = require('../qcloud')
+const multer = require('koa-multer')
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) { cb(null, path.join(__dirname, '../uploads/')) },
+  filename: function (req, file, cb) {
+    var fileFormat = (file.originalname).split(".");
+    cb(null, file.fieldname + '-' + Date.now() + "." + fileFormat[fileFormat.length - 1]);
+  }
+});  
+const upload = multer({ storage: storage })
 
 // --- 登录与授权 Demo --- //
 // 登录接口
-router.get('/login', authorizationMiddleware, controllers.auth.wechat)
+// router.get('/login', authorizationMiddleware, controllers.auth.wechat)
 // 用户信息接口（可以用来验证登录态）
-router.get('/user', validationMiddleware, controllers.user)
+// router.get('/user', validationMiddleware, controllers.user)
 //账号密码小程序登录
-router.post('/login_local', controllers.auth.local)
+router.post('/login_local', controllers.auth.local.login)
+router.post('/register_local', upload.single('file'), controllers.auth.local.register)
 
 // --- 图片上传 Demo --- //
 // 图片上传接口，小程序端可以直接将 url 填入 wx.uploadFile 中

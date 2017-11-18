@@ -17,17 +17,14 @@ Page({
     this.setData({ pwdValue: e.detail.value })
   },
   localLogin:function () {
-    console.log(this.data.accValue)
-    wx.request({
-      url: config.urls.LocalLogin,
-      method: "POST",
-      data:{
-        acc: this.data.accValue,
-        pwd: this.data.pwdValue
-      },
-      success: (res)=>{
-        console.log(res)
-      }
+    util.post(config.urls.LocalLogin, {
+      acc: this.data.accValue,
+      pwd: this.data.pwdValue
+    },(res)=>{
+      wx.setStorageSync('token', res.token);
+      app.globalData.token = res.token
+      // app.globalData.userInfo = data.userInfo
+      wx.switchTab({ url: '../MyAccount/MyAccount' })
     })
   },
   wechat_login_success: (userInfo)=>{

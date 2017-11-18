@@ -4,6 +4,9 @@ var config = require('./config')
 
 App({
     onLaunch: function () {
+      var token = wx.getStorageSync('token') || '';
+      this.globalData.token = token;
+      
       qcloud.setLoginUrl(config.service.loginUrl)
       var that = this
       qcloud.login({
@@ -29,6 +32,7 @@ App({
       })
     },
     globalData:{
-      userInfo: null
+      userInfo: null,
+      token: ''
     }
 })
