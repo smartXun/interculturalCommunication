@@ -1,10 +1,32 @@
-// 登录授权接口
+const axios = require('axios')
+const conf = require('../../config.js')
+const knex = require('../../knex.js')
+const jwt = require('jsonwebtoken')
+
 module.exports = async (ctx, next) => {
-    // 通过 Koa 中间件进行登录之后
-    // 登录信息会被存储到 ctx.state.$wxInfo
-    // 具体查看：
-    if (ctx.state.$wxInfo.loginState) {
-        ctx.state.data = ctx.state.$wxInfo.userinfo
-        ctx.state.data['time'] = Math.floor(Date.now() / 1000)
+  const { code, nickName, avatarUrl } = ctx.request.body;
+  if (!code || !nickName || !avatarUrl) {
+    ctx.body = { success: false, message: '参数错误' }
+  } else {
+    const url = 'https://api.weixin.qq.com/sns/jscode2session?appid=' +
+      conf.appId + '&secret=' + conf.appSecret + '&js_code=' + code + '&grant_type=authorization_code'
+    const res = await axios.get(url)
+    const { openid, session_key } = res.data
+    const user = await knex('mUser').where({ open_id: openid }).first()
+    if (user) {
+      let userToken = { id: user.u_id }
+      const token = jwt.sign(userToken, conf.jwtSecret, { expiresIn: '7d' })  //token签名 有效期为7天
+      ctx.body = { success: true, token }
+    } else {
+      const user = await knex('mUser').insert({ name: nickName, image_url: avatarUrl, open_id: openid, session_key: session_key })
+      if (user) {
+        const u_id = user[0]
+        let userToken = { id: user.u_id }
+        const token = jwt.sign(userToken, conf.jwtSecret, { expiresIn: '7d' })  //token签名 有效期为7天
+        ctx.body = { success: true, token }
+      } else {
+        ctx.body = { success: false, msg: "用户创建失败" }
+      }
     }
+  }
 }

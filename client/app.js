@@ -1,35 +1,47 @@
-//app.js
-var qcloud = require('./vendor/wafer2-client-sdk/index')
-var config = require('./config')
+const util = require('./common/util.js')
+const urls = require('./common/constant_url.js')
+const config = require('./config')
 
 App({
     onLaunch: function () {
       var token = wx.getStorageSync('token') || '';
       this.globalData.token = token;
       
-      qcloud.setLoginUrl(config.service.loginUrl)
       var that = this
-      qcloud.login({
-        success(result) {
-          if (result) {
-            that.globalData.userInfo = result;
-          } else {
-            qcloud.request({
-              url: config.service.requestUrl,
-              login: true,
-              success(result) {
-                that.globalData.userInfo = result.data.data;
-              },
-              fail(error) {
-                console.log('request fail', error)
+      wx.getUserInfo({
+        success: function (res) {
+          const userInfo = res.userInfo
+          wx.login({
+            success: res => {
+              const data = {
+                code: res.code,
+                nickName: userInfo.nickName,
+                avatarUrl: userInfo.avatarUrl,
               }
-            })
-          }
-        },
-        fail(error) {
-          console.log('登录失败', error)
+              util.http_post(urls.WechatLogin, data, (res) => {
+                if (res && res.success) {
+                  that.globalData.userInfo = userInfo
+                  if (that.userInfoReadyCallback) {
+                    that.userInfoReadyCallback(res)
+                  }
+                }
+              });
+            },
+            fail: err => {
+              if(token){
+                this.getUserInfo();
+              }
+            }
+          })
         }
       })
+    },
+    getUserInfo: function(){
+      util.http_get(urls.UserInfo,(res)=>{
+        if(res.success){
+          this.globalData.userInfo = res.userInfo
+        }
+      });
     },
     globalData:{
       userInfo: null,

@@ -5,8 +5,6 @@
     "pages/MyAccount/MyAccount",
     "pages/Kit/Kit",
     "pages/SignIn/SignIn",
-    "pages/index/index",
-    "pages/addCgi/addCgi",
     "pages/SignUp/SignUp"
   ],
   "window": {

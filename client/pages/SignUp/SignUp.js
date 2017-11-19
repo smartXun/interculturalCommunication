@@ -1,7 +1,8 @@
-var util = require('../../utils/util.js')
-var errMsg = require('../../errMsg.js')
-var config = require('../../config.js')
-var app = getApp()
+const util = require('../../common/util.js')
+const urls = require('../../common/constant_url.js')
+const errMsg = require('../../errMsg.js')
+const config = require('../../config.js')
+const app = getApp()
 
 Page({
   data: {
@@ -75,7 +76,7 @@ Page({
       util.showModel(errMsg.type.wrongValue, errMsg.account.pwdNotSame)
     }else{
       wx.uploadFile({
-        url: config.urls.LocalRegister,
+        url: urls.LocalRegister,
         filePath: this.data.userPhoto,
         name: 'file',
         formData: {
@@ -86,17 +87,16 @@ Page({
         success: function (res) {
           const data = JSON.parse(res.data)
           if (data.success){
-            util.showSuccess('注册成功')
-            wx.setStorageSync('token', res.token);
-            app.globalData.token = res.token
-            // app.globalData.userInfo = data.userInfo
+            wx.setStorageSync('token', data.token);
+            app.globalData.token = data.token
+            app.globalData.userInfo = data.userInfo
             wx.switchTab({ url: '../MyAccount/MyAccount' })
           }else{
-            util.showModel('注册失败', data.msg)
+            util.showModel('注册失败', data.message || '')
           }
         },
         fail: function (e) {
-          util.showModel('上传图片失败')
+          util.showModel('network error')
         }
       })
     }

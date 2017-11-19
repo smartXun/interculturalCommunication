@@ -1,7 +1,7 @@
-var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
-var util = require('../../utils/util.js')
+var util = require('../../common/util.js')
 var app = getApp()
+
 Page({
   data: {
     accValue:'',
@@ -17,14 +17,18 @@ Page({
     this.setData({ pwdValue: e.detail.value })
   },
   localLogin:function () {
-    util.post(config.urls.LocalLogin, {
+    util.http_post(config.urls.LocalLogin, {
       acc: this.data.accValue,
       pwd: this.data.pwdValue
     },(res)=>{
-      wx.setStorageSync('token', res.token);
-      app.globalData.token = res.token
-      // app.globalData.userInfo = data.userInfo
-      wx.switchTab({ url: '../MyAccount/MyAccount' })
+      if (res.success){
+        wx.setStorageSync('token', res.token);
+        app.globalData.token = res.token
+        app.globalData.userInfo = res.userInfo
+        wx.switchTab({ url: '../MyAccount/MyAccount' })
+      }else{
+        util.showModel('登陆失败', res.message)
+      }
     })
   },
   wechat_login_success: (userInfo)=>{

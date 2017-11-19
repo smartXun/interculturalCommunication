@@ -1,5 +1,5 @@
 <input class='input underline' bindinput="accKeyInput" type="text" placeholder="Username" />
-<input class='input' bindinput="pwdKeyInput" type="idcard" placeholder="Password" />
+<input class='input' password bindinput="pwdKeyInput" type="text" placeholder="Password" />
 <view class='btn blue' bindtap='localLogin'>
   <text class='fz-15'>Login</text>
 </view>

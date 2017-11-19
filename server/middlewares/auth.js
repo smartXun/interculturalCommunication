@@ -1,24 +1,25 @@
 const debug = require('debug')('Cross-culture')
+const conf = require('../config.js')
+const jwt = require('jsonwebtoken')
+const knex = require('../knex.js')
 
 module.exports = async (ctx, next) => {
   try {
     if (ctx.req.headers && ctx.req.headers.authorization) {
-      await next()
-    } else {
-      ctx.body = {
-        code: -1,
-        msg: '用户未验证'
+      const decoded = jwt.verify(ctx.req.headers.authorization, conf.jwtSecret)
+      if (decoded.id){
+        const user = await knex('mUser').where({ u_id: decoded.id }).first()
+        ctx.request.user = user
+        await next()
+      }else{
+        ctx.body = { code: -1, msg: 'token invalid' }
       }
+    } else {
+      ctx.body = { code: -1, msg: 'User authentication failed' }
     }
   } catch (e) {
-    // catch 住全局的错误信息
     debug('Catch Error: %o', e)
-    // 设置状态码为 200 - 服务端错误
     ctx.status = 200
-    // 输出详细的错误信息
-    ctx.body = {
-      code: -1,
-      error: e && e.message ? e.message : e.toString()
-    }
+    ctx.body = { code: -1, error: e && e.message ? e.message : e.toString() }
   }
 }
