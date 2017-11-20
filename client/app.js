@@ -19,6 +19,8 @@ App({
               }
               util.http_post(urls.WechatLogin, data, (res) => {
                 if (res && res.success) {
+                  wx.setStorageSync('token', res.token);
+                  that.globalData.token = res.token
                   that.globalData.userInfo = userInfo
                   if (that.userInfoReadyCallback) {
                     that.userInfoReadyCallback(res)

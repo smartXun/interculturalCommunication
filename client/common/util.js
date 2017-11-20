@@ -67,7 +67,7 @@ module.exports = {
   }),
   showLoading: () => {
     wx.showToast({
-      title: '加载中',
+      title: 'Loding',
       icon: 'loading',
       mask: true,
       duration: 10000
