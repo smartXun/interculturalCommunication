@@ -1,7 +1,6 @@
 const util = require('../../common/util.js')
 const urls = require('../../common/constant_url.js')
 const errMsg = require('../../errMsg.js')
-const config = require('../../config.js')
 const app = getApp()
 
 Page({

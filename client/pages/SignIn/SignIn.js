@@ -1,4 +1,4 @@
-var config = require('../../config')
+var urls = require('../../common/constant_url.js')
 var util = require('../../common/util.js')
 var app = getApp()
 
@@ -17,7 +17,7 @@ Page({
     this.setData({ pwdValue: e.detail.value })
   },
   localLogin:function () {
-    util.http_post(config.urls.LocalLogin, {
+    util.http_post(urls.LocalLogin, {
       acc: this.data.accValue,
       pwd: this.data.pwdValue
     },(res)=>{

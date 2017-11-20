@@ -1,6 +1,5 @@
 const util = require('./common/util.js')
 const urls = require('./common/constant_url.js')
-const config = require('./config')
 
 App({
     onLaunch: function () {
