@@ -4,7 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-  
+    list:[]
   },
   onLoad: function (options) {
     app.userInfoReadyCallback = ()=> {
@@ -13,7 +13,9 @@ Page({
   },
   getData: function(){
     util.http_get(url.QAList, (res) => {
-      console.log(res)
+      this.setData({
+        list: res.data
+      })
     });
   }
 })

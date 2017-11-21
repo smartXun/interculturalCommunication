@@ -1,1 +1,29 @@
-/* pages/Q&A/Q&A.wxss */
+page{
+  background-color: #D8D8D8; 
+}
+
+.qalist{
+  background-color: #FFFFFF;
+  margin: 10rpx 0;
+}
+.qatitle,.qades{
+  display: block;
+  margin: 20rpx;
+}
+.qades{
+  color: #999999;
+}
+.userIcon{
+  width: 70rpx;
+  height: 70rpx;
+  margin: 0 0 20rpx 20rpx;
+}
+.timeIcon{
+  width: 20rpx;
+  height: 20rpx;
+}
+.timeText{
+  color: #999999;
+  margin-left: 13rpx;
+  margin-right: 30rpx;
+}

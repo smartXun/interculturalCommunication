@@ -1,1 +1,37 @@
-/* pages/Kit/Kit.wxss */
+page{
+  background-color: #D8D8D8; 
+}
+
+.cover_image{
+  position: absolute;
+  top: 90rpx;
+  width: 750rpx;
+  height: 555rpx;
+}
+
+.kit_group{
+  position: absolute;
+  bottom: 0;
+  background: #FFFFFF;
+}
+.kit{
+  position: relative;
+  height: 230rpx;
+  text-align: center;
+}
+.kit_center{
+  border-style: solid;
+  border-width: 0 1px 0 1px;
+  border-color: #D8D8D8;
+}
+.kit_icon{
+  width: 69rpx;
+  height: 69rpx;
+  margin-top: 75rpx;
+}
+.kit_text{
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 20rpx;
+}

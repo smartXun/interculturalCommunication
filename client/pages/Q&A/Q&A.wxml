@@ -1,2 +1,29 @@
-<!--pages/Q&A/Q&A.wxml-->
-<text>pages/Q&A/Q&A.wxml</text>
+<view class='header'>
+  <view class='header-top blue flex-h'>
+    <view class='search flex1 flex-h'>
+    <image class='search_icon' src='../../assets/icon/search@3x.png'></image>
+    <input class='flex1 fz-12' bindinput="searchKeyInput" type="text" placeholder="Search" />
+    </view>
+    <image class='pen' src='../../assets/icon/pen.png'></image>
+  </view>
+</view>
+
+<block wx:for="{{list}}" wx:key="id">
+  <view class='qalist flex-v'>
+    <text class='qatitle fz-14'>{{item.title}}</text>
+    
+    <text class='qades fz-12'>{{item.description}}</text>
+    <view class='flex-h fullWidth'>
+      <view class='flex1 flex'>
+        <block wx:for="{{item.commentUserPhotos}}" wx:key="*this">
+          <image class='userIcon' src="{{item}}"></image>
+        </block>
+        <text class='blue fz-12' style='margin:0 0 20rpx 20rpx'>+{{item.commentCounts}}</text>
+      </view>
+      <view class='flex'>
+        <image class='timeIcon' src='../../assets/icon/Clock@3x.png'></image>
+        <text class='timeText fz-12 g9'>{{item.createTime}}</text>
+      </view>
+    </view>
+  </view>
+</block>

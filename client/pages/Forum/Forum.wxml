@@ -1,2 +1,9 @@
-<!--pages/Forum/Forum.wxml-->
-<text>pages/Forum/Forum.wxml</text>
+<view class='header'>
+  <view class='header-top blue flex-h'>
+    <view class='search flex1 flex-h'>
+    <image class='search_icon' src='../../assets/icon/search@3x.png'></image>
+    <input class='flex1 fz-12' bindinput="searchKeyInput" type="text" placeholder="Search" />
+    </view>
+    <image class='pen' src='../../assets/icon/pen.png'></image>
+  </view>
+</view>

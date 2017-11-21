@@ -1,2 +1,58 @@
-<!--pages/Kit/Kit.wxml-->
-<text>pages/Kit/Kit.wxml</text>
+<view class='header'>
+  <view class='header-top blue flex-h'>
+    <view class='search flex1 flex-h'>
+    <image class='search_icon' src='../../assets/icon/search@3x.png'></image>
+    <input class='flex1 fz-12' bindinput="searchKeyInput" type="text" placeholder="Search" />
+    </view>
+    <image class='pen' src='../../assets/icon/pen.png'></image>
+  </view>
+</view>
+
+<image class='cover_image' src='../../assets/background/kit_corver.png'></image>
+
+<view class='kit_group .fullWidth'>
+  <view class='flex-h underline'>
+    <view class='flex1 kit'>
+      <image class='kit_icon' src='../../assets/icon/IT@3x.png'></image>
+      <text class='kit_text fz-14'>IT</text>
+    </view>
+    <view class='flex1 kit kit_center'>
+      <image class='kit_icon' src='../../assets/icon/OA@3x.png'></image>
+      <text class='kit_text fz-14'>OA</text>
+    </view>
+    <view class='flex1 kit'>
+      <image class='kit_icon' src='../../assets/icon/Company&BG@3x.png'></image>
+      <text class='kit_text fz-14'>Company & BG</text>
+    </view>
+  </view>
+
+  <view class='flex-h underline'>
+    <view class='flex1 kit'>
+      <image class='kit_icon' src='../../assets/icon/HR@3x.png'></image>
+      <text class='kit_text fz-14'>HR</text>
+    </view>
+    <view class='flex1 kit kit_center'>
+      <image class='kit_icon' src='../../assets/icon/Culture@3x.png'></image>
+      <text class='kit_text fz-14'>Culture</text>
+    </view>
+    <view class='flex1 kit'>
+      <image class='kit_icon' src='../../assets/icon/Renting@3x.png'></image>
+      <text class='kit_text fz-14'>Renting</text>
+    </view>
+  </view>
+
+  <view class='flex-h'>
+    <view class='flex1 kit'>
+      <image class='kit_icon' src='../../assets/icon/Transportation@3x.png'></image>
+      <text class='kit_text fz-14'>Transportation</text>
+    </view>
+    <view class='flex1 kit kit_center'>
+      <image class='kit_icon' src='../../assets/icon/Food@3x.png'></image>
+      <text class='kit_text fz-14'>Food</text>
+    </view>
+    <view class='flex1 kit'>
+      <image class='kit_icon' src='../../assets/icon/Others@3x.png'></image>
+      <text class='kit_text fz-14'>Others</text>
+    </view>
+  </view>
+</view>
