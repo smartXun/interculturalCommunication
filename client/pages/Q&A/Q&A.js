@@ -17,5 +17,8 @@ Page({
         list: res.data
       })
     });
+  },
+  newqa: function(){
+    wx.navigateTo({ url: '../NewQA/NewQA' })
   }
 })

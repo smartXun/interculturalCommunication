@@ -4,7 +4,7 @@
     <image class='search_icon' src='../../assets/icon/search@3x.png'></image>
     <input class='flex1 fz-12' bindinput="searchKeyInput" type="text" placeholder="Search" />
     </view>
-    <image class='pen' src='../../assets/icon/pen.png'></image>
+    <image bindtap="newqa" class='pen' src='../../assets/icon/pen.png'></image>
   </view>
 </view>
 

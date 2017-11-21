@@ -1,0 +1,6 @@
+textarea{
+  margin: 20rpx;
+}
+.btn{
+  width: 220rpx;
+}
