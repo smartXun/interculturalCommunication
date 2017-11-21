@@ -19,6 +19,8 @@ router.post('/login_local', controllers.auth.local.login)
 router.post('/register_local', upload.single('file'), controllers.auth.local.register)
 router.get('/user_info', auth, controllers.auth.userInfo)
 
-router.get('/qalist', auth, controllers.qa.list)
+router.get('/qalist', controllers.qa.list)
+
+router.get('/forumlist', controllers.forum.list)
 
 module.exports = router
