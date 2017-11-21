@@ -1,12 +1,12 @@
 {
   "pages": [
+    "pages/NewQA/NewQA",
     "pages/Q&A/Q&A",
     "pages/Forum/Forum",
     "pages/MyAccount/MyAccount",
     "pages/Kit/Kit",
     "pages/SignIn/SignIn",
-    "pages/SignUp/SignUp",
-    "pages/NewQA/NewQA"
+    "pages/SignUp/SignUp"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

@@ -47,6 +47,9 @@
 .fz-15{
   font-size: 30rpx;
 }
+.fz-16{
+  font-size: 32rpx;
+}
 
 .mt-15{
   margin-top: 30rpx;
