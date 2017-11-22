@@ -1,11 +1,12 @@
 <view class='content_wrapper'>
   <block wx:for="{{pageData}}" wx:key="{{index}}">
     <view bindtap='edit' data-index="{{index}}" style='position:relative'>
-      <block wx-if="{{!isEditing || editingIndex!=index}}">
-        <text wx-if="{{item.type=='text'}}" class='fz-14'>{{item.content}}</text>
+      <block wx-if="{{!isEditing || editingIndex!=index || item.type!='text'}}">
+        <text wx-if="{{item.type=='text'}}" decode="{{true}}" space="{{true}}" class='fz-14'>{{item.content}}</text>
         <image mode="aspectFit" class='contentImg' wx-if="{{item.type=='image'}}" src='{{item.src}}'></image>
+        <video wx-if="{{item.type=='video'}}" controls objectFit='contain' src="{{item.src}}" ></video>
       </block>
-      <textarea wx-if="{{isEditing && editingIndex==index}}" focus auto-height bindblur='changeBlur' class="fz-14" value="{{item.content}}"></textarea>
+      <textarea wx-if="{{isEditing && editingIndex==index && item.type=='text'}}" focus auto-height bindblur='changeBlur' class="fz-14" value="{{item.content}}"></textarea>
       <view class='flex-h editGroup'>
         <view catchtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view>
         <view catchtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view>
@@ -15,44 +16,23 @@
   </block>
 </view>
 
-
-<view class='bottom flex-h fullWidth' style='background-color:#F7F7FA'>
+<view class='bottomGroup flex-h fullWidth' style='background-color:#F7F7FA'>
   <view class='flex1 flex'>
     <image bindtap='addImage' class='icon' src='../../assets/icon/photo@3x.png'></image>
-    <image class='icon' src='../../assets/icon/video@3x.png'></image>
-    <text bindtap='addText' class='icon fz-16'>+</text>
+    <image bindtap='showModel' class='icon' src='../../assets/icon/video@3x.png'></image>
+    <text bindtap='addText' class='icon'>+</text>
   </view>
   <view class='btn blue'><text class='fz-15'>Send</text></view>
 </view>
 
-
-
-
-
 <view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>  
 <view class="drawer_box" wx:if="{{showModalStatus}}">  
-  <view class="drawer_title">弹窗标题</view>  
+  <view class="drawer_title fz-15">Insert Link</view>  
   <view class="drawer_content">  
-    <view class="top grid">  
-      <label class="title col-0">标题</label>  
-      <input class="input_base input_h30 col-1" name="rName" value="可自行定义内容"></input>  
-    </view>  
-    <view class="top grid">  
-      <label class="title col-0">标题</label>  
-      <input class="input_base input_h30 col-1" name="mobile" value="110"></input>  
-    </view>  
-    <view class="top grid">  
-      <label class="title col-0">标题</label>  
-      <input class="input_base input_h30 col-1" name="phone" value="拒绝伸手党"></input>  
-    </view>  
-    <view class="top grid">  
-      <label class="title col-0">标题</label>  
-      <input class="input_base input_h30 col-1" name="Email" value="仅供学习使用"></input>  
-    </view>  
-    <view class="top bottom grid">  
-      <label class="title col-0">备注</label>  
-      <input class="input_base input_h30 col-1" name="bz"></input>  
-    </view>  
+    <input bindinput="linkInput" placeholder='link address'></input>  
   </view>  
-  <view class="btn_ok" bindtap="powerDrawer" data-statu="close">确定</view>  
+  <view class='flex-h'>
+    <view bindtap="hideModel" class='flex1 cancle_btn'>Cancle</view>
+    <view bindtap="addVideo" class='flex1 sure_btn'>Add</view>
+  </view>  
 </view>  

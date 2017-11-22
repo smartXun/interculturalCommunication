@@ -3,10 +3,8 @@ Page({
     pageData:[],
     isEditing: false,
     editingIndex: 0,
-    showModalStatus: false
-  },
-  onLoad: function (options) {
-  
+    showModalStatus: false,
+    linkValue: ''
   },
   changeBlur: function(e){
     let newData = this.data.pageData
@@ -14,7 +12,7 @@ Page({
     if (e.detail.value == '') {
       newData.splice(index, 1)
     } else {
-      newData[index].content = e.detail.value
+      newData[index].content = e.detail.value.replace(/\s/g, '&nbsp;')
     }
     this.setData({
       pageData: newData,
@@ -42,6 +40,25 @@ Page({
       isEditing: true,
       editingIndex: newData.length-1
     })
+  },
+  linkInput: function (e) {
+    this.setData({ linkValue: e.detail.value })
+  },
+  addVideo: function () {
+    let newData = this.data.pageData
+    const linksrc = this.data.linkValue
+    newData.push({ index: newData.length, type: 'video', src: linksrc })
+    this.setData({
+      pageData: newData,
+      linkValue: '',
+      showModalStatus: false
+    })
+  },
+  showModel: function () {
+    this.setData({ showModalStatus: true })
+  },
+  hideModel: function(){
+    this.setData({ showModalStatus: false, linkValue: '' })
   },
   addImage: function () {
     let _this = this;
@@ -93,9 +110,8 @@ Page({
     let index = e.target.dataset.index;
     let newData = this.data.pageData;
     let self = this;
-    if (index == 0 && newData.length == 1) return;
     wx.showModal({
-      title: '确定要删除此段落吗？',
+      title: '确定要删除吗？',
       success: function (res) {
         if (res.confirm) {
           newData.splice(index, 1);
@@ -104,5 +120,8 @@ Page({
         }
       }
     });
+  },
+  submit: function(){
+    
   }
 })
