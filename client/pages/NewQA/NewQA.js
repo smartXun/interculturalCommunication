@@ -81,9 +81,28 @@ Page({
     this.setData({ pageData: newData })
   },
   handBlockDown: function (e) {
-
+    const index = e.target.dataset.index;
+    let newData = this.data.pageData;
+    if (index == newData.length-1) return;
+    newData[index + 1].index -= 1;
+    newData[index].index += 1;
+    newData.sort(function (a, b) { return a.index - b.index; })
+    this.setData({ pageData: newData })
   },
   handBlockClose: function (e) {
-
+    let index = e.target.dataset.index;
+    let newData = this.data.pageData;
+    let self = this;
+    if (index == 0 && newData.length == 1) return;
+    wx.showModal({
+      title: '确定要删除此段落吗？',
+      success: function (res) {
+        if (res.confirm) {
+          newData.splice(index, 1);
+          newData.map(function (n, i) { n.index = i })
+          self.setData({ pageData: newData })
+        }
+      }
+    });
   }
 })
