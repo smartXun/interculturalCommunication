@@ -9,7 +9,7 @@
 </view>
 
 <block wx:for="{{list}}" wx:key="id">
-  <view class='qalist flex-v' bindtap='toAnsList' data-id='{{item.id}}'>
+  <view class='flex-v qalist' style='background: #FFFFFF;margin: 10rpx 0;' bindtap='toAnsList' data-id='{{item.id}}'>
     <text class='qatitle fz-14'>{{item.title}}</text>
     <text class='qades fz-12'>{{item.description}}</text>
     <view class='flex-h fullWidth' wx:if="{{item.description}}">

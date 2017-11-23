@@ -7,7 +7,7 @@ module.exports = {
   LocalRegister: host + '/weapp/register_local',
 
   QueAdd: host + '/weapp/qa/q/add',
-  AnsList: host + '/weapp/qa/a/list',
+  QueDetail: host + '/weapp/qa/q/',
   hotAnsList: host + '/weapp/qa/hotAnsList',
   AnsAddWithImage: host + '/weapp/qa/a/addWithImage',
   AnsAddWithoutImage: host + '/weapp/qa/a/addWithoutImage'

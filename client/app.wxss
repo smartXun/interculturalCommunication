@@ -1,4 +1,7 @@
 /** 通用样式 **/
+page{
+  background-color: #D8D8D8; 
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -38,6 +41,9 @@
   right: 0;
 }
 
+.fz-11{
+  font-size: 22rpx;
+}
 .fz-12{
   font-size: 24rpx;
 }

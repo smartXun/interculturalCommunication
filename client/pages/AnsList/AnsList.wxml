@@ -1,2 +1,21 @@
-<!--pages/AnsList/AnsList.wxml-->
-<text>pages/AnsList/AnsList.wxml</text>
+<view style='background:#FFFFFF;'>
+  <view class='flex-h'>
+    <view class='que_icon_img'>
+      <image src='../../assets/icon/Q@3x.png'></image>
+    </view>
+    <text class='flex1 fz-15'>{{que.content}}</text>
+  </view>
+  <view class='flex-h underline like_chat'>
+    <image src='../../assets/icon/Heart@3x.png'></image>
+    <text class='fz-11'>{{que.like_num}}</text>
+    <image src='../../assets/icon/Chat@3x.png'></image>
+    <text class='fz-11'>{{que.ans_num}}</text>
+    <view class='flex1'></view>
+    <image src='../../assets/icon/Clock@3x.png'></image>
+    <text class='fz-11' style='margin-right:30rpx;'>{{que.last_visit_time}}</text>
+  </view>
+  <view class='flex-h underline' style='text-align:center;'>
+    <view class='flex1 fz-15' style='border-right:solid 1px #DBDBDB;padding:16rpx 0;' bindtap='like'>I Like</view>
+    <view class='flex1 fz-15' bindtap='toNewA'>Answer</view>
+  </view>
+</view>

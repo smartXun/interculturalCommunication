@@ -16,8 +16,9 @@ const add = async (ctx, next) => {
 
 const item = async (ctx, next) => {
   const id = ctx.params.id
-  const que = await knex('qa_que').where({ q_id: id }).first()
-  ctx.body = { data: que }
+  const que = await knex('qa_que').where({ id: id }).first()
+  const ansList = await knex('qa_ans').where({ q_id: id })
+  ctx.body = { data: { que, ansList } }
 }
 
 module.exports = { add, item }

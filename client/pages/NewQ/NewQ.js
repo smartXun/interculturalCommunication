@@ -13,7 +13,7 @@ Page({
       if(res.success){
         util.showSuccess("Success!");
         setTimeout(()=>{
-          wx.switchTab({ url: '../Q&A/Q&A' })
+          wx.switchTab({ url: '../QA/QA' })
         },1000)
       }else{
         util.showModel('Error', res.message)

@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/Q&A/Q&A",
+    "pages/QA/QA",
     "pages/AnsList/AnsList",
     "pages/NewQ/NewQ",
     "pages/NewA/NewA",
@@ -24,7 +24,7 @@
     "list": [
       {
         "text": "Q&A",
-        "pagePath": "pages/Q&A/Q&A",
+        "pagePath": "pages/QA/QA",
         "iconPath": "assets/icon/Q&A_on@3x.png",
         "selectedIconPath": "assets/icon/Q&A@3x.png"
       },
