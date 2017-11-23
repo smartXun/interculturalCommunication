@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/NewQA/NewQA",
     "pages/Q&A/Q&A",
+    "pages/AnsList/AnsList",
+    "pages/NewQ/NewQ",
+    "pages/NewA/NewA",
     "pages/Forum/Forum",
     "pages/MyAccount/MyAccount",
     "pages/Kit/Kit",

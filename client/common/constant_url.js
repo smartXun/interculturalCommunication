@@ -6,7 +6,9 @@ module.exports = {
   LocalLogin: host + '/weapp/login_local',
   LocalRegister: host + '/weapp/register_local',
 
-  QAList: host + '/weapp/qalist',
-  QAddWithImage: host + '/weapp/qa/q/addWithImage',
-  QAddWithoutImage: host + '/weapp/qa/q/addWithoutImage'
+  QueAdd: host + '/weapp/qa/q/add',
+  AnsList: host + '/weapp/qa/a/list',
+  hotAnsList: host + '/weapp/qa/hotAnsList',
+  AnsAddWithImage: host + '/weapp/qa/a/addWithImage',
+  AnsAddWithoutImage: host + '/weapp/qa/a/addWithoutImage'
 }

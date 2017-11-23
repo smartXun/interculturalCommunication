@@ -3,25 +3,21 @@ const cos = require('../../cos.js')
 const conf = require('../../config.js')
 const fs = require('fs')
 
-const addWithImage = async (ctx, next) => {
-  const { pageData, imageIndex, imageCount, qID } = ctx.req.body
-  const { filename, path, mimetype } = ctx.req.file
-  if (imageIndex == 0){
-    if (!pageData){
-      fs.unlinkSync(path)
-      ctx.body = { success: true, token, userInfo }
-    }else{
-      fs.unlinkSync(path)
-      console.log(pageData)
-    }
-  }else{
-
+const add = async (ctx, next) => {
+  const { content } = ctx.request.body
+  const user = ctx.request.user
+  const que = await knex('qa_que').insert({ user_id: user.u_id, content: content, like_num: 0, ans_num: 0 })
+  if (que) {
+    ctx.body = { success: true }
+  } else {
+    ctx.body = { success: false, msg: "Create Question Fail!" }
   }
 }
 
-const addWithoutImage = async (ctx, next) => {
-  const { pageData } = ctx.req.body
-  const user = await knex('mUser').insert({ name: acc, email: email, password: pwd, image_url: image_url })
+const item = async (ctx, next) => {
+  const id = ctx.params.id
+  const que = await knex('qa_que').where({ q_id: id }).first()
+  ctx.body = { data: que }
 }
 
-module.exports = { addWithImage, addWithoutImage }
+module.exports = { add, item }

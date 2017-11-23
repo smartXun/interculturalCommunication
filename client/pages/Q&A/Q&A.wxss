@@ -5,10 +5,15 @@ page{
 .qalist{
   background-color: #FFFFFF;
   margin: 10rpx 0;
+  align-items: flex-start;
 }
 .qatitle,.qades{
   display: block;
   margin: 20rpx;
+  text-align: left;
+}
+.qatitle{
+  color: #333333;
 }
 .qades{
   color: #999999;

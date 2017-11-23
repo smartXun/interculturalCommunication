@@ -19,9 +19,11 @@ router.post('/login_local', controllers.auth.local.login)
 router.post('/register_local', upload.single('file'), controllers.auth.local.register)
 router.get('/user_info', auth, controllers.auth.userInfo)
 
-router.get('/qalist', controllers.qa.list)
-router.put('/qa/q/addWithImage', upload.single('file'), controllers.qa.q.addWithImage)
-router.put('/qa/q/addWithoutImage', controllers.qa.q.addWithoutImage)
+router.get('/qa/q/:id', controllers.qa.q.item)
+router.put('/qa/q/add', auth, controllers.qa.q.add)
+router.get('/qa/hotAnsList', controllers.qa.a.hotAnsList)
+router.put('/qa/a/addWithImage', upload.single('file'), controllers.qa.a.addWithImage)
+router.put('/qa/a/addWithoutImage', controllers.qa.a.addWithoutImage)
 
 router.get('/forumlist', controllers.forum.list)
 

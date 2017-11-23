@@ -4,13 +4,12 @@ const debug = require('debug')('koa-weapp-demo')
 const response = require('./middlewares/response')
 const bodyParser = require('koa-bodyparser')
 const config = require('./config')
-
-app.use(response)// 使用响应处理中间件
-app.use(bodyParser())// 解析请求体
-
-// 引入路由分发
+const cors = require('koa-cors')
 const router = require('./routes')
+
+app.use(cors());
+app.use(response)
+app.use(bodyParser())
 app.use(router.routes())
 
-// 启动程序，监听端口
 app.listen(config.port, () => debug(`listening on port ${config.port}`))

@@ -27,7 +27,7 @@ Page({
         app.globalData.userInfo = res.userInfo
         wx.switchTab({ url: '../MyAccount/MyAccount' })
       }else{
-        util.showModel('登陆失败', res.message)
+        util.showModel('Error', res.message)
       }
     })
   },

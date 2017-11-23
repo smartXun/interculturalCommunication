@@ -4,13 +4,13 @@ const app = getApp()
 
 Page({
   data: {
-    pageData:[],
+    pageData: [],
     isEditing: false,
     editingIndex: 0,
     showModalStatus: false,
     linkValue: ''
   },
-  changeBlur: function(e){
+  changeBlur: function (e) {
     let newData = this.data.pageData
     const index = this.data.editingIndex
     if (e.detail.value == '') {
@@ -23,11 +23,11 @@ Page({
       isEditing: false
     })
   },
-  edit: function(e){
+  edit: function (e) {
     const index = e.currentTarget.dataset.index
-    if (this.data.pageData && this.data.pageData[index]){
+    if (this.data.pageData && this.data.pageData[index]) {
       const etype = this.data.pageData[index].type
-      if (etype == 'image'){
+      if (etype == 'image') {
         return;
       }
     }
@@ -36,13 +36,13 @@ Page({
       editingIndex: index
     })
   },
-  addText: function(){
+  addText: function () {
     let newData = this.data.pageData
     newData.push({ index: newData.length, type: 'text', content: '' })
     this.setData({
       pageData: newData,
       isEditing: true,
-      editingIndex: newData.length-1
+      editingIndex: newData.length - 1
     })
   },
   linkInput: function (e) {
@@ -61,7 +61,7 @@ Page({
   showModel: function () {
     this.setData({ showModalStatus: true })
   },
-  hideModel: function(){
+  hideModel: function () {
     this.setData({ showModalStatus: false, linkValue: '' })
   },
   addImage: function () {
@@ -96,7 +96,7 @@ Page({
     const index = e.target.dataset.index;
     if (index == 0) return;
     let newData = this.data.pageData;
-    newData[index-1].index += 1;
+    newData[index - 1].index += 1;
     newData[index].index -= 1;
     newData.sort(function (a, b) { return a.index - b.index; })
     this.setData({ pageData: newData })
@@ -104,7 +104,7 @@ Page({
   handBlockDown: function (e) {
     const index = e.target.dataset.index;
     let newData = this.data.pageData;
-    if (index == newData.length-1) return;
+    if (index == newData.length - 1) return;
     newData[index + 1].index -= 1;
     newData[index].index += 1;
     newData.sort(function (a, b) { return a.index - b.index; })
@@ -125,15 +125,15 @@ Page({
       }
     });
   },
-  submit: function(){
+  submit: function () {
     const pageData = this.data.pageData
     const isImage = (ele) => {
       return ele.type == 'image';
     }
-    if (pageData.some(isImage)){
+    if (pageData.some(isImage)) {
       console.log('有图片')
-    }else{
-      util.http_put(url.QAddWithoutImage,{pageData},(res)=>{
+    } else {
+      util.http_put(url.QAddWithoutImage, { pageData }, (res) => {
         console.log(res)
       })
     }
