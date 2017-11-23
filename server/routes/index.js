@@ -20,6 +20,8 @@ router.post('/register_local', upload.single('file'), controllers.auth.local.reg
 router.get('/user_info', auth, controllers.auth.userInfo)
 
 router.get('/qalist', controllers.qa.list)
+router.put('/qa/q/addWithImage', upload.single('file'), controllers.qa.q.addWithImage)
+router.put('/qa/q/addWithoutImage', controllers.qa.q.addWithoutImage)
 
 router.get('/forumlist', controllers.forum.list)
 

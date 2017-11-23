@@ -15,7 +15,7 @@ cos.up = ( filename, path )=>{
       Key: filename,
       FilePath: path
     }, function (err, data) {
-      fs.unlinkSync(path);
+      fs.unlinkSync(path)
       if (!err) {
         resolve(data)
       } else {

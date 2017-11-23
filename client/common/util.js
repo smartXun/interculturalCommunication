@@ -57,6 +57,9 @@ module.exports = {
   http_post: (requestUrl, data, successCallback, failCallback) => {
     basicHttp('POST', requestUrl, data, successCallback, failCallback);
   },
+  http_put: (requestUrl, data, successCallback, failCallback) => {
+    basicHttp('PUT', requestUrl, data, successCallback, failCallback);
+  },
   http_delete: (requestUrl, successCallback, failCallback) => {
     basicHttp('DELETE', requestUrl, {}, successCallback, failCallback);
   },

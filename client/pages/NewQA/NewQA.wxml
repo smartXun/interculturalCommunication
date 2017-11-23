@@ -22,7 +22,7 @@
     <image bindtap='showModel' class='icon' src='../../assets/icon/video@3x.png'></image>
     <text bindtap='addText' class='icon'>+</text>
   </view>
-  <view class='btn blue'><text class='fz-15'>Send</text></view>
+  <view bindtap='submit' class='btn blue'><text class='fz-15'>Send</text></view>
 </view>
 
 <view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>  

@@ -1,3 +1,7 @@
+const util = require('../../common/util.js')
+const url = require('../../common/constant_url.js')
+const app = getApp()
+
 Page({
   data: {
     pageData:[],
@@ -122,6 +126,29 @@ Page({
     });
   },
   submit: function(){
-    
+    const pageData = this.data.pageData
+    const isImage = (ele) => {
+      return ele.type == 'image';
+    }
+    if (pageData.some(isImage)){
+      console.log('有图片')
+    }else{
+      util.http_put(url.QAddWithoutImage,{pageData},(res)=>{
+        console.log(res)
+      })
+    }
+    // wx.uploadFile({
+    //   url: url.QAddWithImage,
+    //   filePath: tempFilePaths[0],
+    //   name: 'file',
+    //   formData: {
+    //     pageData: this.data.pageData,
+    //     imageIndex: 0,
+    //     imageCount: 1
+    //   },
+    //   success: function (res) {
+    //     console.log(res)
+    //   }
+    // })
   }
 })
