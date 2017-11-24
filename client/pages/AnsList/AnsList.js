@@ -9,7 +9,10 @@ Page({
   onLoad: function (options) {
     const AnsListUrl = url.QueDetail + "/" + options.id
     util.http_get(AnsListUrl, (res)=>{
-      this.setData({ que: res.data.que, ansList:res.data.ansList })
+      let que = res.data.que
+      que.create_time = util.diffDate(new Date(), new Date(que.create_time))
+      let que = res.data.ansList
+      this.setData({ que, ansList })
     })
   },
   toNewA: function(){

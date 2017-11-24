@@ -15,8 +15,9 @@ Page({
         const content = JSON.parse(ans.content)
         const firstText = content.filter((item)=>{
           return item.type=='text'
-        })[0].content
-        return { q_id: ans.q_id ,que: ans.que, content: firstText }
+        })[0].content.replace(/(\&nbsp\;)+/g, '')
+        const create_time = util.diffDate(new Date(),new Date(ans.create_time))
+        return { q_id: ans.q_id, que: ans.que, content: firstText, create_time, comment_num: ans.comment_num}
       })
       this.setData({ list: list }) 
     });

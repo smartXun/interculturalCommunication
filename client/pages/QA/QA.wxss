@@ -6,6 +6,7 @@
 .qatitle,.qades{
   display: block;
   margin: 20rpx;
+  width: 710rpx;
   text-align: left;
 }
 .qatitle{

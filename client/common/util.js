@@ -11,6 +11,27 @@ const validate = (formatType, value) => {
   }
 }
 
+const diffDate = (date1, date2) => {
+  let yearDiff = Math.abs(date1.getFullYear() - date2.getFullYear())
+  if (yearDiff >= 1) {
+    return yearDiff + 'year'
+  }
+  let monthDiff = Math.abs(date1.getMonth() - date2.getMonth())
+  if (monthDiff >= 1) {
+    return monthDiff + 'month'
+  }
+  var datediff = Math.abs(date1.getTime() - date2.getTime())
+  var days = Math.floor(datediff / (24 * 3600 * 1000))
+  var leave1 = datediff % (24 * 3600 * 1000)
+  var hours = Math.floor(leave1 / (3600 * 1000))
+  var leave2 = leave1 % (3600 * 1000)
+  var minutes = Math.floor(leave2 / (60 * 1000))
+  var leave3 = leave2 % (60 * 1000)
+  var seconds = Math.round(leave3 / 1000)
+  
+  return days ? days + ' days' : hours ? hours + ' hours' : minutes ? minutes + ' minutes' : seconds +' seconds'
+}
+
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -86,5 +107,6 @@ module.exports = {
       content: typeof (content) === "string" ? content : JSON.stringify(content),
       showCancel: false
     })
-  }
+  },
+  formatTime, diffDate
 }
