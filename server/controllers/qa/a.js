@@ -54,15 +54,4 @@ const hotAnsList = async (ctx, next) => {
   }
 }
 
-const list = async (ctx, next) => {
-  const { id } = ctx.request.query
-  const que = await knex('qa_que').where({ id: id }).first()
-  const ansList = await knex('qa_ans').where({ q_id: id })
-  let list = []
-  ansList.forEach((ans, index, array) => {
-    list.push({ id: ans.id, content: ans.content })
-  })
-  ctx.body = { data: { que, list} }
-}
-
-module.exports = { addWithImage, addWithoutImage, list, hotAnsList }
+module.exports = { addWithImage, addWithoutImage, hotAnsList }

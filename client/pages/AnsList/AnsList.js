@@ -12,6 +12,13 @@ Page({
       let que = res.data.que
       que.create_time = util.diffDate(new Date(), new Date(que.create_time))
       let ansList = res.data.ansList
+      ansList.forEach((ans) => {
+        ans.create_time = util.diffDate(new Date(), new Date(ans.create_time))
+        const content = JSON.parse(ans.content)
+        ans.content = content.filter((item) => {
+          return item.type == 'text'
+        })[0].content.replace(/^(\&nbsp\;)/, '')
+      })
       this.setData({ que, ansList })
     })
   },

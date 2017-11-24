@@ -4,6 +4,7 @@
     "pages/AnsList/AnsList",
     "pages/NewQ/NewQ",
     "pages/NewA/NewA",
+    "pages/Answer/Answer",
     "pages/Forum/Forum",
     "pages/MyAccount/MyAccount",
     "pages/Kit/Kit",

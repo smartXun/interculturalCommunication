@@ -22,3 +22,22 @@
   margin: 25rpx 0;
   line-height: 48rpx;
 }
+
+.answer_wrapper{
+  background: #FFFFFF;
+  margin-top: 10rpx;
+}
+.userPhoto{
+  width: 44rpx;
+  height: 44rpx;
+  margin-left: 30rpx;
+  margin-top: 20rpx;
+}
+.answer{
+  margin: 20rpx 27rpx 30rpx 20rpx;
+  max-height: 120rpx;
+  overflow: hidden;
+  color: #333333;
+  word-break: break-all;
+  text-overflow:ellipsis;
+}
