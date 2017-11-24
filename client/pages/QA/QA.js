@@ -9,7 +9,17 @@ Page({
     this.getData()
   },
   getData: function(){
-    util.http_get(url.hotAnsList, (res) => { this.setData({ list: res.data }) });
+    util.http_get(url.hotAnsList, (res) => { 
+      const data = res.data
+      let list = data.map((ans)=>{
+        const content = JSON.parse(ans.content)
+        const firstText = content.filter((item)=>{
+          return item.type=='text'
+        })[0].content
+        return { q_id: ans.q_id ,que: ans.que, content: firstText }
+      })
+      this.setData({ list: list }) 
+    });
   },
   newqa: function(){
     wx.navigateTo({ url: '../NewQ/NewQ' })

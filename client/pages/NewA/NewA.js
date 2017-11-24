@@ -10,6 +10,12 @@ Page({
     showModalStatus: false,
     linkValue: ''
   },
+  onLoad: function (options) {
+    const AnsListUrl = url.QueDetail + "/" + options.id
+    util.http_get(AnsListUrl, (res) => {
+      this.setData({ queId: options.id })
+    })
+  },
   changeBlur: function (e) {
     let newData = this.data.pageData
     const index = this.data.editingIndex
@@ -133,8 +139,13 @@ Page({
     if (pageData.some(isImage)) {
       console.log('有图片')
     } else {
-      util.http_put(url.QAddWithoutImage, { pageData }, (res) => {
-        console.log(res)
+      util.http_put(url.AnsAddWithoutImage, { queId: this.data.queId, pageData: JSON.stringify(pageData) }, (res) => {
+        if (res.success){
+          util.showSuccess("Success!");
+          setTimeout(() => {
+            wx.navigateBack({ url: '../AnsList/AnsList?id=' + this.data.queId })
+          }, 1000)
+        }
       })
     }
     // wx.uploadFile({

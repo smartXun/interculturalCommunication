@@ -6,7 +6,7 @@
         <image mode="aspectFit" class='contentImg' wx-if="{{item.type=='image'}}" src='{{item.src}}'></image>
         <video wx-if="{{item.type=='video'}}" controls objectFit='contain' src="{{item.src}}" ></video>
       </block>
-      <textarea wx-if="{{isEditing && editingIndex==index && item.type=='text'}}" focus auto-height bindblur='changeBlur' class="fz-14" value="{{item.content}}"></textarea>
+      <textarea wx-if="{{isEditing && editingIndex==index && item.type=='text'}}" maxlength="-1" focus auto-height bindblur='changeBlur' class="fz-14" value="{{item.content}}"></textarea>
       <view class='flex-h editGroup'>
         <view catchtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view>
         <view catchtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view>

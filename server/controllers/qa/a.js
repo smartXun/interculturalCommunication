@@ -20,8 +20,14 @@ const addWithImage = async (ctx, next) => {
 }
 
 const addWithoutImage = async (ctx, next) => {
-  const { pageData } = ctx.request.body
-  const user = await knex('mUser').insert({ name: acc, email: email, password: pwd, image_url: image_url })
+  const { queId, pageData } = ctx.request.body
+  const user = ctx.request.user
+  const answer = await knex('qa_ans').insert({ q_id: queId,user_id: user.u_id, content: pageData })
+  if (answer) {
+    ctx.body = { success: true }
+  } else {
+    ctx.body = { success: false, msg: "Create Answer Fail!" }
+  }
 }
 
 const hotAnsList = async (ctx, next) => {
@@ -30,12 +36,12 @@ const hotAnsList = async (ctx, next) => {
     const questions = await knex('qa_que').orderBy('like_num', 'desc').limit(20)
     let list = []
     questions.forEach((que, index, array)=>{
-      list.push({ id: que.id, title:que.content })
+      list.push({ id: que.id, que:que.content })
     })
     ctx.body = { data: list }
   }else{
     const promises = answers.map((ans, index, array) => {
-      return knex('qa_que').where({ id: ans.id }).firse().then((que)=>{
+      return knex('qa_que').where({ id: ans.q_id }).first().then((que)=>{
         ans.que = que.content
       })
     })

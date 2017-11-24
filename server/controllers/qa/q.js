@@ -6,7 +6,7 @@ const fs = require('fs')
 const add = async (ctx, next) => {
   const { content } = ctx.request.body
   const user = ctx.request.user
-  const que = await knex('qa_que').insert({ user_id: user.u_id, content: content, like_num: 0, ans_num: 0 })
+  const que = await knex('qa_que').insert({ user_id: user.u_id, content: content })
   if (que) {
     ctx.body = { success: true }
   } else {

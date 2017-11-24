@@ -23,7 +23,7 @@ router.get('/qa/q/:id', controllers.qa.q.item)
 router.put('/qa/q/add', auth, controllers.qa.q.add)
 router.get('/qa/hotAnsList', controllers.qa.a.hotAnsList)
 router.put('/qa/a/addWithImage', upload.single('file'), controllers.qa.a.addWithImage)
-router.put('/qa/a/addWithoutImage', controllers.qa.a.addWithoutImage)
+router.put('/qa/a/addWithoutImage', auth, controllers.qa.a.addWithoutImage)
 
 router.get('/forumlist', controllers.forum.list)
 
