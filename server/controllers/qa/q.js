@@ -10,7 +10,7 @@ const add = async (ctx, next) => {
   if (que) {
     ctx.body = { success: true }
   } else {
-    ctx.body = { success: false, msg: "Create Question Fail!" }
+    ctx.body = { success: false, message: "Create Question Fail!" }
   }
 }
 
@@ -22,7 +22,16 @@ const item = async (ctx, next) => {
 }
 
 const like = async (ctx, next) => {
+  const { queId } = ctx.request.body
   const user = ctx.request.user
+  const queLike = await knex('qa_que_like').where({ 'q_id': queId }).first()
+  if (queLike){
+    ctx.body = { success: false, message: "You've liked it!" }
+  }else{
+    await knex('qa_que_like').insert({ user_id: user.u_id, q_id: queId })
+    await knex('qa_que').where({ 'id': queId }).increment('like_num', 1 )
+    ctx.body = { success: true }
+  }
 }
 
 module.exports = { add, item, like }

@@ -19,9 +19,14 @@ Page({
     wx.navigateTo({ url: '../NewA/NewA?id=' + this.data.que.id })
   },
   like: function(){
-    util.http_post(url.QueLike, {} ,(res) => {
+    util.http_post(url.QueLike, { queId: this.data.que.id } ,(res) => {
       if(res.success){
-
+        util.showSuccess('Success')
+        let que = this.data.que
+        que.like_num += 1
+        this.setData({ que })
+      }else{
+        util.showModel('Notice', res.message)
       }
     })
   }

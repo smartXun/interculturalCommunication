@@ -23,10 +23,11 @@ const addWithoutImage = async (ctx, next) => {
   const { queId, pageData } = ctx.request.body
   const user = ctx.request.user
   const answer = await knex('qa_ans').insert({ q_id: queId,user_id: user.u_id, content: pageData })
+  await knex('qa_que').where({ 'id': queId }).increment('ans_num', 1)
   if (answer) {
     ctx.body = { success: true }
   } else {
-    ctx.body = { success: false, msg: "Create Answer Fail!" }
+    ctx.body = { success: false, message: "Create Answer Fail!" }
   }
 }
 

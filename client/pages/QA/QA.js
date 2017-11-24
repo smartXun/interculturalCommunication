@@ -13,15 +13,15 @@ Page({
       if(!res.data)return
       const data = res.data
       let list = data.map((ans)=>{
+        const create_time = util.diffDate(new Date(), new Date(ans.create_time))
         if (ans.content){
           const content = JSON.parse(ans.content)
           const firstText = content.filter((item) => {
             return item.type == 'text'
-          })[0].content.replace(/(\&nbsp\;)+/g, '')
-          const create_time = util.diffDate(new Date(), new Date(ans.create_time))
+          })[0].content.replace(/^(\&nbsp\;)/, '')
           return { q_id: ans.q_id, que: ans.que, content: firstText, create_time, comment_num: ans.comment_num }
         }else{
-          return { q_id: ans.q_id, que: ans.que }
+          return { q_id: ans.q_id, que: ans.que, create_time, comment_num: ans.comment_num }
         }
       })
       this.setData({ list: list }) 

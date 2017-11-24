@@ -25,7 +25,7 @@ module.exports = async (ctx, next) => {
         const token = jwt.sign(userToken, conf.jwtSecret, { expiresIn: '7d' })  //token签名 有效期为7天
         ctx.body = { success: true, token }
       } else {
-        ctx.body = { success: false, msg: "用户创建失败" }
+        ctx.body = { success: false, message: "用户创建失败" }
       }
     }
   }

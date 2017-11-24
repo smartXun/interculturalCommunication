@@ -17,7 +17,11 @@ page{
   color: #333333;
 }
 .qades{
+  max-height: 90rpx;
+  overflow: hidden;
   color: #999999;
+  word-break: break-all;
+  text-overflow:ellipsis;
 }
 .userIcon{
   width: 70rpx;
