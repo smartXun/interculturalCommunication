@@ -32,22 +32,23 @@ const addWithoutImage = async (ctx, next) => {
 
 const hotAnsList = async (ctx, next) => {
   let answers = await knex('qa_ans').orderBy('like_num', 'desc').limit(20)
-  if (!answers || answers.length<=0 ){
-    const questions = await knex('qa_que').orderBy('like_num', 'desc').limit(20)
-    let list = []
-    questions.forEach((que, index, array)=>{
-      list.push({ id: que.id, que:que.content })
+  const promises = answers.map((ans, index, array) => {
+    return knex('qa_que').where({ id: ans.q_id }).first().then((que) => {
+      ans.que = que.content
     })
-    ctx.body = { data: list }
-  }else{
-    const promises = answers.map((ans, index, array) => {
-      return knex('qa_que').where({ id: ans.q_id }).first().then((que)=>{
-        ans.que = que.content
+  })
+  await Promise.all(promises)
+  if (!answers || answers.length<20 ){
+    const questions = await knex('qa_que').orderBy('create_time', 'desc').limit(20)
+    let list = questions.filter((item) => {
+      return !answers.some((ans)=>{
+        return ans.q_id == item.id
       })
+    }).map((que)=>{
+      return { q_id: que.id, que: que.content, create_time: que.create_time }
     })
-    console.log(promises)
-    await Promise.all(promises)
-    console.log(answers)
+    ctx.body = { data: answers.concat(list) }
+  }else{
     ctx.body = { data: answers }
   }
 }

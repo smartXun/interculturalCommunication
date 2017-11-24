@@ -100,7 +100,12 @@ text.blue{
 }
 
 /* 公共样式  */
+.header{
+  position: fixed;
+  top: 0;
+}
 .header-top{
+  width: 750rpx;
   height: 100rpx;
 }
 .search{

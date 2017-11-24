@@ -21,4 +21,8 @@ const item = async (ctx, next) => {
   ctx.body = { data: { que, ansList } }
 }
 
-module.exports = { add, item }
+const like = async (ctx, next) => {
+  const user = ctx.request.user
+}
+
+module.exports = { add, item, like }

@@ -9,15 +9,20 @@ Page({
     this.getData()
   },
   getData: function(){
-    util.http_get(url.hotAnsList, (res) => { 
+    util.http_get(url.hotAnsList, (res) => {
+      if(!res.data)return
       const data = res.data
       let list = data.map((ans)=>{
-        const content = JSON.parse(ans.content)
-        const firstText = content.filter((item)=>{
-          return item.type=='text'
-        })[0].content.replace(/(\&nbsp\;)+/g, '')
-        const create_time = util.diffDate(new Date(),new Date(ans.create_time))
-        return { q_id: ans.q_id, que: ans.que, content: firstText, create_time, comment_num: ans.comment_num}
+        if (ans.content){
+          const content = JSON.parse(ans.content)
+          const firstText = content.filter((item) => {
+            return item.type == 'text'
+          })[0].content.replace(/(\&nbsp\;)+/g, '')
+          const create_time = util.diffDate(new Date(), new Date(ans.create_time))
+          return { q_id: ans.q_id, que: ans.que, content: firstText, create_time, comment_num: ans.comment_num }
+        }else{
+          return { q_id: ans.q_id, que: ans.que }
+        }
       })
       this.setData({ list: list }) 
     });
