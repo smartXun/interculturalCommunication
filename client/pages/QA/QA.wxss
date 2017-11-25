@@ -7,6 +7,12 @@ page{
   margin: 10rpx 0;
   align-items: flex-start;
 }
+.list_image{
+  margin-top: 20rpx;
+}
+.list_image image{
+  max-height: 240rpx;
+}
 .qatitle,.qades{
   display: block;
   margin: 20rpx 20rpx 0 20rpx;

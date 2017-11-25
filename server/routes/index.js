@@ -26,7 +26,9 @@ router.post('/qa/q/like', auth, controllers.qa.q.like)
 router.get('/qa/a/:id', controllers.qa.a.item)
 router.get('/qa/hotAnsList', controllers.qa.a.hotAnsList)
 router.post('/qa/a/like', auth, controllers.qa.a.like)
-router.put('/qa/a/addWithImage', upload.single('file'), controllers.qa.a.addWithImage)
+
+router.post('/qa/a/preAddWithImage', auth, controllers.qa.a.preAddWithImage)
+router.post('/qa/a/addWithImage', upload.single('file'), controllers.qa.a.addWithImage)
 router.put('/qa/a/addWithoutImage', auth, controllers.qa.a.addWithoutImage)
 
 router.put('/qa/c/add', auth, controllers.qa.c.add)

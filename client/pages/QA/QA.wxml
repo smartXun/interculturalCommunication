@@ -11,8 +11,11 @@
 <block wx:for="{{list}}" wx:key="id">
   <view class='flex-v qalist' style='background: #FFFFFF;margin: 10rpx 0;' bindtap='toAnsList' data-id='{{item.q_id}}'>
     <text class='qatitle fz-14'>{{item.que}}</text>
-    <text class='qades fz-12' decode='{{true}}'>{{item.content}}</text>
-    <view class='flex-h fullWidth' style='margin-top:20rpx;'>
+    <view class='list_image flex-h fullWidth' wx:if="{{item.images.length>0}}">
+      <image class='flex1' mode="aspectFill" wx:for="{{item.images}}" wx:key="{{index}}" src="{{item.src}}"></image>
+    </view>
+    <text class='qades fz-12'  wx:if="{{item.content}}" decode='{{true}}'>{{item.content}}</text>
+    <view class='flex-h fullWidth' style='margin-top:20rpx;margin-bottom:30rpx;'>
       <view class='flex1 flex'>
         <block wx:for="{{item.userPhotos}}" wx:key="{{index}}">
           <image class='userIcon' src="{{item}}"></image>

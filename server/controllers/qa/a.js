@@ -1,21 +1,59 @@
 const knex = require('../../knex.js')
 const cos = require('../../cos.js')
 const conf = require('../../config.js')
+const jwt = require('jsonwebtoken')
 const fs = require('fs')
 
+var cache = {}
+const preAddWithImage = async (ctx, next) => {
+  const { pageData, imageCount, queId } = ctx.request.body
+  const user = ctx.request.user
+  let images = []
+  for (var i = 0; i < imageCount; i++ ){ images.push({}) }
+  cache[queId + '_' + user.u_id] = { pageData, imageCount, images }
+  ctx.body = { success: true }
+}
 const addWithImage = async (ctx, next) => {
-  const { pageData, imageIndex, imageCount, qID } = ctx.request.body
-  const { filename, path, mimetype } = ctx.req.file
-  if (imageIndex == 0) {
-    if (!pageData) {
-      fs.unlinkSync(path)
-      ctx.body = { success: true, token, userInfo }
+  if (ctx.req.headers && ctx.req.headers.authorization) {
+    const decoded = jwt.verify(ctx.req.headers.authorization, conf.jwtSecret)
+    if (decoded.id) {
+      const user = await knex('mUser').where({ u_id: decoded.id }).first()
+      const { imageIndex, queId } = ctx.req.body
+      const { filename, path, mimetype } = ctx.req.file
+      let ansObj = cache[queId + '_' + user.u_id]
+      if (!ansObj){
+        fs.unlinkSync(path)
+        ctx.body = { success: false, message: 'Bad request' }
+      }else{
+        ansObj.images[imageIndex] = { filename, path }
+        if (!cache[queId + '_' + user.u_id].complete && ansObj.images.every((value, index, arr) => {
+          return value && value.filename && value.path
+        })) {
+          cache[queId + '_' + user.u_id].complete = true
+          let { pageData, images } = ansObj
+          const promises = images.map((image, index, array) => {
+            return cos.up(image.filename, image.path).then((data) => {
+              image.url = "http://" + data.Location
+            })
+          })
+          await Promise.all(promises)
+          pageData.filter((item, index, arr) => {
+            return item.type == 'image'
+          }).forEach((item, index, arr) => {
+            item.src = images[index].url
+          })
+          pageData = JSON.stringify(pageData)
+          await knex('qa_ans').insert({ q_id: queId, user_id: user.u_id, content: pageData })
+          await knex('qa_que').where({ 'id': queId }).increment('ans_num', 1)
+          delete cache[queId + '_' + user.u_id]
+          ctx.body = { success: true }
+        }
+      }
     } else {
-      fs.unlinkSync(path)
-      console.log(pageData)
+      ctx.body = { code: -1, message: 'token invalid' }
     }
   } else {
-
+    ctx.body = { code: -1, msg: 'User authentication failed' }
   }
 }
 
@@ -31,7 +69,7 @@ const addWithoutImage = async (ctx, next) => {
   }
 }
 
-let hotAnswers = [];
+var hotAnswers = [];
 const getCommentUserPhoto = async (ans) => {
   const comments = await knex('qa_comment').where({ a_id: ans.id }).limit(3)
   let userPhotos = []
@@ -99,4 +137,4 @@ const like = async (ctx, next) => {
   }
 }
 
-module.exports = { addWithImage, addWithoutImage, hotAnsList, updateHotAns, item, like }
+module.exports = { preAddWithImage, addWithImage, addWithoutImage, hotAnsList, updateHotAns, item, like }

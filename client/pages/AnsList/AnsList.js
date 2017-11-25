@@ -15,9 +15,14 @@ Page({
       ansList.forEach((ans) => {
         ans.create_time = util.diffDate(new Date(), new Date(ans.create_time))
         const content = JSON.parse(ans.content)
-        ans.content = content.filter((item) => {
+        let firstText = content.filter((item) => {
           return item.type == 'text'
-        })[0].content.replace(/^(\&nbsp\;)/, '')
+        })[0]
+        if (firstText) {
+          ans.content = firstText.content.replace(/^(\&nbsp\;)/, '')
+        } else {
+          ans.content = ''
+        }
       })
       this.setData({ que, ansList })
     })

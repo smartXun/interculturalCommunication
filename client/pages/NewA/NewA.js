@@ -8,7 +8,10 @@ Page({
     isEditing: false,
     editingIndex: 0,
     showModalStatus: false,
-    linkValue: ''
+    linkValue: '',
+    uploadProgress: [],
+    isUploading: false,
+    uploadingImages: []
   },
   onLoad: function (options) {
     const AnsListUrl = url.QueDetail + "/" + options.id
@@ -133,11 +136,45 @@ Page({
   },
   submit: function () {
     const pageData = this.data.pageData
-    const isImage = (ele) => {
-      return ele.type == 'image';
-    }
-    if (pageData.some(isImage)) {
-      console.log('有图片')
+    const images = pageData.filter((currentValue, index, arr)=>{
+      return currentValue.type=='image'
+    })
+    if (images.length > 0) {
+      let uploadProgress = this.data.uploadProgress
+      uploadProgress = []
+      util.http_post(url.preAddWithImage,{
+        queId: this.data.queId,
+        pageData: this.data.pageData,
+        imageCount: images.length
+      },(res)=>{
+        if(!res.success)return;
+        images.forEach((image, index) => {
+          uploadProgress.push(0)
+          const formData = {
+            queId: this.data.queId,
+            imageIndex: index,
+          }
+          const uploadTask = wx.uploadFile({
+            url: url.AnsAddWithImage,
+            filePath: image.src,
+            name: 'file',
+            header:{ Authorization: getApp().globalData.token },
+            formData: formData,
+          })
+          uploadTask.onProgressUpdate((res) => {
+            let uploadProgress = this.data.uploadProgress
+            uploadProgress[index] = res.progress
+            if (uploadProgress.every((value, index, arr)=>{
+              return value == 100
+            })){
+              this.setData({ uploadProgress, isUploading:false })
+            }else{
+              this.setData({ uploadProgress })
+            }
+          })
+        })
+      })
+      this.setData({ uploadProgress, isUploading: true, uploadingImages: images })
     } else {
       util.http_put(url.AnsAddWithoutImage, { queId: this.data.queId, pageData: JSON.stringify(pageData) }, (res) => {
         if (res.success){
@@ -148,18 +185,5 @@ Page({
         }
       })
     }
-    // wx.uploadFile({
-    //   url: url.QAddWithImage,
-    //   filePath: tempFilePaths[0],
-    //   name: 'file',
-    //   formData: {
-    //     pageData: this.data.pageData,
-    //     imageIndex: 0,
-    //     imageCount: 1
-    //   },
-    //   success: function (res) {
-    //     console.log(res)
-    //   }
-    // })
   }
 })

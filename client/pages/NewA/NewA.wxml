@@ -25,7 +25,7 @@
   <view bindtap='submit' class='btn blue'><text class='fz-15'>Send</text></view>
 </view>
 
-<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>  
+<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus || isUploading}}"></view>  
 <view class="drawer_box" wx:if="{{showModalStatus}}">  
   <view class="drawer_title fz-15">Insert Link</view>  
   <view class="drawer_content">  
@@ -34,5 +34,15 @@
   <view class='flex-h'>
     <view bindtap="hideModel" class='flex1 cancle_btn'>Cancle</view>
     <view bindtap="addVideo" class='flex1 sure_btn'>Add</view>
-  </view>  
+  </view>
 </view>  
+
+<view class='upload fullWidth' wx:if="{{isUploading}}">
+  <text class='fz-15'>Photo Uploader</text>
+  <view style='padding-top:20rpx;'>
+    <view class='progress_view' wx:for="{{uploadingImages}}" wx:key="{{index}}" >
+      <image mode="aspectFill" src="{{item.src}}"></image>
+      <text class='fz-15'>{{uploadProgress[index]}}%</text>
+    </view>
+  </view>
+</view>

@@ -16,13 +16,24 @@ Page({
         ans.create_time = util.diffDate(new Date(), new Date(ans.create_time))
         if (ans.content){
           const content = JSON.parse(ans.content)
-          ans.content = content.filter((item) => {
+          let firstText = content.filter((item) => {
             return item.type == 'text'
-          })[0].content.replace(/^(\&nbsp\;)/, '')
-          return ans
-        }else{
-          return { q_id: ans.q_id, que: ans.que, create_time, comment_num: ans.comment_num }
+          })[0]
+          let images = content.filter((item) => {
+            return item.type == 'image'
+          })
+          ans.images = []
+          for (var i = 0; i < images.length; i++ ){
+            if(i>=2){break;}
+            ans.images.push(images[i])
+          }
+          if (firstText) {
+            ans.content = firstText.content.replace(/^(\&nbsp\;)/, '')
+          }else{
+            ans.content = ''
+          }
         }
+        return ans
       })
       this.setData({ list: list }) 
     });
