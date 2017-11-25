@@ -31,27 +31,57 @@ const addWithoutImage = async (ctx, next) => {
   }
 }
 
-const hotAnsList = async (ctx, next) => {
+let hotAnswers = [];
+const updateHotAns = async (ctx, next) => {
   let answers = await knex('qa_ans').orderBy('like_num', 'desc').limit(20)
-  const promises = answers.map((ans, index, array) => {
+  const que_promises = answers.map((ans, index, array) => {
     return knex('qa_que').where({ id: ans.q_id }).first().then((que) => {
       ans.que = que.content
     })
   })
+  // const userAvatar_promises = answers.map((ans, index, array) => {
+  //   return knex('qa_que').where({ id: ans.q_id }).first().then((que) => {
+  //     ans.que = que.content
+  //   })
+  // })
+  const promises = que_promises.concat([])
   await Promise.all(promises)
-  if (!answers || answers.length<20 ){
+  if (!answers || answers.length < 20) {
     const questions = await knex('qa_que').orderBy('create_time', 'desc').limit(20)
     let list = questions.filter((item) => {
-      return !answers.some((ans)=>{
+      return !answers.some((ans) => {
         return ans.q_id == item.id
       })
-    }).map((que)=>{
+    }).map((que) => {
       return { q_id: que.id, que: que.content, create_time: que.create_time }
     })
-    ctx.body = { data: answers.concat(list) }
-  }else{
-    ctx.body = { data: answers }
+    hotAnswers = answers.concat(list)
+  } else {
+    hotAnswers = answers
   }
 }
 
-module.exports = { addWithImage, addWithoutImage, hotAnsList }
+const hotAnsList = async (ctx, next) => {
+  if (!hotAnswers || hotAnswers.length <= 0) {
+    await updateHotAns()
+  }
+  ctx.body = { data: hotAnswers }
+}
+
+const item = async (ctx, next) => {
+  const id = ctx.params.id
+  let ans = await knex('qa_ans').where({ id: id }).first()
+  const ansUser = await knex('mUser').where({ 'u_id': ans.user_id }).first()
+  ans.user = { name: ansUser.name, userAvatar: ansUser.image_url }
+  const que = await knex('qa_que').where({ id: ans.q_id }).first()
+  // let commentList = await knex('qa_ans_comment').where({ q_id: id })
+  // const promises = commentList.map((comment, index, array) => {
+  //   return knex('mUser').where({ 'u_id': comment.user_id }).first().then((user) => {
+  //     comment.userAvatar = user.image_url
+  //   })
+  // })
+  // await Promise.all(promises)
+  ctx.body = { data: { que, ans } }
+}
+
+module.exports = { addWithImage, addWithoutImage, hotAnsList, updateHotAns, item }

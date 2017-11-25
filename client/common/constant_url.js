@@ -9,6 +9,8 @@ module.exports = {
   QueAdd: host + '/weapp/qa/q/add',
   QueDetail: host + '/weapp/qa/q/',
   QueLike: host + '/weapp/qa/q/like',
+
+  AnsDetail: host + '/weapp/qa/a/',
   hotAnsList: host + '/weapp/qa/hotAnsList',
   AnsAddWithImage: host + '/weapp/qa/a/addWithImage',
   AnsAddWithoutImage: host + '/weapp/qa/a/addWithoutImage'

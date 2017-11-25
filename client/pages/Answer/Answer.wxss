@@ -1,1 +1,73 @@
-/* pages/Answer/Answer.wxss */
+.que_icon_img{
+  width: 76rpx;
+  height: 76rpx;
+  margin: 30rpx;
+  background: #4C98E1;
+}
+.que_icon_img image{
+  width: 66rpx;
+  height: 66rpx;
+  margin: 5rpx;
+}
+.title{
+  margin: 25rpx 0;
+  line-height: 48rpx;
+}
+
+.userPhoto{
+  width: 76rpx;
+  height: 76rpx;
+  margin-left: 30rpx;
+  margin-right: 20rpx;
+}
+.ansInfo{
+  width:150rpx;
+  margin-right:30rpx;
+  align-items:flex-start;
+}
+.ansInfo image{
+  width: 20rpx;
+  height: 20rpx;
+  margin: 8rpx;
+}
+
+.content{
+  margin-top: 20rpx;
+  background: #FFFFFF;
+  border-top: solid 1px #DBDBDB;
+  padding-bottom: 20rpx;
+}
+.content_wrapper{
+  margin: 20rpx;
+  width: 710rpx;
+}
+.content_wrapper text{
+  max-width:710rpx;
+  word-break: break-all;
+}
+.content_wrapper video{
+  max-width:710rpx;
+  max-height: 300rpx;
+}
+.contentImg{
+  max-width:710rpx;
+  max-height: 300rpx;
+}
+
+.actionBar{
+  background:#4C98E1;
+  color:#FFF;
+}
+.actionBar view{
+  height:80rpx;
+  text-align:center;
+}
+.actionBar image{
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 16rpx;
+}
+
+.comments{
+  border-top: solid 1px #DBDBDB;
+}

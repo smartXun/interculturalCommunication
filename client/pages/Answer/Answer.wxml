@@ -1,2 +1,60 @@
-<!--pages/Answer/Answer.wxml-->
-<text>pages/Answer/Answer.wxml</text>
+<view class='underline' style='background:#FFFFFF;'>
+  <view class='flex-h' style='align-items:flex-start;'>
+    <view class='que_icon_img'>
+      <image src='../../assets/icon/Q@3x.png'></image>
+    </view>
+    <text class='title flex1 fz-15'>{{que.content}}</text>
+  </view>
+</view>
+
+<view class='content'>
+  <view class='flex-h' style='margin-top: 20rpx;'>
+    <image class='userPhoto' src="{{ans.user.userAvatar}}"></image>
+    <text class='flex1 fz-12'>{{ans.user.name}}</text>
+    <view  class='flex-h'>
+      <view class='fz-11'>Translation</view>
+      <view class='flex-v ansInfo'>
+        <view class='flex-h flex1' class='flex-h' style='width:150rpx;'>
+          <image src='../../assets/icon/Heart@3x.png'></image>
+          <text class='fz-11 flex1'>{{ans.like_num}}</text>
+          <image src='../../assets/icon/Chat@3x.png'></image>
+          <text class='fz-11 flex1'>{{ans.comment_num}}</text>
+        </view>
+        <view class='flex-h flex1'>
+          <image src='../../assets/icon/Clock@3x.png'></image>
+          <text class='fz-11'>{{ans.create_time}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='content_wrapper'>
+    <block wx:for="{{ans.content}}" wx:key="{{index}}">
+      <view style='position:relative'>
+        <block>
+          <text wx-if="{{item.type=='text'}}" decode="{{true}}" space="{{true}}" class='fz-14'>{{item.content}}</text>
+          <image mode="aspectFit" class='contentImg' wx-if="{{item.type=='image'}}" src='{{item.src}}'></image>
+          <video wx-if="{{item.type=='video'}}" controls objectFit='contain' src="{{item.src}}" ></video>
+        </block>
+      </view>
+    </block>
+  </view>
+</view>
+
+<view class='flex-h actionBar'>
+  <view class='flex1 flex-h'>
+    <image src='../../assets/icon/like_3@3x.png'></image>
+    <text class='fz-12'>Like</text>
+  </view>
+  <view class='flex1 flex-h' style='border-style:solid;border-width: 0 1px 0 1px;border-color:#DBDBDB;'>
+    <image src='../../assets/icon/Comment_2@3x.png'></image>
+    <text class='fz-12'>Comment</text>
+  </view>
+  <view class='flex1 flex-h'>
+    <image src='../../assets/icon/share_3@3x.png'></image>
+    <text class='fz-12'>Share</text>
+  </view>
+</view>
+
+<view class='comments'>
+
+</view>

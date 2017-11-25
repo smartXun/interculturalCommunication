@@ -36,5 +36,8 @@ Page({
         util.showModel('Notice', res.message)
       }
     })
+  },
+  toAnswer: function(e){
+    wx.navigateTo({ url: '../Answer/Answer?id=' + e.currentTarget.dataset.id })
   }
 })

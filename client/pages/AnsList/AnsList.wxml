@@ -20,7 +20,7 @@
   </view>
 </view>
 
-<view wx:for="{{ansList}}" wx:key="id" class='answer_wrapper'>
+<view wx:for="{{ansList}}" wx:key="id" class='answer_wrapper' bindtap='toAnswer' data-id='{{item.id}}'>
   <view class='flex-h' style='align-items:flex-start;'>
     <image class='userPhoto' src="{{item.userAvatar}}"></image>
     <text class='flex1 answer fz-12' decode='{{true}}'>{{item.content}}</text>

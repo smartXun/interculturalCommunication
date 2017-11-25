@@ -20,7 +20,6 @@ const item = async (ctx, next) => {
   let ansList = await knex('qa_ans').where({ q_id: id })
   const promises = ansList.map((ans, index, array) => {
     return knex('mUser').where({ 'u_id': ans.user_id }).first().then((user) => {
-      console.log(user.image_url)
       ans.userAvatar = user.image_url
     })
   })
