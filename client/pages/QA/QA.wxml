@@ -12,12 +12,12 @@
   <view class='flex-v qalist' style='background: #FFFFFF;margin: 10rpx 0;' bindtap='toAnsList' data-id='{{item.q_id}}'>
     <text class='qatitle fz-14'>{{item.que}}</text>
     <text class='qades fz-12' decode='{{true}}'>{{item.content}}</text>
-    <view class='flex-h fullWidth'>
+    <view class='flex-h fullWidth' style='margin-top:20rpx;'>
       <view class='flex1 flex'>
-        <block wx:for="{{item.commentUserPhotos}}" wx:key="*this">
+        <block wx:for="{{item.userPhotos}}" wx:key="{{index}}">
           <image class='userIcon' src="{{item}}"></image>
         </block>
-        <text wx:if="{{item.comment_num>3}}" class='blue fz-12' style='margin:0 0 20rpx 20rpx'>+{{item.comment_num}}</text>
+        <text wx:if="{{item.userPhotos.length>3}}" class='blue fz-12' style='margin:0 0 20rpx 20rpx'>+{{item.comment_num}}</text>
       </view>
       <view class='flex'>
         <image class='timeIcon' src='../../assets/icon/Clock@3x.png'></image>

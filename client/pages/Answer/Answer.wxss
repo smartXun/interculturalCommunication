@@ -70,4 +70,15 @@
 
 .comments{
   border-top: solid 1px #DBDBDB;
+  background: #FFFFFF;
+  margin-top: 20rpx;
+}
+.comments .userPhoto{
+  width: 36rpx;
+  height: 36rpx;
+}
+.comments .time{
+  width: 20rpx;
+  height: 20rpx;
+  margin-right: 13rpx;
 }

@@ -32,19 +32,28 @@ const addWithoutImage = async (ctx, next) => {
 }
 
 let hotAnswers = [];
+const getCommentUserPhoto = async (ans) => {
+  const comments = await knex('qa_comment').where({ a_id: ans.id }).limit(3)
+  let userPhotos = []
+  const promises = comments.map((comment, index, array) => {
+    return knex('mUser').where({ 'u_id': comment.user_id }).first().then((user) => {
+      userPhotos.push(user.image_url)
+    })
+  })
+  await Promise.all(promises)
+  ans.userPhotos = userPhotos
+}
 const updateHotAns = async (ctx, next) => {
   let answers = await knex('qa_ans').orderBy('like_num', 'desc').limit(20)
   const que_promises = answers.map((ans, index, array) => {
-    return knex('qa_que').where({ id: ans.q_id }).first().then((que) => {
+    return knex('qa_que').where({ 'id': ans.q_id }).first().then((que) => {
       ans.que = que.content
     })
   })
-  // const userAvatar_promises = answers.map((ans, index, array) => {
-  //   return knex('qa_que').where({ id: ans.q_id }).first().then((que) => {
-  //     ans.que = que.content
-  //   })
-  // })
-  const promises = que_promises.concat([])
+  const userAvatar_promises = answers.map((ans, index, array) => {
+    return getCommentUserPhoto(ans)
+  })
+  const promises = que_promises.concat([userAvatar_promises])
   await Promise.all(promises)
   if (!answers || answers.length < 20) {
     const questions = await knex('qa_que').orderBy('create_time', 'desc').limit(20)
@@ -74,14 +83,20 @@ const item = async (ctx, next) => {
   const ansUser = await knex('mUser').where({ 'u_id': ans.user_id }).first()
   ans.user = { name: ansUser.name, userAvatar: ansUser.image_url }
   const que = await knex('qa_que').where({ id: ans.q_id }).first()
-  // let commentList = await knex('qa_ans_comment').where({ q_id: id })
-  // const promises = commentList.map((comment, index, array) => {
-  //   return knex('mUser').where({ 'u_id': comment.user_id }).first().then((user) => {
-  //     comment.userAvatar = user.image_url
-  //   })
-  // })
-  // await Promise.all(promises)
   ctx.body = { data: { que, ans } }
 }
 
-module.exports = { addWithImage, addWithoutImage, hotAnsList, updateHotAns, item }
+const like = async (ctx, next) => {
+  const { ansId } = ctx.request.body
+  const user = ctx.request.user
+  const ansLike = await knex('qa_ans_like').where({ 'a_id': ansId }).first()
+  if (ansLike) {
+    ctx.body = { success: false, message: "You've liked it!" }
+  } else {
+    await knex('qa_ans_like').insert({ user_id: user.u_id, a_id: ansId })
+    await knex('qa_ans').where({ 'id': ansId }).increment('like_num', 1)
+    ctx.body = { success: true }
+  }
+}
+
+module.exports = { addWithImage, addWithoutImage, hotAnsList, updateHotAns, item, like }

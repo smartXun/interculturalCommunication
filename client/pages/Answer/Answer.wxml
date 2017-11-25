@@ -10,11 +10,11 @@
 <view class='content'>
   <view class='flex-h' style='margin-top: 20rpx;'>
     <image class='userPhoto' src="{{ans.user.userAvatar}}"></image>
-    <text class='flex1 fz-12'>{{ans.user.name}}</text>
+    <text class='flex1 fz-15'>{{ans.user.name}}</text>
     <view  class='flex-h'>
       <view class='fz-11'>Translation</view>
       <view class='flex-v ansInfo'>
-        <view class='flex-h flex1' class='flex-h' style='width:150rpx;'>
+        <view class='flex-h flex1' style='width:100%;'>
           <image src='../../assets/icon/Heart@3x.png'></image>
           <text class='fz-11 flex1'>{{ans.like_num}}</text>
           <image src='../../assets/icon/Chat@3x.png'></image>
@@ -41,11 +41,11 @@
 </view>
 
 <view class='flex-h actionBar'>
-  <view class='flex1 flex-h'>
+  <view bindtap='like' class='flex1 flex-h'>
     <image src='../../assets/icon/like_3@3x.png'></image>
     <text class='fz-12'>Like</text>
   </view>
-  <view class='flex1 flex-h' style='border-style:solid;border-width: 0 1px 0 1px;border-color:#DBDBDB;'>
+  <view bindtap='comment' class='flex1 flex-h' style='border-style:solid;border-width: 0 1px 0 1px;border-color:#DBDBDB;'>
     <image src='../../assets/icon/Comment_2@3x.png'></image>
     <text class='fz-12'>Comment</text>
   </view>
@@ -55,6 +55,16 @@
   </view>
 </view>
 
-<view class='comments'>
-
+<view class='comments' wx:if="{{comments&&comments.length>0}}">
+  <view wx:for="{{comments}}" wx:key="id" class='flex-h' style='align-items:flex-start;padding-top:20rpx;'>
+    <image class='userPhoto' src='{{item.userAvatar}}'></image>
+    <view class='flex1 flex-v underline'>
+      <view class='flex-h' style='width:100%;'>
+        <text class='flex1 fz-14'>{{item.name}}</text>
+        <image class="time" src='../../assets/icon/Clock@3x.png'></image>
+        <text class='fz-11' style='margin-right:30rpx;'>{{item.create_time}}</text>
+      </view>
+      <text class='fz-12' style="margin-top:15rpx;margin-bottom:30rpx;">{{item.content}}</text>
+    </view>
+  </view>
 </view>
