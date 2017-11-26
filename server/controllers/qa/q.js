@@ -3,10 +3,13 @@ const cos = require('../../cos.js')
 const conf = require('../../config.js')
 const fs = require('fs')
 
+const { updateHotAns } = require('./a.js')
+
 const add = async (ctx, next) => {
   const { content } = ctx.request.body
   const user = ctx.request.user
   const que = await knex('qa_que').insert({ user_id: user.u_id, content: content })
+  updateHotAns()
   if (que) {
     ctx.body = { success: true }
   } else {

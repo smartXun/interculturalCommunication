@@ -45,6 +45,7 @@ const addWithImage = async (ctx, next) => {
           pageData = JSON.stringify(pageData)
           await knex('qa_ans').insert({ q_id: queId, user_id: user.u_id, content: pageData })
           await knex('qa_que').where({ 'id': queId }).increment('ans_num', 1)
+          updateHotAns()
           delete cache[queId + '_' + user.u_id]
           ctx.body = { success: true }
         }
@@ -62,6 +63,7 @@ const addWithoutImage = async (ctx, next) => {
   const user = ctx.request.user
   const answer = await knex('qa_ans').insert({ q_id: queId,user_id: user.u_id, content: pageData })
   await knex('qa_que').where({ 'id': queId }).increment('ans_num', 1)
+  updateHotAns()
   if (answer) {
     ctx.body = { success: true }
   } else {

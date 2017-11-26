@@ -12,14 +12,14 @@ module.exports = async (ctx, next) => {
         ctx.request.user = user
         await next()
       }else{
-        ctx.body = { code: -1, msg: 'token invalid' }
+        ctx.body = { code: -1, message: 'token invalid' }
       }
     } else {
-      ctx.body = { code: -1, msg: 'User authentication failed' }
+      ctx.body = { code: -1, message: 'User authentication failed' }
     }
   } catch (e) {
     debug('Catch Error: %o', e)
     ctx.status = 200
-    ctx.body = { code: -1, error: e && e.message ? e.message : e.toString() }
+    ctx.body = { code: -1, message: e && e.message ? e.message : e.toString() }
   }
 }
