@@ -15,9 +15,7 @@ Page({
   },
   onLoad: function (options) {
     const AnsListUrl = url.QueDetail + "/" + options.id
-    util.http_get(AnsListUrl, (res) => {
-      this.setData({ queId: options.id })
-    })
+    this.setData({ queId: options.id })
   },
   changeBlur: function (e) {
     let newData = this.data.pageData
@@ -25,7 +23,9 @@ Page({
     if (e.detail.value == '') {
       newData.splice(index, 1)
     } else {
-      newData[index].content = e.detail.value.replace(/\s/g, '&nbsp;')
+      newData[index].content = e.detail.value.replace(/^ +/gm, function (all) {
+        return all.replace(/ /g, '&nbsp;');
+      })
     }
     this.setData({
       pageData: newData,
@@ -167,6 +167,10 @@ Page({
             if (uploadProgress.every((value, index, arr)=>{
               return value == 100
             })){
+              util.showSuccess('Success')
+              setTimeout(() => {
+                wx.navigateBack({ url: '../AnsList/AnsList?id=' + this.data.queId })
+              }, 1000)
               this.setData({ uploadProgress, isUploading:false })
             }else{
               this.setData({ uploadProgress })

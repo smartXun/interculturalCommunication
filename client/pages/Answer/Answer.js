@@ -3,6 +3,7 @@ const url = require('../../common/constant_url.js')
 
 Page({
   data: {
+    isChooseLanguage: false
   },
   onLoad: function (options) {
     this.setData({ ansId: options.id })
@@ -41,5 +42,11 @@ Page({
         util.showModel('Notice', res.message)
       }
     })
+  },
+  chooseLanguage: function(){
+    this.setData({ isChooseLanguage:true })
+  },
+  cancleChooseLanguage: function(){
+    this.setData({ isChooseLanguage: false })
   }
 })

@@ -1,10 +1,14 @@
 page{
   background-color: #FFFFFF; 
+  padding-bottom:110rpx;
 }
 
 .content_wrapper{
   margin: 20rpx;
   width: 710rpx;
+}
+.content_wrapper view{
+  margin-bottom: 40rpx;
 }
 .content_wrapper textarea{
   border: 1px dashed #D8D8D8;
@@ -12,15 +16,13 @@ page{
 }
 .content_wrapper text{
   max-width:710rpx;
-  word-break:break-all;
 }
 .content_wrapper video{
   max-width:710rpx;
   max-height: 300rpx;
 }
 .contentImg{
-  max-width:710rpx;
-  max-height: 300rpx;
+  width: 100%;
 }
 
 image.icon{
