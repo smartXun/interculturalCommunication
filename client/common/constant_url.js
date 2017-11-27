@@ -13,11 +13,17 @@ module.exports = {
 
   AnsDetail: host + '/weapp/qa/a',
   AnsLike: host + '/weapp/qa/a/like',
-  preAddWithImage: host + '/weapp/qa/a/preAddWithImage',
+  AnsPreAddWithImage: host + '/weapp/qa/a/preAddWithImage',
   AnsAddWithImage: host + '/weapp/qa/a/addWithImage',
   AnsAddWithoutImage: host + '/weapp/qa/a/addWithoutImage',
 
   CommentAdd: host + '/weapp/qa/c/add',
   CommentList: host + '/weapp/qa/c/list',
 
+  TopicList: host + '/weapp/forum/topic/list',
+  TopicPreAddWithImage: host + '/weapp/forum/topic/preAddWithImage',
+  TopicAddWithImage: host + '/weapp/forum/topic/addWithImage',
+  TopicAddWithoutImage: host + '/weapp/forum/topic/addWithoutImage',
+
+  BackList: host + '/weapp/forum/back/list',
 }

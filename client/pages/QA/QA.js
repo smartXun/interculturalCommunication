@@ -5,7 +5,7 @@ Page({
   data: {
     list:[]
   },
-  onShow: function (options) {
+  onLoad: function (options) {
     this.getData()
   },
   getData: function(){

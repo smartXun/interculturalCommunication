@@ -9,6 +9,10 @@ Page({
     this.setData({ content: e.detail.value })
   },
   submit: function () {
+    if (!this.data.content.trim()){
+      util.showModel('Notice', 'Please enter your question!')
+      return
+    }
     util.http_put(url.QueAdd, { content: this.data.content }, (res) => {
       if(res.success){
         util.showSuccess("Success!");

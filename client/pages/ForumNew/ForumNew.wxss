@@ -1,0 +1,161 @@
+page{
+  background-color: #FFFFFF; 
+  padding-bottom:110rpx;
+}
+
+.headline{
+  border-bottom:solid 1px #DBDBDB;
+}
+
+.content_wrapper{
+  margin: 20rpx;
+  width: 710rpx;
+}
+.content_wrapper view{
+  margin-bottom: 40rpx;
+}
+.content_wrapper textarea{
+  border: 1px dashed #D8D8D8;
+  line-height: 50rpx;
+}
+.content_wrapper text{
+  max-width:710rpx;
+}
+.content_wrapper video{
+  max-width:710rpx;
+  max-height: 300rpx;
+}
+.contentImg{
+  width: 100%;
+}
+
+image.icon{
+  width: 48rpx;
+  height: 36rpx;
+  margin-left: 40rpx;
+}
+text.icon{
+  margin-left: 40rpx;
+}
+.btn{
+  width: 220rpx;
+}
+
+.bottomGroup{
+  position: fixed;
+  bottom: 0;
+  z-index: 1000;
+}
+.editGroup{
+  position:absolute;
+  top:5rpx;
+  right:0rpx;
+  z-index: 1000;
+}
+.icon{
+    width: 36rpx;
+    height: 36rpx;
+}
+.icon-close{
+    background-image: url(http://mat1.gtimg.com/xian/dcls2017/icon-close.png);
+    background-size: 100%;
+}
+.icon-up{
+    background-image: url(http://mat1.gtimg.com/xian/dcls2017/icon-up.png);
+    background-size: 100%;
+}
+.icon-down{
+    background-image: url(http://mat1.gtimg.com/xian/dcls2017/icon-down.png);
+    background-size: 100%;
+}
+.icon-plus{
+    background-image: url(http://mat1.gtimg.com/xian/dcls2017/icon-plus.png);
+    background-size: 100%;
+}
+
+.drawer_box .btn {  
+  width: 80%;  
+  padding: 20rpx 0;  
+  border-radius: 10rpx;  
+  text-align: center;  
+  margin: 40rpx 10%;  
+  background: #000;  
+  color: #fff;  
+}
+.drawer_screen {  
+  width: 100%;  
+  height: 100%;  
+  position: fixed;  
+  top: 0;  
+  left: 0;  
+  z-index: 1000;  
+  background: #000;  
+  opacity: 0.5;  
+  overflow: hidden;  
+}  
+.drawer_box {  
+  width: 560rpx;  
+  overflow: hidden;  
+  position: fixed;  
+  top: 50%;  
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 1001;  
+  background: #FAFAFA;  
+  border-radius: 3px;  
+}  
+.drawer_box .drawer_title{  
+  padding: 30rpx 0 0 30rpx;  
+}  
+.drawer_box .cancle_btn,.drawer_box .sure_btn{  
+  height: 80rpx;
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 36rpx;
+  line-height: 80rpx;
+}
+.drawer_box .cancle_btn{
+  background: #222222;
+}
+.drawer_box .sure_btn{
+  background: #4C98E1;
+}
+.drawer_box input{  
+    font: 12px "microsoft yahei";  
+    background: #fff;  
+    border: solid 1px #DBDBDB;
+    margin: 18rpx 29rpx 40rpx 33rpx;
+    color:#000 ;  
+    padding-left: 20rpx;
+} 
+
+.upload{
+  position: fixed;
+  z-index: 2000;
+  top: 200rpx;
+  border-style: solid;
+  border-width: 1px 0;
+  border-color: #DBDBDB;
+  background: #FFFFFF;
+  padding: 20rpx 0 0 30rpx;
+}
+
+.progress_view{
+  width: 140rpx;
+  height: 140rpx;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+  position:relative;
+  display:inline-block;
+}
+.progress_view image{
+  width: 140rpx;
+  height: 140rpx;
+}
+.progress_view text{
+  position:absolute;
+  bottom: 14rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #FFFFFF;
+}

@@ -4,6 +4,12 @@
     <image class='search_icon' src='../../assets/icon/search@3x.png'></image>
     <input class='flex1 fz-12' bindinput="searchKeyInput" type="text" placeholder="Search" />
     </view>
-    <image class='pen' src='../../assets/icon/pen.png'></image>
+    <image bindtap="forumnew" class='pen' src='../../assets/icon/pen.png'></image>
   </view>
+</view>
+
+<view wx:for="{{list}}" wx:key="id">
+  <text>{{item.title}}</text>
+  <text>{{item.create_time}}</text>
+  <text>{{item.back_num}}</text>
 </view>

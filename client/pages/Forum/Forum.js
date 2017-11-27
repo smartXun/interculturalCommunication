@@ -1,66 +1,42 @@
-// pages/Forum/Forum.js
-Page({
+const util = require('../../common/util.js')
+const url = require('../../common/constant_url.js')
 
-  /**
-   * 页面的初始数据
-   */
+Page({
   data: {
   
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-  
+    this.getData()
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  getData: function () {
+    util.http_get(url.TopicList, (res) => {
+      if (!res.data) return
+      const data = res.data
+      let list = data.map((topic) => {
+        topic.create_time = util.diffDate(new Date(), new Date(topic.create_time))
+        if (topic.content) {
+          const content = JSON.parse(topic.content)
+          let firstText = content.filter((item) => {
+            return item.type == 'text'
+          })[0]
+          let images = content.filter((item) => {
+            return item.type == 'image'
+          })
+          topic.images = []
+          for (var i = 0; i < images.length; i++) {
+            if (i >= 2) { break; }
+            topic.images.push(images[i])
+          }
+          if (firstText) {
+            topic.firstText = firstText.content.replace(/^(\&nbsp\;)/, '')
+          }
+        }
+        return topic
+      })
+      this.setData({ list: list })
+    });
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  forumnew: function(){
+    wx.navigateTo({ url: '../ForumNew/ForumNew' })
   }
 })

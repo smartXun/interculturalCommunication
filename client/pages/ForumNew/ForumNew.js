@@ -4,6 +4,7 @@ const app = getApp()
 
 Page({
   data: {
+    headlineValue:'',
     pageData: [],
     isEditing: false,
     editingIndex: 0,
@@ -13,9 +14,8 @@ Page({
     isUploading: false,
     uploadingImages: []
   },
-  onLoad: function (options) {
-    const AnsListUrl = url.QueDetail + "/" + options.id
-    this.setData({ queId: options.id })
+  headlineInput: function (e) {
+    this.setData({ headlineValue: e.detail.value })
   },
   changeBlur: function (e) {
     let newData = this.data.pageData
@@ -76,7 +76,7 @@ Page({
   addImage: function () {
     let _this = this;
     wx.showActionSheet({
-      itemList: ['从相册中选择', '拍照'],
+      itemList: ['Photo Library', 'Camera'],
       itemColor: "#f7982a",
       success: function (res) {
         if (!res.cancel) {
@@ -136,49 +136,50 @@ Page({
   },
   submit: function () {
     const pageData = this.data.pageData
-    if (pageData.length < 0 || !pageData.some((item, index, arr) => {
-      return item.type == 'text'&&item.content
-    })){
-      util.showModel('Notice','Please enter something!')
+    const headlineValue = this.data.headlineValue.trim()
+    if (!headlineValue){
+      util.showModel('Notice', 'Please enter headline!')
       return
     }
-    const images = pageData.filter((currentValue, index, arr)=>{
-      return currentValue.type=='image'
+    if (pageData.length < 0 || !pageData.some((item, index, arr) => {
+      return item.type == 'text' && item.content
+    })) {
+      util.showModel('Notice', 'Please enter something!')
+      return
+    }
+    const images = pageData.filter((currentValue, index, arr) => {
+      return currentValue.type == 'image'
     })
     if (images.length > 0) {
       let uploadProgress = this.data.uploadProgress
       uploadProgress = []
-      util.http_post(url.AnsPreAddWithImage,{
-        queId: this.data.queId,
+      util.http_post(url.TopicPreAddWithImage, {
+        title: this.data.headlineValue,
         pageData: this.data.pageData,
         imageCount: images.length
-      },(res)=>{
-        if(!res.success)return;
+      }, (res) => {
+        if (!res.success) return;
         images.forEach((image, index) => {
           uploadProgress.push(0)
-          const formData = {
-            queId: this.data.queId,
-            imageIndex: index,
-          }
           const uploadTask = wx.uploadFile({
-            url: url.AnsAddWithImage,
+            url: url.TopicAddWithImage,
             filePath: image.src,
             name: 'file',
-            header:{ Authorization: getApp().globalData.token },
-            formData: formData,
+            header: { Authorization: getApp().globalData.token },
+            formData: { imageIndex: index },
           })
           uploadTask.onProgressUpdate((res) => {
             let uploadProgress = this.data.uploadProgress
             uploadProgress[index] = res.progress
-            if (uploadProgress.every((value, index, arr)=>{
+            if (uploadProgress.every((value, index, arr) => {
               return value == 100
-            })){
+            })) {
               util.showSuccess('Success')
               setTimeout(() => {
                 wx.navigateBack({ url: '../AnsList/AnsList?id=' + this.data.queId })
               }, 1000)
-              this.setData({ uploadProgress, isUploading:false })
-            }else{
+              this.setData({ uploadProgress, isUploading: false })
+            } else {
               this.setData({ uploadProgress })
             }
           })
@@ -186,8 +187,8 @@ Page({
       })
       this.setData({ uploadProgress, isUploading: true, uploadingImages: images })
     } else {
-      util.http_put(url.AnsAddWithoutImage, { queId: this.data.queId, pageData: JSON.stringify(pageData) }, (res) => {
-        if (res.success){
+      util.http_put(url.TopicAddWithoutImage, { title: this.data.headlineValue, pageData: JSON.stringify(pageData) }, (res) => {
+        if (res.success) {
           util.showSuccess("Success!");
           setTimeout(() => {
             wx.navigateBack({ url: '../AnsList/AnsList?id=' + this.data.queId })
