@@ -136,6 +136,12 @@ Page({
   },
   submit: function () {
     const pageData = this.data.pageData
+    if (pageData.length < 0 || !pageData.some((item, index, arr) => {
+      return item.type == 'text'&&item.content
+    })){
+      util.showModel('Notice','Please enter something!')
+      return
+    }
     const images = pageData.filter((currentValue, index, arr)=>{
       return currentValue.type=='image'
     })

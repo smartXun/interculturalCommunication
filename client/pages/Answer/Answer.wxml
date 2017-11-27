@@ -15,8 +15,8 @@
     <view  class='flex-h'>
       <view bindtap='chooseLanguage' class='fz-11 translation'>
         Translation
-        <view hidden="{{!isChooseLanguage}}" class='language'>Chinese</view>
-        <view hidden="{{!isChooseLanguage}}" class='language'>English</view>
+        <view catchtap='translateChinese' hidden="{{!isChooseLanguage}}" class='language'>Chinese</view>
+        <view catchtap='translateEnglish' hidden="{{!isChooseLanguage}}" class='language'>English</view>
       </view>
       <view class='flex-v ansInfo'>
         <view class='flex-h flex1' style='width:100%;'>

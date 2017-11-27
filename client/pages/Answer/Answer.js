@@ -15,7 +15,6 @@ Page({
       const que = res.data.que
       ans.create_time = util.diffDate(new Date(), new Date(ans.create_time))
       ans.content = JSON.parse(ans.content)
-      console.log(ans)
       this.setData({ ans, que })
     })
 
@@ -44,9 +43,15 @@ Page({
     })
   },
   chooseLanguage: function(){
-    this.setData({ isChooseLanguage:true })
+    this.setData({ isChooseLanguage: !this.data.isChooseLanguage })
   },
   cancleChooseLanguage: function(){
     this.setData({ isChooseLanguage: false })
+  },
+  translateChinese: function () {
+
+  },
+  translateEnglish: function () {
+
   }
 })

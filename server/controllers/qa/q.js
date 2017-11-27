@@ -43,4 +43,33 @@ const like = async (ctx, next) => {
   }
 }
 
-module.exports = { add, item, like }
+const getUserPhotos = async (que) => {
+  que.userPhotos = []
+  const promises = que.answers.map((ans, index, array) => {
+    return knex('mUser').where({ 'u_id': ans.user_id }).first().then((user) => {
+      que.userPhotos.push(user.image_url)
+    })
+  })
+  await Promise.all(promises)
+}
+
+const list = async (ctx, next) => {
+  const questions = await knex('qa_que').orderBy('create_time', 'desc').limit(20)
+  const promises1 = questions.map((que, index, array) => {
+    return knex('qa_ans').where({ 'q_id': que.id }).orderBy('create_time', 'desc').limit(3).then((answers) => {
+      que.answers = answers
+    })
+  })
+  await Promise.all(promises1)
+  const promises2 = questions.map((que, index, array) => {
+    return getUserPhotos(que)
+  })
+  await Promise.all(promises2)
+  const list = questions.map((que, index, array) => {
+    const { ans_num, content, create_time, id, userPhotos } = que
+    return { ans_num, content, create_time, id, userPhotos, ans: que.answers[0].content }
+  })
+  ctx.body = { data: list }
+}
+
+module.exports = { add, item, like, list }

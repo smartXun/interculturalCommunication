@@ -9,31 +9,29 @@ Page({
     this.getData()
   },
   getData: function(){
-    util.http_get(url.hotAnsList, (res) => {
+    util.http_get(url.QueList, (res) => {
       if(!res.data)return
       const data = res.data
-      let list = data.map((ans)=>{
-        ans.create_time = util.diffDate(new Date(), new Date(ans.create_time))
-        if (ans.content){
-          const content = JSON.parse(ans.content)
+      let list = data.map((que)=>{
+        que.create_time = util.diffDate(new Date(), new Date(que.create_time))
+        if (que.ans){
+          const content = JSON.parse(que.ans)
           let firstText = content.filter((item) => {
             return item.type == 'text'
           })[0]
           let images = content.filter((item) => {
             return item.type == 'image'
           })
-          ans.images = []
+          que.images = []
           for (var i = 0; i < images.length; i++ ){
             if(i>=2){break;}
-            ans.images.push(images[i])
+            que.images.push(images[i])
           }
           if (firstText) {
-            ans.content = firstText.content.replace(/^(\&nbsp\;)/, '')
-          }else{
-            ans.content = ''
+            que.firstText = firstText.content.replace(/^(\&nbsp\;)/, '')
           }
         }
-        return ans
+        return que
       })
       this.setData({ list: list }) 
     });

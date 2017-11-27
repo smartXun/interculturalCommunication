@@ -19,14 +19,13 @@ router.post('/login_local', controllers.auth.local.login)
 router.post('/register_local', upload.single('file'), controllers.auth.local.register)
 router.get('/user_info', auth, controllers.auth.userInfo)
 
-router.get('/qa/q/:id', controllers.qa.q.item)
+router.get('/qa/q/list', controllers.qa.q.list)
 router.put('/qa/q/add', auth, controllers.qa.q.add)
 router.post('/qa/q/like', auth, controllers.qa.q.like)
+router.get('/qa/q/:id', controllers.qa.q.item)
 
 router.get('/qa/a/:id', controllers.qa.a.item)
-router.get('/qa/hotAnsList', controllers.qa.a.hotAnsList)
 router.post('/qa/a/like', auth, controllers.qa.a.like)
-
 router.post('/qa/a/preAddWithImage', auth, controllers.qa.a.preAddWithImage)
 router.post('/qa/a/addWithImage', upload.single('file'), controllers.qa.a.addWithImage)
 router.put('/qa/a/addWithoutImage', auth, controllers.qa.a.addWithoutImage)
