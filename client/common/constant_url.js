@@ -21,10 +21,13 @@ module.exports = {
   CommentList: host + '/weapp/qa/c/list',
 
   TopicDetail: host + '/weapp/forum/topic',
+  TopicLike: host + '/weapp/forum/topic/like',
+  TopicDisLike: host + '/weapp/forum/topic/dislike',
   TopicList: host + '/weapp/forum/topic/list',
   TopicPreAddWithImage: host + '/weapp/forum/topic/preAddWithImage',
   TopicAddWithImage: host + '/weapp/forum/topic/addWithImage',
   TopicAddWithoutImage: host + '/weapp/forum/topic/addWithoutImage',
 
   BackList: host + '/weapp/forum/back/list',
+  BackAddd: host + '/weapp/forum/back/add',
 }

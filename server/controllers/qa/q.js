@@ -1,7 +1,6 @@
 const knex = require('../../knex.js')
 const cos = require('../../cos.js')
 const conf = require('../../config.js')
-const fs = require('fs')
 
 const add = async (ctx, next) => {
   const { content } = ctx.request.body

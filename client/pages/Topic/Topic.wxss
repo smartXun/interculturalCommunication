@@ -14,6 +14,55 @@
   margin-right: 40rpx;
 }
 
+.drawer_screen {  
+  width: 100%;  
+  height: 100%;  
+  position: fixed;  
+  top: 0;  
+  left: 0;  
+  z-index: 1000;  
+  overflow: hidden;  
+}  
+.translation{
+  background: #4C98E1;
+  color: #FFFFFF;
+  width: 130rpx;
+  height: 64rpx;
+  line-height:64rpx;
+  text-align:center;
+  z-index:1001;
+  position: relative;
+}
+.language{
+  background: #4C98E1;
+  color: #FFFFFF;
+  height: 60rpx;
+  line-height: 60rpx;
+  width: 220rpx;
+  text-align:center;
+  position: absolute;
+  right: 0;
+}
+
+.comment_wrapper{
+  margin: 20rpx 0;
+  background: #FFFFFF;
+}
+.comment{
+  padding: 20rpx 0 0 30rpx;
+  align-items: flex-start;
+}
+.comment .userPhoto{
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 20rpx;
+}
+.comment .icon{
+  width: 20rpx;
+  height: 20rpx;
+  margin-right: 13rpx;
+}
+
 .backInput{
   position: fixed;
   bottom: 0;

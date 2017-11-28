@@ -9,7 +9,7 @@ CREATE TABLE `forum_topic_back` (
   `id` mediumint(9) NOT NULL auto_increment,
   `user_id` mediumint(9) NOT NULL,
   `topic_id` mediumint(9) NOT NULL,
-  `content` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_visit_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),

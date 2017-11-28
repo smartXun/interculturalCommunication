@@ -37,6 +37,11 @@ router.get('/forum/topic/list', controllers.forum.topic.list)
 router.post('/forum/topic/preAddWithImage', auth, controllers.forum.topic.preAddWithImage)
 router.post('/forum/topic/addWithImage', upload.single('file'), controllers.forum.topic.addWithImage)
 router.put('/forum/topic/addWithoutImage', auth, controllers.forum.topic.addWithoutImage)
+router.post('/forum/topic/like/:id', auth, controllers.forum.topic.like)
+router.post('/forum/topic/dislike/:id', auth, controllers.forum.topic.dislike)
 router.get('/forum/topic/:id', controllers.forum.topic.item)
+
+router.put('/forum/back/add', auth, controllers.forum.back.add)
+router.get('/forum/back/list/:id', controllers.forum.back.list)
 
 module.exports = router

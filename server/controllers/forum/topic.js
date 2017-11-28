@@ -83,8 +83,22 @@ const item = async (ctx, next) => {
   const id = ctx.params.id
   let topic = await knex('forum_topic').where({ id: id }).first()
   const user = await knex('mUser').where({ 'u_id': topic.user_id }).first()
+  topic.islike = await knex('forum_topic_like').where({ user_id: user.u_id, topic_id: id }).first()?true:false
   topic.user = { name: user.name, userAvatar: user.image_url }
   ctx.body = { data: topic }
 }
 
-module.exports = { item, list, preAddWithImage, addWithImage, addWithoutImage }
+const like = async (ctx, next) => {
+  const id = ctx.params.id
+  const user = ctx.request.user
+  let islike = await knex('forum_topic_like').insert({ user_id: user.u_id, topic_id: id })
+  ctx.body = { success: true }
+}
+const dislike = async (ctx, next) => {
+  const id = ctx.params.id
+  const user = ctx.request.user
+  let islike = await knex('forum_topic_like').where({ user_id: user.u_id, topic_id: id }).del()
+  ctx.body = { success: true }
+}
+
+module.exports = { item, list, preAddWithImage, addWithImage, addWithoutImage, like, dislike }
