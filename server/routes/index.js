@@ -24,11 +24,11 @@ router.put('/qa/q/add', auth, controllers.qa.q.add)
 router.post('/qa/q/like', auth, controllers.qa.q.like)
 router.get('/qa/q/:id', controllers.qa.q.item)
 
-router.get('/qa/a/:id', controllers.qa.a.item)
 router.post('/qa/a/like', auth, controllers.qa.a.like)
 router.post('/qa/a/preAddWithImage', auth, controllers.qa.a.preAddWithImage)
 router.post('/qa/a/addWithImage', upload.single('file'), controllers.qa.a.addWithImage)
 router.put('/qa/a/addWithoutImage', auth, controllers.qa.a.addWithoutImage)
+router.get('/qa/a/:id', controllers.qa.a.item)
 
 router.put('/qa/c/add', auth, controllers.qa.c.add)
 router.get('/qa/c/list/:id', controllers.qa.c.list)
@@ -37,5 +37,6 @@ router.get('/forum/topic/list', controllers.forum.topic.list)
 router.post('/forum/topic/preAddWithImage', auth, controllers.forum.topic.preAddWithImage)
 router.post('/forum/topic/addWithImage', upload.single('file'), controllers.forum.topic.addWithImage)
 router.put('/forum/topic/addWithoutImage', auth, controllers.forum.topic.addWithoutImage)
+router.get('/forum/topic/:id', controllers.forum.topic.item)
 
 module.exports = router

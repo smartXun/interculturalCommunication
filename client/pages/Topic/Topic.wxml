@@ -1,0 +1,22 @@
+<view class='topic'>
+  <view class='flex-h'>
+    <image class='userPhoto' src="{{topic.user.userAvatar}}"></image>
+    <text class='flex1'>{{topic.user.name}}</text>
+    <image class='icon' src='../../assets/icon/Heart@3x.png'></image>
+    <view bindtap='chooseLanguage' class='fz-11 translation'>
+      Translation
+      <view catchtap='translateChinese' hidden="{{!isChooseLanguage}}" class='language'>Chinese</view>
+      <view catchtap='translateEnglish' hidden="{{!isChooseLanguage}}" class='language'>English</view>
+    </view>
+  </view>
+  <text class='fz-15'>{{topic.title}}</text>
+  <view class='text_view' wx:for="{{topic.content}}" wx:key="{{index}}">
+    <text wx-if="{{item.type=='text'}}" decode space class='fz-12'>{{item.content}}</text>
+    <image mode="widthFix" class='contentImg' wx-if="{{item.type=='image'}}" src='{{item.src}}'></image>
+    <video wx-if="{{item.type=='video'}}" controls objectFit='contain' src="{{item.src}}" ></video>
+  </view>
+</view>
+
+<view class='backInput flex-h'>
+  <input class='flex1 fz-12' placeholder='Type Something'></input>
+</view>

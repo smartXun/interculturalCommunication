@@ -8,8 +8,15 @@
   </view>
 </view>
 
-<view wx:for="{{list}}" wx:key="id">
-  <text>{{item.title}}</text>
-  <text>{{item.create_time}}</text>
-  <text>{{item.back_num}}</text>
+<view bindtap='toTopic' class='topic flex-h underline' wx:for="{{list}}" wx:key="id" data-id='{{item.id}}'>
+  <image class='userPhoto' src='{{item.userPhotos}}'></image>
+  <view class='flex-v flex1'>
+    <text class='fz-15'>{{item.title}}</text>
+    <view class='flex-h' style='width:100%'>
+      <image class='icon' src='../../assets/icon/Clock@3x.png'></image>
+      <text class='flex1 fz-11' style='color:#999999;'>{{item.create_time}}</text>
+      <image class='icon' src='../../assets/icon/Chat@3x.png'></image>
+      <text class='fz-11' style='color:#666666;'>{{item.back_num}}</text>
+    </view>
+  </view>
 </view>

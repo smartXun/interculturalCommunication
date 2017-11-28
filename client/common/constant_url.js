@@ -20,6 +20,7 @@ module.exports = {
   CommentAdd: host + '/weapp/qa/c/add',
   CommentList: host + '/weapp/qa/c/list',
 
+  TopicDetail: host + '/weapp/forum/topic',
   TopicList: host + '/weapp/forum/topic/list',
   TopicPreAddWithImage: host + '/weapp/forum/topic/preAddWithImage',
   TopicAddWithImage: host + '/weapp/forum/topic/addWithImage',

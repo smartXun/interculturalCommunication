@@ -38,5 +38,8 @@ Page({
   },
   forumnew: function(){
     wx.navigateTo({ url: '../ForumNew/ForumNew' })
+  },
+  toTopic: function(e){
+    wx.navigateTo({ url: '../Topic/Topic?id=' + e.currentTarget.dataset.id })
   }
 })
