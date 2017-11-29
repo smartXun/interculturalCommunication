@@ -1,66 +1,40 @@
-// pages/AnswerLike/AnswerLike.js
-Page({
+const util = require('../../common/util.js')
+const url = require('../../common/constant_url.js')
 
-  /**
-   * 页面的初始数据
-   */
+Page({
   data: {
   
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-  
+    util.http_get(url.AnsLikeList, (res) => {
+      if (!res.data) return
+      let list = res.data
+      list.forEach((ans) => {
+        ans.create_time = util.diffDate(new Date(), new Date(ans.create_time))
+        const content = JSON.parse(ans.content)
+        let firstText = content.filter((item) => {
+          return item.type == 'text'
+        })[0]
+        let images = content.filter((item) => {
+          return item.type == 'image'
+        })
+        ans.images = []
+        for (var i = 0; i < images.length; i++) {
+          if (i >= 2) { break; }
+          ans.images.push(images[i])
+        }
+        if (firstText) {
+          ans.firstText = firstText.content.replace(/^(\&nbsp\;)/, '')
+        }
+        return ans
+      })
+      this.setData({ list: list }) 
+    });
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  toAnsList: function (e) {
+    wx.navigateTo({ url: '../AnsList/AnsList?id=' + e.currentTarget.dataset.id })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  toAnswer: function (e) {
+    wx.navigateTo({ url: '../Answer/Answer?id=' + e.currentTarget.dataset.id })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

@@ -17,10 +17,10 @@
     <text bindtap='toAnswer' data-id='{{item.id}}'  class='qades fz-12' wx:if="{{item.firstText}}" decode>{{item.firstText}}</text>
     <view class='flex-h fullWidth' style='margin-top:20rpx;margin-bottom:30rpx;'>
       <view class='flex1 flex' style='margin-left:30rpx;'>
-        <block wx:for="{{item.userPhotos}}" wx:key="{{index}}">
+        <block wx:for="{{item.ans.commenters}}" wx:key="{{index}}">
           <image class='userIcon' src="{{item}}"></image>
         </block>
-        <text wx:if="{{item.userPhotos.length>3}}" class='blue fz-12' style='margin:0 0 20rpx 20rpx'>+{{item.comment_num}}</text>
+        <text wx:if="{{item.ans.commenters.length>3}}" class='blue fz-12' style='margin:0 0 20rpx 20rpx'>+{{item.comment_num}}</text>
       </view>
       <view class='flex'>
         <image class='timeIcon' src='../../assets/icon/Clock@3x.png'></image>

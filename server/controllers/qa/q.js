@@ -1,6 +1,7 @@
 const knex = require('../../knex.js')
 const cos = require('../../cos.js')
 const conf = require('../../config.js')
+const { getAnsCommentUserPhoto } = require('./a.js')
 
 const add = async (ctx, next) => {
   const { content } = ctx.request.body
@@ -66,18 +67,18 @@ const getUserPhotos = async (que) => {
 const list = async (ctx, next) => {
   const questions = await knex('qa_que').orderBy('create_time', 'desc').limit(20)
   const promises1 = questions.map((que, index, array) => {
-    return knex('qa_ans').where({ 'q_id': que.id }).orderBy('create_time', 'desc').limit(3).then((answers) => {
-      que.answers = answers
+    return knex('qa_ans').where({ 'q_id': que.id }).orderBy('create_time', 'desc').first().then((ans) => {
+      que.ans = ans
     })
   })
   await Promise.all(promises1)
   const promises2 = questions.map((que, index, array) => {
-    return getUserPhotos(que)
+    return getAnsCommentUserPhoto(que.ans)
   })
   await Promise.all(promises2)
   const list = questions.map((que, index, array) => {
-    const { ans_num, content, create_time, id, userPhotos } = que
-    return { ans_num, content, create_time, id, userPhotos, ans: que.answers[0].content }
+    const { ans_num, content, create_time, id, ans } = que
+    return { ans_num, content, create_time, id, ans }
   })
   ctx.body = { data: list }
 }

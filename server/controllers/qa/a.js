@@ -81,7 +81,7 @@ const item = async (ctx, next) => {
 const like = async (ctx, next) => {
   const { ansId } = ctx.request.body
   const user = ctx.request.user
-  const ansLike = await knex('qa_ans_like').where({ 'a_id': ansId }).first()
+  const ansLike = await knex('qa_ans_like').where({ 'a_id': ansId , user_id: user.u_id }).first()
   if (ansLike) {
     ctx.body = { success: false, message: "You've liked it!" }
   } else {
@@ -91,4 +91,38 @@ const like = async (ctx, next) => {
   }
 }
 
-module.exports = { preAddWithImage, addWithImage, addWithoutImage, item, like }
+const getAnsCommentUserPhoto = async (ans) => {
+  ans.commenters = []
+  const comments = await knex('qa_comment').where({ 'a_id': ans.id }).limit(3)
+  const promise = comments.map((comment, index, array) => {
+    return knex('mUser').where({ 'u_id': comment.user_id }).first().then((user) => {
+      ans.commenters.push(user.image_url)
+    })
+  })
+  await Promise.all(promise)
+}
+
+const likelist = async (ctx, next) => {
+  const user = ctx.request.user
+  const ansLikeList = await knex('qa_ans_like').where({ 'user_id': user.u_id })
+  let list = []
+  const promises = ansLikeList.map((ansLike, index, array) => {
+    return knex('qa_ans').where({ 'id': ansLike.a_id }).first().then((ans) => {
+      list.push(ans)
+    })
+  })
+  await Promise.all(promises)
+  const promises1 = list.map((ans, index, array) => {
+    return knex('qa_que').where({ 'id': ans.q_id }).first().then((que) => {
+      ans.que = que.content
+    })
+  })
+  await Promise.all(promises1)
+  const promises2 = list.map((ans, index, array) => {
+    return getAnsCommentUserPhoto(ans)
+  })
+  await Promise.all(promises2)
+  ctx.body = { success: true, data: list }
+}
+
+module.exports = { preAddWithImage, addWithImage, addWithoutImage, item, like, likelist, getAnsCommentUserPhoto }

@@ -14,6 +14,7 @@ module.exports = {
 
   AnsDetail: host + '/weapp/qa/a',
   AnsLike: host + '/weapp/qa/a/like',
+  AnsLikeList: host + '/weapp/qa/a/likelist',
   AnsPreAddWithImage: host + '/weapp/qa/a/preAddWithImage',
   AnsAddWithImage: host + '/weapp/qa/a/addWithImage',
   AnsAddWithoutImage: host + '/weapp/qa/a/addWithoutImage',

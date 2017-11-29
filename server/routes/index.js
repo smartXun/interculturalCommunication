@@ -26,6 +26,7 @@ router.put('/qa/q/add', auth, controllers.qa.q.add)
 router.post('/qa/q/like', auth, controllers.qa.q.like)
 router.get('/qa/q/:id', controllers.qa.q.item)
 
+router.get('/qa/a/likelist', auth, controllers.qa.a.likelist)
 router.post('/qa/a/like', auth, controllers.qa.a.like)
 router.post('/qa/a/preAddWithImage', auth, controllers.qa.a.preAddWithImage)
 router.post('/qa/a/addWithImage', upload.single('file'), controllers.qa.a.addWithImage)

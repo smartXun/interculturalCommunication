@@ -94,6 +94,7 @@ const like = async (ctx, next) => {
   let islike = await knex('forum_topic_like').insert({ user_id: user.u_id, topic_id: id })
   ctx.body = { success: true }
 }
+
 const dislike = async (ctx, next) => {
   const id = ctx.params.id
   const user = ctx.request.user
@@ -101,4 +102,4 @@ const dislike = async (ctx, next) => {
   ctx.body = { success: true }
 }
 
-module.exports = { item, list, preAddWithImage, addWithImage, addWithoutImage, like, dislike }
+module.exports = { item, list, preAddWithImage, addWithImage, addWithoutImage, like, dislike, likelist }

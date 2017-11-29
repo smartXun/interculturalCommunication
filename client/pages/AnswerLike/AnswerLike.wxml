@@ -1,2 +1,19 @@
-<!--pages/AnswerLike/AnswerLike.wxml-->
-<text>pages/AnswerLike/AnswerLike.wxml</text>
+<view wx:for="{{list}}" wx:key="id" class='flex-v qalist' style='background: #FFFFFF;margin: 10rpx 0;'>
+  <text bindtap='toAnsList' data-id='{{item.id}}' class='qatitle fz-14'>{{item.que}}</text>
+  <view bindtap='toAnswer' data-id='{{item.id}}' class='list_image flex-h fullWidth' wx:if="{{item.images.length>0}}">
+    <image class='flex1' mode="aspectFill" wx:for="{{item.images}}" wx:key="{{index}}" src="{{item.src}}"></image>
+  </view>
+  <text bindtap='toAnswer' data-id='{{item.id}}'  class='qades fz-12' wx:if="{{item.firstText}}" decode>{{item.firstText}}</text>
+  <view class='flex-h fullWidth' style='margin-top:20rpx;margin-bottom:30rpx;'>
+    <view class='flex1 flex' style='margin-left:30rpx;'>
+      <block wx:for="{{item.commenters}}" wx:key="{{index}}">
+        <image class='userIcon' src="{{item}}"></image>
+      </block>
+      <text wx:if="{{item.commenters.length>3}}" class='blue fz-12' style='margin:0 0 20rpx 20rpx'>+{{item.comment_num}}</text>
+    </view>
+    <view class='flex'>
+      <image class='timeIcon' src='../../assets/icon/Clock@3x.png'></image>
+      <text class='timeText fz-12 g9'>{{item.create_time}}</text>
+    </view>
+  </view>
+</view>

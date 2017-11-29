@@ -10,6 +10,7 @@
     "pages/Topic/Topic",
     "pages/ForumNew/ForumNew",
     "pages/MyAccount/MyAccount",
+    "pages/MyComment/MyComment",
     "pages/ILikeSelect/ILikeSelect",
     "pages/QuestionLike/QuestionLike",
     "pages/AnswerLike/AnswerLike",

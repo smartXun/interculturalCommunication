@@ -1,1 +1,42 @@
-/* pages/AnswerLike/AnswerLike.wxss */
+
+.qalist{
+  background: #FFFFFF;
+  margin: 10rpx 0;
+  align-items: flex-start;
+}
+.list_image{
+  margin-top: 20rpx;
+}
+.list_image image{
+  max-height: 240rpx;
+}
+.qatitle,.qades{
+  display: block;
+  margin: 20rpx 30rpx 0 30rpx;
+  width: 710rpx;
+  text-align: left;
+}
+.qatitle{
+  color: #333333;
+}
+.qades{
+  max-height: 90rpx;
+  overflow: hidden;
+  color: #999999;
+  word-break: break-all;
+  text-overflow:ellipsis;
+}
+.userIcon{
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 20rpx;
+}
+.timeIcon{
+  width: 20rpx;
+  height: 20rpx;
+}
+.timeText{
+  color: #999999;
+  margin-left: 13rpx;
+  margin-right: 30rpx;
+}
