@@ -20,9 +20,9 @@
   <view class='flex1 flex'>
     <image bindtap='addImage' class='icon' src='../../assets/icon/photo@3x.png'></image>
     <image bindtap='showModel' class='icon' src='../../assets/icon/video@3x.png'></image>
-    <text bindtap='addText' class='icon'>+</text>
+    <image bindtap='addText' class='icon' src='../../assets/icon/text@3x.png'></image>
   </view>
-  <view bindtap='submit' class='btn blue'><text class='fz-15'>Send</text></view>
+  <view bindtap='submit' class='button blue'><text class='fz-15'>Send</text></view>
 </view>
 
 <view class="drawer_screen" wx:if="{{showModalStatus || isUploading}}"></view>  

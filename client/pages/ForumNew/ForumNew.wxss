@@ -29,12 +29,10 @@ page{
   width: 100%;
 }
 
+
 image.icon{
   width: 48rpx;
   height: 36rpx;
-  margin-left: 40rpx;
-}
-text.icon{
   margin-left: 40rpx;
 }
 .btn{
@@ -43,8 +41,17 @@ text.icon{
 
 .bottomGroup{
   position: fixed;
+  height: 80rpx;
   bottom: 0;
   z-index: 1000;
+}
+.button{
+  width: 220rpx;
+  color: #FFFFFF;
+  height:80rpx;
+  line-height:80rpx;
+  border-radius:0;
+  text-align:center;
 }
 .editGroup{
   position:absolute;

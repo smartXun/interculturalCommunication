@@ -15,7 +15,7 @@ page{
 }
 .qatitle,.qades{
   display: block;
-  margin: 20rpx 20rpx 0 20rpx;
+  margin: 20rpx 30rpx 0 30rpx;
   width: 710rpx;
   text-align: left;
 }
@@ -30,9 +30,9 @@ page{
   text-overflow:ellipsis;
 }
 .userIcon{
-  width: 70rpx;
-  height: 70rpx;
-  margin: 0 0 20rpx 20rpx;
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 20rpx;
 }
 .timeIcon{
   width: 20rpx;

@@ -41,5 +41,8 @@ Page({
   },
   toAnsList: function(e){
     wx.navigateTo({ url: '../AnsList/AnsList?id=' + e.currentTarget.dataset.id })
-  }
+  },
+  toAnswer: function (e) {
+    wx.navigateTo({ url: '../Answer/Answer?id=' + e.currentTarget.dataset.id })
+  },
 })

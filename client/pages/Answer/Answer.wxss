@@ -66,19 +66,18 @@
   padding-bottom: 20rpx;
 }
 .content_wrapper{
-  margin: 20rpx;
-  width: 710rpx;
+  margin: 30rpx;
+  width: 690rpx;
 }
 .content_wrapper .text_view{
  margin-bottom: 40rpx;
 }
 .content_wrapper text{
-  max-width:710rpx;
+  max-width:690rpx;
   word-wrap:break-word;
 }
 .content_wrapper video{
-  max-width:710rpx;
-  max-height: 300rpx;
+  max-width:690rpx;
 }
 .contentImg{
   width: 100%;
