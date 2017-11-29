@@ -1,0 +1,9 @@
+.item{
+  height: 110rpx;
+  background: #FFFFFF;
+  padding: 0 40rpx 0 30rpx;
+}
+.item .icon{
+  width: 14rpx;
+  height: 22rpx;
+}

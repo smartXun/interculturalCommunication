@@ -41,6 +41,6 @@ page{
 }
 .item_icon{
   margin: 0 40rpx;
-  width: 36rpx;
-  height: 36rpx;
+  width: 42rpx;
+  height: 42rpx;
 }

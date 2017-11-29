@@ -5,7 +5,7 @@
 </view>
 
 <view class='list'>
-  <view class='item'>
+  <view class='item' bindtap='toILikeSelect'>
     <image class='item_icon' src='../../assets/icon/like_1@3x.png'></image>
     <text class='fz-15'>I Like</text>
   </view>

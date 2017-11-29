@@ -1,0 +1,12 @@
+<view class='item flex-h underline'>
+  <text class='flex1 fz-15'>Question</text>
+  <image class='icon' src='../../assets/icon/arrow@3x.png'></image>
+</view>
+<view class='item flex-h underline'>
+  <text class='flex1 fz-15'>Answer</text>
+  <image class='icon' src='../../assets/icon/arrow@3x.png'></image>
+</view>
+<view class='item flex-h'>
+  <text class='flex1 fz-15'>Article</text>
+  <image class='icon' src='../../assets/icon/arrow@3x.png'></image>
+</view>

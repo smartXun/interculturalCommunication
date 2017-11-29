@@ -6,7 +6,7 @@
     <view bindtap='chooseLanguage' class='fz-11 translation'>
       Translation
       <view catchtap='translateChinese' hidden="{{!isChooseLanguage}}" class='language'>Chinese</view>
-      <view catchtap='translateEnglish' hidden="{{!isChooseLanguage}}" class='language' style='transform:translateY(30px);'>English</view>
+      <view catchtap='translateEnglish' hidden="{{!isChooseLanguage}}" class='language' style='transform:translateY(100%);'>English</view>
     </view>
   </view>
   <text class='fz-15'>{{topic.title}}</text>

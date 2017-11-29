@@ -10,6 +10,7 @@
     "pages/Topic/Topic",
     "pages/ForumNew/ForumNew",
     "pages/MyAccount/MyAccount",
+    "pages/ILikeSelect/ILikeSelect",
     "pages/Kit/Kit",
     "pages/SignIn/SignIn",
     "pages/SignUp/SignUp"
@@ -47,8 +48,8 @@
       {
         "text": "My Account",
         "pagePath": "pages/MyAccount/MyAccount",
-        "iconPath": "assets/icon/My Account_on@3x.png",
-        "selectedIconPath": "assets/icon/My Account@3x.png"
+        "iconPath": "assets/icon/My-Account_on@3x.png",
+        "selectedIconPath": "assets/icon/My-Account@3x.png"
       }
     ]
   }

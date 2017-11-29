@@ -12,5 +12,8 @@ Page({
   },
   onShow: function () {
     this.setData({ userInfo: app.globalData.userInfo });
+  },
+  toILikeSelect: function () {
+    wx.navigateTo({ url: '../ILikeSelect/ILikeSelect' })
   }
 })
