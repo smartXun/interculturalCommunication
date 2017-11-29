@@ -30,13 +30,27 @@ const like = async (ctx, next) => {
   const { queId } = ctx.request.body
   const user = ctx.request.user
   const queLike = await knex('qa_que_like').where({ 'q_id': queId }).first()
-  if (queLike){
+  if (queLike) {
     ctx.body = { success: false, message: "You've liked it!" }
-  }else{
+  } else {
     await knex('qa_que_like').insert({ user_id: user.u_id, q_id: queId })
-    await knex('qa_que').where({ 'id': queId }).increment('like_num', 1 )
+    await knex('qa_que').where({ 'id': queId }).increment('like_num', 1)
     ctx.body = { success: true }
   }
+}
+
+const likelist = async (ctx, next) => {
+  const user = ctx.request.user
+  const queLikeList = await knex('qa_que_like').where({ 'user_id': user.u_id })
+  let list = []
+  const promises = queLikeList.map((queLike, index, array) => {
+    return knex('qa_que').where({ 'id': queLike.q_id }).first().then((que) => {
+      let { content, create_time, ans_num, like_num } = que
+      list.push({ content, create_time, ans_num, like_num })
+    })
+  })
+  await Promise.all(promises)
+  ctx.body = { success: true, data: list }
 }
 
 const getUserPhotos = async (que) => {
@@ -68,4 +82,4 @@ const list = async (ctx, next) => {
   ctx.body = { data: list }
 }
 
-module.exports = { add, item, like, list }
+module.exports = { add, item, like, likelist , list }

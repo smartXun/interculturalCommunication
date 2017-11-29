@@ -1,2 +1,17 @@
-<!--pages/QuestionLike/QuestionLike.wxml-->
-<text>pages/QuestionLike/QuestionLike.wxml</text>
+<view class='que' wx:for="{{list}}" wx:key="id">
+  <view class='flex-h' style='align-items:flex-start;'>
+    <view class='que_icon_img'>
+      <image src='../../assets/icon/Q@3x.png'></image>
+    </view>
+    <text class='title flex1 fz-15'>{{item.content}}</text>
+  </view>
+  <view class='flex-h like_chat'>
+    <image src='../../assets/icon/Heart@3x.png'></image>
+    <text class='fz-11'>{{item.like_num}}</text>
+    <image src='../../assets/icon/Chat@3x.png'></image>
+    <text class='fz-11'>{{item.ans_num}}</text>
+    <view class='flex1'></view>
+    <image src='../../assets/icon/Clock@3x.png'></image>
+    <text class='fz-11' style='margin-right:30rpx;'>{{item.create_time}}</text>
+  </view>
+</view>

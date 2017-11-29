@@ -1,1 +1,28 @@
-/* pages/QuestionLike/QuestionLike.wxss */
+.que{
+  background: #FFFFFF;
+  margin-top: 20rpx;
+}
+.que_icon_img{
+  width: 76rpx;
+  height: 76rpx;
+  margin: 30rpx;
+  background: #4C98E1;
+}
+.que_icon_img image{
+  width: 66rpx;
+  height: 66rpx;
+  margin: 5rpx;
+}
+.like_chat{
+  padding-bottom: 26rpx;
+}
+.like_chat image{
+  width: 20rpx;
+  height: 20rpx;
+  margin-left: 30rpx;
+  margin-right: 8rpx;
+}
+.title{
+  margin: 25rpx 0;
+  line-height: 48rpx;
+}

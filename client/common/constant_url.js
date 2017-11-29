@@ -10,6 +10,7 @@ module.exports = {
   QueDetail: host + '/weapp/qa/q',
   QueList: host + '/weapp/qa/q/list',
   QueLike: host + '/weapp/qa/q/like',
+  QueLikeList: host + '/weapp/qa/q/likelist',
 
   AnsDetail: host + '/weapp/qa/a',
   AnsLike: host + '/weapp/qa/a/like',
