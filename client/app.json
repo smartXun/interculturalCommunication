@@ -11,6 +11,9 @@
     "pages/ForumNew/ForumNew",
     "pages/MyAccount/MyAccount",
     "pages/ILikeSelect/ILikeSelect",
+    "pages/QuestionLike/QuestionLike",
+    "pages/AnswerLike/AnswerLike",
+    "pages/TopicLike/TopicLike",
     "pages/Kit/Kit",
     "pages/SignIn/SignIn",
     "pages/SignUp/SignUp"
