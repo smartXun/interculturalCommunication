@@ -19,7 +19,6 @@ router.post('/login_local', controllers.auth.local.login)
 router.post('/register_local', upload.single('file'), controllers.auth.local.register)
 router.get('/user_info', auth, controllers.auth.userInfo)
 
-
 router.get('/qa/q/likelist', auth, controllers.qa.q.likelist)
 router.get('/qa/q/list', controllers.qa.q.list)
 router.put('/qa/q/add', auth, controllers.qa.q.add)
@@ -48,5 +47,7 @@ router.put('/forum/back/add', auth, controllers.forum.back.add)
 router.get('/forum/back/list/:id', controllers.forum.back.list)
 
 router.post('/translate', controllers.translate)
+
+router.post('/system/login', controllers.admin.user.login)
 
 module.exports = router
