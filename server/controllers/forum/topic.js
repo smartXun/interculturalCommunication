@@ -102,4 +102,4 @@ const dislike = async (ctx, next) => {
   ctx.body = { success: true }
 }
 
-module.exports = { item, list, preAddWithImage, addWithImage, addWithoutImage, like, dislike, likelist }
+module.exports = { item, list, preAddWithImage, addWithImage, addWithoutImage, like, dislike }

@@ -3,6 +3,7 @@ const url = require('../../common/constant_url.js')
 
 Page({
   data: {
+    reloadContent: false,
     isChooseLanguage: false
   },
   onLoad: function (options) {
@@ -14,8 +15,8 @@ Page({
       let ans = res.data.ans
       const que = res.data.que
       ans.create_time = util.diffDate(new Date(), new Date(ans.create_time))
-      ans.content = JSON.parse(ans.content)
-      this.setData({ ans, que })
+      let contents = JSON.parse(ans.content)
+      this.setData({ ans, que, contents })
     })
 
     const CommentListUrl = url.CommentList + "/" + this.data.ansId
@@ -49,9 +50,55 @@ Page({
     this.setData({ isChooseLanguage: false })
   },
   translateChinese: function () {
-
+    this.setData({ isChooseLanguage: false })
+    util.showLoading()
+    let content = JSON.parse(this.data.ans.content)
+    let textList = content.filter((item) => { return item.type == 'text' })
+    const promise = textList.map((item)=>{
+      return new Promise((resolve, reject)=>{
+        util.http_post(url.Translate, {
+          transText: item.content.toLowerCase(),
+          to: 'zh-CN'
+        }, (res) => {
+          const results = res.result
+          let resultString = ''
+          results.forEach((item) => {
+            resultString += item
+          })
+          item.content = resultString
+          resolve()
+        })
+      })
+    })
+    Promise.all(promise).then(()=>{
+      util.hideLoading()
+      this.setData({ contents: content })
+    })
   },
   translateEnglish: function () {
-
+    this.setData({ isChooseLanguage: false })
+    util.showLoading()
+    let content = JSON.parse(this.data.ans.content)
+    let textList = content.filter((item) => { return item.type == 'text' })
+    const promise = textList.map((item) => {
+      return new Promise((resolve, reject) => {
+        util.http_post(url.Translate, {
+          transText: item.content.toLowerCase(),
+          to: 'en'
+        }, (res) => {
+          const results = res.result
+          let resultString = ''
+          results.forEach((item) => {
+            resultString += item
+          })
+          item.content = resultString
+          resolve()
+        })
+      })
+    })
+    Promise.all(promise).then((results) => {
+      util.hideLoading()
+      this.setData({ contents: content })
+    })
   }
 })

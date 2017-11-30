@@ -19,6 +19,8 @@
         "koa-log4": "^2.1.0",
         "koa-router": "^7.0.1",
         "koa-multer": "^1.0.2",
+        "koa-static": "^4.0.2",
+        "translation.js": "^0.6.4",
         "jsonwebtoken": "^8.1.0",
         "lodash": "^4.17.4",
         "mkdir-p": "0.0.7",

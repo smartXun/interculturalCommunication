@@ -11,8 +11,8 @@ Page({
     const topDetailUrl = url.TopicDetail + "/" + options.id
     util.http_get(topDetailUrl, (res) => {
       let topic = res.data
-      topic.content = JSON.parse(topic.content)
-      this.setData({ topic });
+      let contents = JSON.parse(topic.content)
+      this.setData({ topic, contents });
     })
     const BackListUrl = url.BackList + "/" + options.id
     util.http_get(BackListUrl, (res) => {
@@ -36,10 +36,56 @@ Page({
     this.setData({ isChooseLanguage: false })
   },
   translateChinese: function () {
-
+    this.setData({ isChooseLanguage: false })
+    util.showLoading()
+    let content = JSON.parse(this.data.topic.content)
+    let textList = content.filter((item) => { return item.type == 'text' })
+    const promise = textList.map((item) => {
+      return new Promise((resolve, reject) => {
+        util.http_post(url.Translate, {
+          transText: item.content.toLowerCase(),
+          to: 'zh-CN'
+        }, (res) => {
+          const results = res.result
+          let resultString = ''
+          results.forEach((item) => {
+            resultString += item
+          })
+          item.content = resultString
+          resolve()
+        })
+      })
+    })
+    Promise.all(promise).then((results) => {
+      util.hideLoading()
+      this.setData({ contents: content })
+    })
   },
   translateEnglish: function () {
-
+    this.setData({ isChooseLanguage: false })
+    util.showLoading()
+    let content = JSON.parse(this.data.topic.content)
+    let textList = content.filter((item) => { return item.type == 'text' })
+    const promise = textList.map((item) => {
+      return new Promise((resolve, reject) => {
+        util.http_post(url.Translate, {
+          transText: item.content.toLowerCase(),
+          to: 'en'
+        }, (res) => {
+          const results = res.result
+          let resultString = ''
+          results.forEach((item) => {
+            resultString += item
+          })
+          item.content = resultString
+          resolve()
+        })
+      })
+    })
+    Promise.all(promise).then((results) => {
+      util.hideLoading()
+      this.setData({ contents: content })
+    })
   },
   favorite: function(){
     if (this.data.topic.islike){

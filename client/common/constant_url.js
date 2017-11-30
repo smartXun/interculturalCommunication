@@ -1,6 +1,8 @@
 var host = 'https://5pa2v70w.qcloud.la';
 
 module.exports = {
+  Translate: host + '/weapp/translate',
+
   UserInfo: host + '/weapp/user_info',
   WechatLogin: host + '/weapp/login_wechat',
   LocalLogin: host + '/weapp/login_local',

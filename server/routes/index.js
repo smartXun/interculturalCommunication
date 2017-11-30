@@ -47,4 +47,6 @@ router.get('/forum/topic/:id', controllers.forum.topic.item)
 router.put('/forum/back/add', auth, controllers.forum.back.add)
 router.get('/forum/back/list/:id', controllers.forum.back.list)
 
+router.post('/translate', controllers.translate)
+
 module.exports = router
