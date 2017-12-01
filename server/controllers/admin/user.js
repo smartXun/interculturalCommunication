@@ -1,26 +1,12 @@
 const knex = require('../../knex.js')
 const conf = require('../../config.js')
-const jwt = require('jsonwebtoken')
 
-const login = async (ctx, next) => {
-  const { acc, pwd } = ctx.request.body;
-  console.log(acc,pwd)
-  if (!acc || !pwd) {
-    ctx.body = { success: false, message: '参数错误' }
-  } else {
-    const user = await knex('aUser').where({ name: acc }).first()
-    if (user) {
-      if (pwd == user.password) {
-        let userToken = { id: user.u_id }
-        const token = jwt.sign(userToken, conf.jwtSecret, { expiresIn: '7d' })  //token签名 有效期为7天
-        ctx.body = { success: true, token }
-      } else {
-        ctx.body = { success: false, message: '用户名密码错误' }
-      }
-    } else {
-      ctx.body = { success: false, message: '用户不存在' }
-    }
-  }
+const list = async (ctx, next) => {
+  const { offset, pageSize } = ctx.params
+  const user = await knex.select('*').from('mUser').limit(parseInt(pageSize)).offset(parseInt(offset))
+  const totalRet = await knex('mUser').count('*')
+  const total = totalRet && totalRet[0] && totalRet[0]['count(*)']
+  ctx.body = { success: true, data: user, total }
 }
 
-module.exports = { login }
+module.exports = { list }

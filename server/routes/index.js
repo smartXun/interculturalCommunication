@@ -2,6 +2,7 @@ const path = require('path')
 const router = require('koa-router')({ prefix: '/weapp' })
 const controllers = require('../controllers')
 const auth = require('../middlewares/auth.js')
+const admin = require('../middlewares/admin.js')
 
 const multer = require('koa-multer')
 const storage = multer.diskStorage({
@@ -48,6 +49,8 @@ router.get('/forum/back/list/:id', controllers.forum.back.list)
 
 router.post('/translate', controllers.translate)
 
-router.post('/system/login', controllers.admin.user.login)
+router.post('/system/login', controllers.admin.auth.login)
+router.get('/system/user/list/:offset/:pageSize', admin, controllers.admin.user.list)
+router.get('/system/qa/q/list/:offset/:pageSize', admin, controllers.admin.qa.q.list)
 
 module.exports = router
