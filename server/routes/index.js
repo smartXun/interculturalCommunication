@@ -50,7 +50,14 @@ router.get('/forum/back/list/:id', controllers.forum.back.list)
 router.post('/translate', controllers.translate)
 
 router.post('/system/login', controllers.admin.auth.login)
-router.get('/system/user/list/:offset/:pageSize', admin, controllers.admin.user.list)
+router.get('/system/user/list/:offset/:pageSize', admin, controllers.admin.user.user.list)
 router.get('/system/qa/q/list/:offset/:pageSize', admin, controllers.admin.qa.q.list)
+router.post('/system/qa/q/delete', admin, controllers.admin.qa.q.delete_item)
+router.get('/system/qa/a/list/:offset/:pageSize', admin, controllers.admin.qa.a.list)
+router.post('/system/qa/a/delete', admin, controllers.admin.qa.a.delete_item)
+router.get('/system/qa/c/list/:offset/:pageSize', admin, controllers.admin.qa.c.list)
+router.post('/system/qa/c/delete', admin, controllers.admin.qa.c.delete_item)
+router.get('/system/forum/topic/:offset/:pageSize', admin, controllers.admin.forum.topic.list)
+router.get('/system/forum/back/:offset/:pageSize', admin, controllers.admin.forum.back.list)
 
 module.exports = router

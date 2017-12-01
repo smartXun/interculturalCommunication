@@ -54,16 +54,6 @@ const likelist = async (ctx, next) => {
   ctx.body = { success: true, data: list }
 }
 
-const getUserPhotos = async (que) => {
-  que.userPhotos = []
-  const promises = que.answers.map((ans, index, array) => {
-    return knex('mUser').where({ 'u_id': ans.user_id }).first().then((user) => {
-      que.userPhotos.push(user.image_url)
-    })
-  })
-  await Promise.all(promises)
-}
-
 const list = async (ctx, next) => {
   const questions = await knex('qa_que').orderBy('create_time', 'desc').limit(20)
   const promises1 = questions.map((que, index, array) => {

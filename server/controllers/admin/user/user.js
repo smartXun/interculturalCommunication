@@ -1,5 +1,5 @@
-const knex = require('../../knex.js')
-const conf = require('../../config.js')
+const knex = require('../../../knex.js')
+const conf = require('../../../config.js')
 
 const list = async (ctx, next) => {
   const { offset, pageSize } = ctx.params

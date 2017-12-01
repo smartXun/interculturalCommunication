@@ -8,8 +8,9 @@ const add = async (ctx, next) => {
     ctx.body = { success: false, message: "Parameter Error!" }
   } else {
     const user = ctx.request.user
-    const que = await knex('qa_comment').insert({ user_id: user.u_id, content: content, a_id: ansId })
-    if (que) {
+    const ans = await knex('qa_ans').where({ 'id': ansId }).first()
+    const comment = await knex('qa_comment').insert({ user_id: user.u_id, content: content, a_id: ansId, q_id: ans.q_id })
+    if (comment) {
       await knex('qa_ans').where({ 'id': ansId }).increment('comment_num', 1)
       ctx.body = { success: true }
     } else {

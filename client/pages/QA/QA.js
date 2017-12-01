@@ -14,7 +14,7 @@ Page({
       const data = res.data
       let list = data.map((que)=>{
         que.create_time = util.diffDate(new Date(), new Date(que.create_time))
-        if (que.ans.content){
+        if (que.ans && que.ans.content){
           const content = JSON.parse(que.ans.content)
           let firstText = content.filter((item) => {
             return item.type == 'text'

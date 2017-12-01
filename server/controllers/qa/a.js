@@ -92,14 +92,11 @@ const like = async (ctx, next) => {
 }
 
 const getAnsCommentUserPhoto = async (ans) => {
-  ans.commenters = []
-  const comments = await knex('qa_comment').where({ 'a_id': ans.id }).limit(3)
-  const promise = comments.map((comment, index, array) => {
-    return knex('mUser').where({ 'u_id': comment.user_id }).first().then((user) => {
-      ans.commenters.push(user.image_url)
-    })
-  })
-  await Promise.all(promise)
+  if(!ans)return
+  const comments = await knex.select('user_id').from('qa_comment').whereIn('a_id', ans.id).limit(3)
+  comments.map((item)=>{return item.user_id})
+  const commenters = await knex.select('image_url').from('mUser').whereIn('u_id', comments.map((item) => { return item.user_id }))
+  ans.commenters = commenters.map((item) => { return item.image_url })
 }
 
 const likelist = async (ctx, next) => {
