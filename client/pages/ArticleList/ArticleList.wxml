@@ -1,0 +1,9 @@
+<view class='category flex-v fullWidth'>
+  <text style='font-size:60rpx;margin-bottom:18rpx;'>{{category}}</text>
+  <text class='fz-14'>Today's featured article</text>
+</view>
+
+<view class='article_list flex-v' wx:for="{{list}}" wx:key="id" bindtap='toArticle' data-id='{{item.id}}'>
+  <image mode="aspectFill" src='{{item.firstImage}}'></image>
+  <text class='fz-14'>{{item.title}}</text>
+</view>

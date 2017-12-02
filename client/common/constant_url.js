@@ -34,4 +34,7 @@ module.exports = {
 
   BackList: host + '/weapp/forum/back/list',
   BackAddd: host + '/weapp/forum/back/add',
+
+  ArticleDetail: host + '/weapp/kit/article',
+  ArticleList: host + '/weapp/kit/article/list/',
 }

@@ -47,6 +47,8 @@ router.get('/forum/topic/:id', controllers.forum.topic.item)
 router.put('/forum/back/add', auth, controllers.forum.back.add)
 router.get('/forum/back/list/:id', controllers.forum.back.list)
 
+router.get('/kit/article/list/:category', controllers.kit.article.list)
+
 router.post('/translate', controllers.translate)
 
 router.post('/system/login', controllers.admin.auth.login)
@@ -59,7 +61,7 @@ router.get('/system/qa/c/list/:offset/:pageSize', admin, controllers.admin.qa.c.
 router.post('/system/qa/c/delete', admin, controllers.admin.qa.c.delete_item)
 router.get('/system/forum/topic/list/:offset/:pageSize', admin, controllers.admin.forum.topic.list)
 router.get('/system/forum/back/list/:offset/:pageSize', admin, controllers.admin.forum.back.list)
-router.get('/system/kit/list/:offset/:pageSize', admin, controllers.admin.kit.kit.list)
-router.put('/system/kit/add', upload.array('files'), controllers.admin.kit.kit.add)
+router.get('/system/kit/article/list/:offset/:pageSize', admin, controllers.admin.kit.article.list)
+router.put('/system/kit/article/add', upload.array('files'), controllers.admin.kit.article.add)
 
 module.exports = router

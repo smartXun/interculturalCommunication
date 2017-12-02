@@ -1,0 +1,18 @@
+.category{
+  background: #FFFFFF;
+  align-items: flex-start;
+  padding: 30rpx;
+}
+
+.article_list{
+  background: #FFFFFF;
+  margin-top: 20rpx;
+  align-items: flex-start;
+}
+.article_list image{
+  width: 100%;
+  max-height: 320rpx;
+}
+.article_list text{
+  margin:20rpx 30rpx;
+}

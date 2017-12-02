@@ -11,45 +11,45 @@
 
 <view class='kit_group .fullWidth'>
   <view class='flex-h underline'>
-    <view class='flex1 kit'>
+    <view class='flex1 kit' bindtap='toArticleList' data-category="1">
       <image class='kit_icon' src='../../assets/icon/IT@3x.png'></image>
       <text class='kit_text fz-14'>IT</text>
     </view>
-    <view class='flex1 kit kit_center'>
+    <view class='flex1 kit kit_center' bindtap='toArticleList' data-category="2">
       <image class='kit_icon' src='../../assets/icon/OA@3x.png'></image>
       <text class='kit_text fz-14'>OA</text>
     </view>
-    <view class='flex1 kit'>
+    <view class='flex1 kit' bindtap='toArticleList' data-category="3">
       <image class='kit_icon' src='../../assets/icon/Company&BG@3x.png'></image>
       <text class='kit_text fz-14'>Company & BG</text>
     </view>
   </view>
 
   <view class='flex-h underline'>
-    <view class='flex1 kit'>
+    <view class='flex1 kit' bindtap='toArticleList' data-category="4">
       <image class='kit_icon' src='../../assets/icon/HR@3x.png'></image>
       <text class='kit_text fz-14'>HR</text>
     </view>
-    <view class='flex1 kit kit_center'>
+    <view class='flex1 kit kit_center' bindtap='toArticleList' data-category="5">
       <image class='kit_icon' src='../../assets/icon/Culture@3x.png'></image>
       <text class='kit_text fz-14'>Culture</text>
     </view>
-    <view class='flex1 kit'>
+    <view class='flex1 kit' bindtap='toArticleList' data-category="6">
       <image class='kit_icon' src='../../assets/icon/Renting@3x.png'></image>
       <text class='kit_text fz-14'>Renting</text>
     </view>
   </view>
 
   <view class='flex-h'>
-    <view class='flex1 kit'>
+    <view class='flex1 kit' bindtap='toArticleList' data-category="7">
       <image class='kit_icon' src='../../assets/icon/Transportation@3x.png'></image>
       <text class='kit_text fz-14'>Transportation</text>
     </view>
-    <view class='flex1 kit kit_center'>
+    <view class='flex1 kit kit_center' bindtap='toArticleList' data-category="8">
       <image class='kit_icon' src='../../assets/icon/Food@3x.png'></image>
       <text class='kit_text fz-14'>Food</text>
     </view>
-    <view class='flex1 kit'>
+    <view class='flex1 kit' bindtap='toArticleList' data-category="0">
       <image class='kit_icon' src='../../assets/icon/Others@3x.png'></image>
       <text class='kit_text fz-14'>Others</text>
     </view>

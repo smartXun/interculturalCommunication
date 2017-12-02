@@ -2,6 +2,8 @@
   "pages": [
     "pages/QA/QA",
     "pages/AnsList/AnsList",
+    "pages/ArticleList/ArticleList",
+    "pages/Article/Article",
     "pages/NewQ/NewQ",
     "pages/NewA/NewA",
     "pages/Comment/Comment",
