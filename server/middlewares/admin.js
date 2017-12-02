@@ -4,22 +4,16 @@ const jwt = require('jsonwebtoken')
 const knex = require('../knex.js')
 
 module.exports = async (ctx, next) => {
-  try {
-    if (ctx.req.headers && ctx.req.headers.authorization) {
-      const decoded = jwt.verify(ctx.req.headers.authorization, conf.jwtSecret)
-      if (decoded.id) {
-        const user = await knex('aUser').where({ u_id: decoded.id }).first()
-        ctx.request.user = user
-        await next()
-      } else {
-        ctx.body = { code: -1, message: 'token invalid' }
-      }
+  if (ctx.req.headers && ctx.req.headers.authorization) {
+    const decoded = jwt.verify(ctx.req.headers.authorization, conf.jwtSecret)
+    if (decoded.id) {
+      const user = await knex('aUser').where({ u_id: decoded.id }).first()
+      ctx.request.user = user
+      await next()
     } else {
-      ctx.body = { code: -1, message: 'User authentication failed' }
+      ctx.body = { code: -1, message: 'token invalid' }
     }
-  } catch (e) {
-    debug('Catch Error: %o', e)
-    ctx.status = 200
-    ctx.body = { code: -1, message: e && e.message ? e.message : e.toString() }
+  } else {
+    ctx.body = { code: -1, message: 'User authentication failed' }
   }
 }

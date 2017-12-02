@@ -57,7 +57,9 @@ router.get('/system/qa/a/list/:offset/:pageSize', admin, controllers.admin.qa.a.
 router.post('/system/qa/a/delete', admin, controllers.admin.qa.a.delete_item)
 router.get('/system/qa/c/list/:offset/:pageSize', admin, controllers.admin.qa.c.list)
 router.post('/system/qa/c/delete', admin, controllers.admin.qa.c.delete_item)
-router.get('/system/forum/topic/:offset/:pageSize', admin, controllers.admin.forum.topic.list)
-router.get('/system/forum/back/:offset/:pageSize', admin, controllers.admin.forum.back.list)
+router.get('/system/forum/topic/list/:offset/:pageSize', admin, controllers.admin.forum.topic.list)
+router.get('/system/forum/back/list/:offset/:pageSize', admin, controllers.admin.forum.back.list)
+router.get('/system/kit/list/:offset/:pageSize', admin, controllers.admin.kit.kit.list)
+router.put('/system/kit/add', upload.array('files'), controllers.admin.kit.kit.add)
 
 module.exports = router
