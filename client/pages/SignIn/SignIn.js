@@ -17,6 +17,8 @@ Page({
     this.setData({ pwdValue: e.detail.value })
   },
   localLogin:function () {
+    if (!this.data.accValue) { util.showModel('Notice', 'Please enter the account'); return; }
+    if (!this.data.pwdValue) { util.showModel('Notice', 'Please enter the password'); return; }
     util.http_post(urls.LocalLogin, {
       acc: this.data.accValue,
       pwd: this.data.pwdValue
@@ -56,7 +58,7 @@ Page({
     const that = this
     wx.getUserInfo({
       success: function (res) {
-        wechat_login_http(res.userInfo)
+        that.wechat_login_http(res.userInfo)
       },
       fail: function () {
         wx.showModal({

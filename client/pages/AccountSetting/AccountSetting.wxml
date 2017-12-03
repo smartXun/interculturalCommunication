@@ -1,0 +1,12 @@
+<view class='item flex-h underline' bindtap='SwitchAccount'>
+  <text class='flex1 fz-15'>Switch Account</text>
+  <image class='icon' src='../../assets/icon/arrow@3x.png'></image>
+</view>
+<view class='item flex-h underline' bindtap='toAnswerLike'>
+  <text class='flex1 fz-15'>Change Password</text>
+  <image class='icon' src='../../assets/icon/arrow@3x.png'></image>
+</view>
+<view class='item flex-h' bindtap='toTopicLike'>
+  <text class='flex1 fz-15'>Withdraw from the account</text>
+  <image class='icon' src='../../assets/icon/arrow@3x.png'></image>
+</view>

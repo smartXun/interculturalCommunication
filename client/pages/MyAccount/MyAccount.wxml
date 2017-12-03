@@ -17,7 +17,7 @@
     <image class='item_icon' src='../../assets/icon/HistoricalRecords@3x.png'></image>
     <text class='fz-15'>Historical Records</text>
   </view>
-  <view class='item'>
+  <view class='item' bindtap='toAccountSetting'>
     <image class='item_icon' src='../../assets/icon/Account@3x.png'></image>
     <text class='fz-15'>Account</text>
   </view>

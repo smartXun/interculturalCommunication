@@ -18,5 +18,8 @@ Page({
   },
   toMyComment: function () {
     wx.navigateTo({ url: '../MyComment/MyComment' })
-  }
+  },
+  toAccountSetting: function () {
+    wx.navigateTo({ url: '../AccountSetting/AccountSetting' })
+  },
 })
