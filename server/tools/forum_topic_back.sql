@@ -7,6 +7,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `forum_topic_back`;
 CREATE TABLE `forum_topic_back` (
   `id` mediumint(9) NOT NULL auto_increment,
+  `author_id` mediumint(9) NOT NULL,
   `user_id` mediumint(9) NOT NULL,
   `topic_id` mediumint(9) NOT NULL,
   `content` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -15,6 +16,7 @@ CREATE TABLE `forum_topic_back` (
   PRIMARY KEY (`id`),
   KEY `id` (`id`) USING BTREE,
   KEY `topic_id` (`topic_id`) USING BTREE,
+  KEY `author_id` (`author_id`) USING BTREE,
   KEY `user_id` (`user_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='论坛主题回复';
 

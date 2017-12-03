@@ -15,5 +15,8 @@ Page({
   },
   toILikeSelect: function () {
     wx.navigateTo({ url: '../ILikeSelect/ILikeSelect' })
+  },
+  toMyComment: function () {
+    wx.navigateTo({ url: '../MyComment/MyComment' })
   }
 })

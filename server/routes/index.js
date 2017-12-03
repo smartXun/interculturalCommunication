@@ -20,6 +20,9 @@ router.post('/login_local', controllers.auth.local.login)
 router.post('/register_local', upload.single('file'), controllers.auth.local.register)
 router.get('/user_info', auth, controllers.auth.userInfo)
 
+router.get('/account/comment/my', auth, controllers.account.comment.my)
+router.get('/account/comment/tome', auth, controllers.account.comment.tome)
+
 router.get('/qa/q/likelist', auth, controllers.qa.q.likelist)
 router.get('/qa/q/list', controllers.qa.q.list)
 router.put('/qa/q/add', auth, controllers.qa.q.add)

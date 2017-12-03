@@ -9,7 +9,7 @@
     <image class='item_icon' src='../../assets/icon/like_1@3x.png'></image>
     <text class='fz-15'>I Like</text>
   </view>
-  <view class='item'>
+  <view class='item' bindtap='toMyComment'>
     <image class='item_icon' src='../../assets/icon/Comment@3x.png'></image>
     <text class='fz-15'>My Comment</text>
   </view>

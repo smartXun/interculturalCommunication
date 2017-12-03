@@ -8,7 +8,8 @@ const add = async (ctx, next) => {
     ctx.body = { success: false, message: "Parameter Error!" }
   } else {
     const user = ctx.request.user
-    const back = await knex('forum_topic_back').insert({ user_id: user.u_id, content: content, topic_id: topicId })
+    const topic = await knex('forum_topic').where({ id: topicId }).first()
+    const back = await knex('forum_topic_back').insert({ author_id: topic.user_id, user_id: user.u_id, content: content, topic_id: topicId })
     if (back) {
       await knex('forum_topic').where({ 'id': topicId }).increment('back_num', 1)
       ctx.body = { success: true }

@@ -28,7 +28,7 @@
         <image class='icon' src='../../assets/icon/Clock@3x.png'></image>
         <text class='fz-11' style='margin-right:30rpx;'>{{item.create_time}}</text>
       </view>
-      <text style='margin-bottom:30rpx;' class='flex1 answer fz-12' decode='{{true}}'>{{item.content}}</text>
+      <text style='margin-bottom:30rpx;width:100%;' class='flex1 answer fz-12' decode='{{true}}'>{{item.content}}</text>
     </view>
   </view>
 </view>
