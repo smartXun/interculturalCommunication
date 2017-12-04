@@ -18,6 +18,7 @@ const upload = multer({ storage: storage })
 router.post('/login_wechat', controllers.auth.wechat)
 router.post('/login_local', controllers.auth.local.login)
 router.post('/register_local', upload.single('file'), controllers.auth.local.register)
+router.post('/change_pwd_local', auth, controllers.auth.local.changepwd)
 router.get('/user_info', auth, controllers.auth.userInfo)
 
 router.get('/account/comment/my', auth, controllers.account.comment.my)

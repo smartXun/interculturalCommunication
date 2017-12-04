@@ -7,6 +7,7 @@ module.exports = {
   WechatLogin: host + '/weapp/login_wechat',
   LocalLogin: host + '/weapp/login_local',
   LocalRegister: host + '/weapp/register_local',
+  LocalChangePassword: host + '/weapp/change_pwd_local',
   CommentToMe: host + '/weapp/account/comment/tome',
   MyComment: host + '/weapp/account/comment/my',
 

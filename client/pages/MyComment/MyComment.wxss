@@ -1,1 +1,40 @@
-/* pages/MyComment/MyComment.wxss */
+page{
+  height: 100%;
+}
+
+swiper{
+  height:100%;
+}
+
+.tabItem{
+  height: 68rpx;
+  line-height: 68rpx;
+  background: #FFFFFF;
+  text-align: center;
+  margin-bottom: 2px;
+}
+.tabItem.active{
+  border-bottom: solid 1px #4C98E1;
+}
+
+.list_item{
+  padding: 20rpx 30rpx;
+  background: #FFFFFF;
+  margin-top: 20rpx;
+}
+.userPhoto{
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 20rpx;
+}
+.icon{
+  width: 20rpx;
+  height: 20rpx;
+  margin-right: 13rpx;
+}
+.content_text{
+  color: #666666;
+}
+.time_text{
+  color: #999999;
+}

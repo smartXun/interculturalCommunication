@@ -106,5 +106,8 @@ Page({
         }
       })
     }
+  },
+  translate: function(){
+    
   }
 })

@@ -11,7 +11,7 @@
   </view>
   <text class='fz-15'>{{topic.title}}</text>
   <view class='text_view' wx:for="{{contents}}" wx:key="{{index}}">
-    <text wx-if="{{item.type=='text'}}" decode space class='fz-12'>{{item.content}}</text>
+    <text wx-if="{{item.type=='text'}}" decode space class='fz-12' bindlongtap=''>{{item.content}}</text>
     <image mode="widthFix" class='contentImg' wx-if="{{item.type=='image'}}" src='{{item.src}}'></image>
     <video wx-if="{{item.type=='video'}}" controls objectFit='contain' src="{{item.src}}" ></video>
   </view>

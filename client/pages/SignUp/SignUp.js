@@ -89,6 +89,7 @@ Page({
             wx.setStorageSync('token', data.token);
             app.globalData.token = data.token
             app.globalData.userInfo = data.userInfo
+            that.globalData.userType = 'local'
             wx.switchTab({ url: '../MyAccount/MyAccount' })
           }else{
             util.showModel('注册失败', data.message || '')

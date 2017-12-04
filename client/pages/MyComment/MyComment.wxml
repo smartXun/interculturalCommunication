@@ -1,0 +1,36 @@
+<view class="flex-v" style='height:100%;'>
+  <view class='flex-h tabBar fullWidth'>
+    <view class="fz-12 tabItem flex1 {{swiper_index==0?'active':''}}" bindtap='tab' data-id="0">Comment To Me</view>
+    <view class="fz-12 tabItem flex1 {{swiper_index==1?'active':''}}" bindtap='tab' data-id="1">My Comment</view>
+  </view>
+  <view class='flex1 fullWidth'>
+    <swiper class='swiper' current="{{swiper_index}}" bindchange='onSwiperChange' indicator-dots="{{false}}" autoplay="{{false}}">
+      <swiper-item>
+        <scroll-view scroll-y style='height:100%;'>
+          <view class='list_item' wx:for="{{tome_list}}" wx:key="id">
+            <view class='flex-h'>
+              <image class='userPhoto' src='{{item.image_url}}'></image>
+              <text class='flex1 fz-14'>{{item.name}}</text>
+              <image class='icon' src='../../assets/icon/Clock@3x.png'></image>
+              <text class='fz-11 time_text'>{{item.create_time}}</text>
+            </view>
+            <text class='fz-12 content_text'>{{item.content}}</text>
+          </view>
+        </scroll-view>
+      </swiper-item>
+      <swiper-item>
+        <scroll-view scroll-y style='height:100%;'>
+          <view class='list_item' wx:for="{{my_list}}" wx:key="id">
+            <view class='flex-h'>
+              <image class='userPhoto' src='{{item.image_url}}'></image>
+              <text class='flex1 fz-14'>{{item.name}}</text>
+              <image class='icon' src='../../assets/icon/Clock@3x.png'></image>
+              <text class='fz-11 time_text'>{{item.create_time}}</text>
+            </view>
+            <text class='fz-12 content_text'>{{item.content}}</text>
+          </view>
+        </scroll-view>
+      </swiper-item>
+    </swiper>
+  </view>
+</view>

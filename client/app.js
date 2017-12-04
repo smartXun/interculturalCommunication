@@ -22,6 +22,7 @@ App({
                   wx.setStorageSync('token', res.token);
                   that.globalData.token = res.token
                   that.globalData.userInfo = userInfo
+                  that.globalData.userType = 'wechat'
                   if (that.userInfoReadyCallback) {
                     that.userInfoReadyCallback(res)
                   }
