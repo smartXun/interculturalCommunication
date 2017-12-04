@@ -48,6 +48,14 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const getTimeString = date =>{
+  const monthString = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  const year = date.getFullYear()
+  const month = date.getMonth()
+  const day = date.getDate()
+  return monthString[month] + " " + day+','+year
+}
+
 var basicHttp = (method, requestUrl, data, successCallback, failCallback) => {
   let header = {
     'Accept': 'application/json',
@@ -108,5 +116,5 @@ module.exports = {
       showCancel: false
     })
   },
-  formatTime, diffDate
+  formatTime, diffDate, getTimeString
 }

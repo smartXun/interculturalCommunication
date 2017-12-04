@@ -33,7 +33,6 @@
   </view>
 </view>
 
-
 <view class='backInput flex-h'>
   <input value='{{backValue}}' bindconfirm="sendBack" confirm-type="send" class='flex1 fz-12' placeholder='Type Something'></input>
 </view>

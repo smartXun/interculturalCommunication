@@ -5,7 +5,7 @@
     <text class='fz-11' style='margin-right:26rpx;color:#666666'>{{article.like_num}}</text>
     <image class='icon' src='../../assets/icon/Chat@3x.png'></image>
     <text class='fz-11' style='color:#666666;'>{{article.back_num}}</text>
-    <text class='flex1'>{{article.create_time}}</text>
+    <text class='fz-11 flex1' style='color:#909090;text-align:center'>{{article.create_time}}</text>
     <view bindtap='chooseLanguage' class='fz-11 translation'>
       Translation
       <view catchtap='translateChinese' hidden="{{!isChooseLanguage}}" class='language'>Chinese</view>

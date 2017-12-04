@@ -47,7 +47,7 @@
 .comment_wrapper{
   margin: 20rpx 0;
   background: #FFFFFF;
-  padding-bottom:65rpx;
+  margin-bottom:65rpx;
 }
 .comment{
   padding: 20rpx 0 0 30rpx;
