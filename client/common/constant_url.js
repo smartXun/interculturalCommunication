@@ -30,6 +30,7 @@ module.exports = {
   TopicDetail: host + '/weapp/forum/topic',
   TopicLike: host + '/weapp/forum/topic/like',
   TopicDisLike: host + '/weapp/forum/topic/dislike',
+  TopicLikeList: host + '/weapp/forum/topic/likelist',
   TopicList: host + '/weapp/forum/topic/list',
   TopicPreAddWithImage: host + '/weapp/forum/topic/preAddWithImage',
   TopicAddWithImage: host + '/weapp/forum/topic/addWithImage',

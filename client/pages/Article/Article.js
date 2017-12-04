@@ -12,6 +12,7 @@ Page({
     const ArticleDetailUrl = url.ArticleDetail + "/" + this.data.articleId
     util.http_get(ArticleDetailUrl, (res) => {
       let article = res.data
+      article.content = JSON.parse(article.content)
       this.setData({ article })
     })
   },

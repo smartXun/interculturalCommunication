@@ -56,7 +56,6 @@ Page({
         setTimeout(()=>{
           wx.navigateBack({ url: '../AccountSetting/AccountSetting' })
         },500)
-       
       }
     })
   }

@@ -102,4 +102,10 @@ const dislike = async (ctx, next) => {
   ctx.body = { success: true }
 }
 
-module.exports = { item, list, preAddWithImage, addWithImage, addWithoutImage, like, dislike }
+const likelist = async (ctx, next) => {
+  const user = ctx.request.user
+  let likelist = await knex('forum_topic_like').join('forum_topic', 'forum_topic_like.topic_id', 'forum_topic.id').select('forum_topic.*').where({ 'forum_topic_like.user_id': user.u_id })
+  ctx.body = { success: true, data:likelist }
+}
+
+module.exports = { item, list, preAddWithImage, addWithImage, addWithoutImage, like, likelist, dislike }
