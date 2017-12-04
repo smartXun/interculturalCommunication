@@ -27,7 +27,7 @@ Page({
         wx.setStorageSync('token', res.token);
         app.globalData.token = res.token
         app.globalData.userInfo = res.userInfo
-        that.globalData.userType = 'wechat'
+        app.globalData.userType = 'local'
         wx.switchTab({ url: '../MyAccount/MyAccount' })
       }else{
         util.showModel('Error', res.message)
@@ -48,7 +48,7 @@ Page({
             wx.setStorageSync('token', res.token);
             app.globalData.token = res.token
             app.globalData.userInfo = userInfo
-            that.globalData.userType = 'local'
+            app.globalData.userType = 'wechat'
             wx.switchTab({ url: '../MyAccount/MyAccount' })
           }
         });

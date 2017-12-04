@@ -47,13 +47,16 @@ Page({
     util.showLoading()
     util.http_post(url.LocalChangePassword,{
       acc: this.data.accValue,
-      oldPwd: oldpwdValue,
-      newPwd: pwd1Value
+      oldPwd: this.data.oldpwdValue,
+      newPwd: this.data.pwd1Value
     },res=>{
       util.hideLoading()
       if(res.success){
         util.showSuccess('Success!');
-        wx.navigateBack({ url:'../AccountSetting/AccountSetting' })
+        setTimeout(()=>{
+          wx.navigateBack({ url: '../AccountSetting/AccountSetting' })
+        },500)
+       
       }
     })
   }

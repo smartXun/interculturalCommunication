@@ -49,7 +49,7 @@ const register = async (ctx, next) => {
 }
 
 const changepwd = async (ctx, next) => {
-  const { acc, oldPwd, newPwd } = ctx.req.body
+  const { acc, oldPwd, newPwd } = ctx.request.body;
   const user = await knex('mUser').where({ name: acc }).first()
   if (user) {
     if (oldPwd == user.password) {
