@@ -13,7 +13,7 @@
     <image class='item_icon' src='../../assets/icon/Comment@3x.png'></image>
     <text class='fz-15'>My Comment</text>
   </view>
-  <view class='item'>
+  <view class='item' bindtap='toHistorical'>
     <image class='item_icon' src='../../assets/icon/HistoricalRecords@3x.png'></image>
     <text class='fz-15'>Historical Records</text>
   </view>

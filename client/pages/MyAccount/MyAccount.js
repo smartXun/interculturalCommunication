@@ -22,4 +22,7 @@ Page({
   toAccountSetting: function () {
     wx.navigateTo({ url: '../AccountSetting/AccountSetting' })
   },
+  toHistorical: function(){
+    wx.navigateTo({ url: '../Historical/Historical' })
+  }
 })
