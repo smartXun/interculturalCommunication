@@ -1,0 +1,8 @@
+<view class='content_wrapper'>
+  <textarea focus auto-height bindinput='contentInput' class="fz-14" placeholder="Write your comment"></textarea>
+</view>
+
+<view class='bottomGroup flex-h fullWidth' style='background-color:#F7F7FA'>
+  <view class='flex1 flex'></view>
+  <view bindtap='submit' class='btn blue'><text class='fz-15'>Send</text></view>
+</view>

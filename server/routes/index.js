@@ -56,6 +56,9 @@ router.get('/kit/article/list/:category', controllers.kit.article.list)
 router.post('/kit/article/like', auth, controllers.kit.article.like)
 router.get('/kit/article/:id', controllers.kit.article.item)
 
+router.post('/kit/back/add', auth, controllers.kit.back.add)
+router.post('/kit/back/list/:id', auth, controllers.kit.back.list)
+
 router.post('/translate', controllers.translate)
 
 router.post('/system/login', controllers.admin.auth.login)

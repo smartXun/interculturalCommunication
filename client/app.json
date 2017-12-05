@@ -4,6 +4,7 @@
     "pages/AnsList/AnsList",
     "pages/ArticleList/ArticleList",
     "pages/Article/Article",
+    "pages/ArticleComment/ArticleComment",
     "pages/NewQ/NewQ",
     "pages/NewA/NewA",
     "pages/Comment/Comment",

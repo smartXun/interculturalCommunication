@@ -42,4 +42,6 @@ module.exports = {
   ArticleDetail: host + '/weapp/kit/article',
   ArticleList: host + '/weapp/kit/article/list/',
   ArticleLike: host + '/weapp/kit/article/like',
+
+  ArticleBackAdd: host + '/weapp/kit/back/add',
 }
