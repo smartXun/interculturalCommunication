@@ -1,6 +1,7 @@
 const knex = require('../../knex.js')
 const cos = require('../../cos.js')
 const conf = require('../../config.js')
+const jwt = require('jsonwebtoken')
 const { getAnsCommentUserPhoto } = require('./a.js')
 
 const add = async (ctx, next) => {
@@ -8,11 +9,30 @@ const add = async (ctx, next) => {
   const user = ctx.request.user
   const queId = await knex('qa_que').insert({ user_id: user.u_id, content: content })
   await knex('user_action').insert({ q_id: queId, user_id: user.u_id })
-  await knex('qa_que').insert({ user_id: user.u_id, content: content })
   if (queId) {
     ctx.body = { success: true }
   } else {
     ctx.body = { success: false, message: "Create Question Fail!" }
+  }
+}
+
+const addWithImage = async (ctx, next) => {
+  if (ctx.req.headers && ctx.req.headers.authorization) {
+    const decoded = jwt.verify(ctx.req.headers.authorization, conf.jwtSecret)
+    if (decoded.id) {
+      const user = await knex('mUser').where({ u_id: decoded.id }).first()
+      const { content } = ctx.req.body
+      const { filename, path, mimetype } = ctx.req.file
+      const data = await cos.up(filename, path)
+      const imageUrl = "http://" + data.Location
+      const queId = await knex('qa_que').insert({ user_id: user.u_id, content, image:imageUrl })
+      await knex('user_action').insert({ q_id: queId, user_id: user.u_id })
+      ctx.body = { success: true }
+    } else {
+      ctx.body = { code: -1, message: 'token invalid' }
+    }
+  } else {
+    ctx.body = { code: -1, msg: 'User authentication failed' }
   }
 }
 
@@ -75,4 +95,4 @@ const list = async (ctx, next) => {
   ctx.body = { data: list }
 }
 
-module.exports = { add, item, like, likelist , list }
+module.exports = { add, addWithImage, item, like, likelist , list }

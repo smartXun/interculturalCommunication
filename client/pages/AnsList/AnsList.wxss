@@ -18,9 +18,18 @@
   margin-left: 30rpx;
   margin-right: 8rpx;
 }
-.title{
+
+.que_content{
+  align-items:flex-start;
+  margin-right:30rpx;
+}
+.que_content .title{
   margin: 25rpx 0;
   line-height: 48rpx;
+}
+.que_content image{
+  width:100%;
+  margin-bottom:25rpx;
 }
 
 .answer_wrapper{

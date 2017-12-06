@@ -11,6 +11,7 @@ CREATE TABLE `qa_que` (
   `like_num` mediumint(9) NOT NULL DEFAULT 0,
   `ans_num` mediumint(9) NOT NULL DEFAULT 0,
   `content` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(1024) COLLATE utf8mb4_unicode_ci,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_visit_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),

@@ -7,8 +7,16 @@ Page({
     ansList: []
   },
   onLoad: function (options) {
-    const AnsListUrl = url.QueDetail + "/" + options.id
+    this.setData({ id: options.id})
+    this.getData()
+  },
+  onPullDownRefresh: function () {
+    this.getData()
+  },
+  getData: function () {
+    const AnsListUrl = url.QueDetail + "/" + this.data.id
     util.http_get(AnsListUrl, (res)=>{
+      wx.stopPullDownRefresh()
       let que = res.data.que
       que.create_time = util.diffDate(new Date(), new Date(que.create_time))
       let ansList = res.data.ansList

@@ -1,8 +1,14 @@
 <view class='content_wrapper'>
-  <textarea focus auto-height bindinput='contentInput' class="fz-14" placeholder="What's on your mind?"></textarea>
+  <textarea focus auto-height bindinput='contentInput' class="fz-14" placeholder="What would you like to ask?"></textarea>
+</view>
+
+<view class='question_image_wrapper'>
+  <image mode="widthFix" src='{{image}}'></image>
 </view>
 
 <view class='bottomGroup flex-h fullWidth' style='background-color:#F7F7FA'>
-  <view class='flex1 flex'></view>
+  <view class='flex1 flex'>
+    <image bindtap='addImage' class='icon' src='../../assets/icon/photo@3x.png'></image>
+  </view>
   <view bindtap='submit' class='btn blue'><text class='fz-15'>Send</text></view>
 </view>

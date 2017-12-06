@@ -24,6 +24,7 @@
   line-height:64rpx;
   text-align:center;
   z-index:1001;
+  position: relative;
 }
 .language{
   background: #4C98E1;
@@ -32,6 +33,8 @@
   line-height: 60rpx;
   width: 220rpx;
   text-align:center;
+  position: absolute;
+  right: 0;
 }
 
 
@@ -40,18 +43,17 @@
   background: #FFFFFF;
 }
 .content_wrapper .text_view{
-  margin-bottom: 40rpx;
+  margin: 0 30rpx 40rpx 30rpx;
 }
 .content_wrapper text{
-  margin-left: 30rpx;
-  max-width:690rpx;
   word-wrap:break-word;
 }
 .content_wrapper video{
   max-width:690rpx;
 }
 .contentImg{
-  width: 750rpx;
+  width: 756rpx;
+  margin-left:-33rpx;
 }
 
 .actionBar{

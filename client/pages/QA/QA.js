@@ -8,8 +8,12 @@ Page({
   onLoad: function (options) {
     this.getData()
   },
+  onPullDownRefresh: function(){
+    this.getData()
+  },
   getData: function(){
     util.http_get(url.QueList, (res) => {
+      wx.stopPullDownRefresh()
       if(!res.data)return
       const data = res.data
       let list = data.map((que)=>{

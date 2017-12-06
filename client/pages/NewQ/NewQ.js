@@ -13,15 +13,60 @@ Page({
       util.showModel('Notice', 'Please enter your question!')
       return
     }
-    util.http_put(url.QueAdd, { content: this.data.content }, (res) => {
-      if(res.success){
-        util.showSuccess("Success!");
-        setTimeout(()=>{
-          wx.switchTab({ url: '../QA/QA' })
-        },1000)
-      }else{
-        util.showModel('Error', res.message)
+    if(this.data.image){
+      util.showLoading()
+      const uploadTask = wx.uploadFile({
+        url: url.QueAddWidthImage,
+        filePath: this.data.image,
+        name: 'file',
+        header: { Authorization: getApp().globalData.token },
+        formData: { content: this.data.content },
+        success: function(res){
+          console.log(res)
+          util.hideLoading()
+          util.showSuccess("Success!");
+          setTimeout(() => {
+            wx.switchTab({ url: '../QA/QA' })
+          }, 500)
+        }
+      })
+    }else{
+      util.http_put(url.QueAdd, { content: this.data.content }, (res) => {
+        if (res.success) {
+          util.showSuccess("Success!");
+          setTimeout(() => {
+            wx.switchTab({ url: '../QA/QA' })
+          }, 500)
+        } else {
+          util.showModel('Error', res.message)
+        }
+      })
+    }
+  },
+  addImage: function () {
+    let _this = this;
+    wx.showActionSheet({
+      itemList: ['从相册中选择', '拍照'],
+      itemColor: "#f7982a",
+      success: function (res) {
+        if (!res.cancel) {
+          if (res.tapIndex == 0) {
+            _this.chooseWxImage('album')
+          } else if (res.tapIndex == 1) {
+            _this.chooseWxImage('camera')
+          }
+        }
       }
     })
-  }
+  },
+  chooseWxImage: function (type) {
+    let _this = this;
+    wx.chooseImage({
+      sizeType: ['original', 'compressed'],
+      sourceType: [type],
+      success: function (res) {
+        _this.setData({ image: res.tempFilePaths[0] })
+      }
+    })
+  },
 })

@@ -3,7 +3,10 @@
     <view class='que_icon_img'>
       <image src='../../assets/icon/Q@3x.png'></image>
     </view>
-    <text class='title flex1 fz-15'>{{que.content}}</text>
+    <view class='que_content flex1 flex-v'>
+      <text class='title fz-15'>{{que.content}}</text>
+      <image mode="widthFix" src='{{que.image}}' wx:if="{{que.image}}"></image>
+    </view>
   </view>
   <view class='flex-h underline like_chat'>
     <image src='../../assets/icon/Heart@3x.png'></image>

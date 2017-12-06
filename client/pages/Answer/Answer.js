@@ -49,56 +49,69 @@ Page({
   cancleChooseLanguage: function(){
     this.setData({ isChooseLanguage: false })
   },
-  translateChinese: function () {
-    this.setData({ isChooseLanguage: false })
-    util.showLoading()
-    let content = JSON.parse(this.data.ans.content)
-    let textList = content.filter((item) => { return item.type == 'text' })
-    const promise = textList.map((item)=>{
-      return new Promise((resolve, reject)=>{
-        util.http_post(url.Translate, {
-          transText: item.content.toLowerCase(),
-          to: 'zh-CN'
-        }, (res) => {
-          const results = res.result
-          let resultString = ''
-          results.forEach((item) => {
-            resultString += item
-          })
-          item.content = resultString
-          resolve()
-        })
+  translate_request: function(content,language, cb){
+    util.http_post(url.Translate, {
+      transText: content.toLowerCase(),
+      to: language
+    }, (res) => {
+      const results = res.result
+      let resultString = ''
+      results.forEach((item) => {
+        resultString += item
       })
-    })
-    Promise.all(promise).then(()=>{
-      util.hideLoading()
-      this.setData({ contents: content })
+      cb(resultString)
     })
   },
-  translateEnglish: function () {
+  translate_content: function(e){
+    const index = e.currentTarget.dataset.index
+    const that = this
+    wx.showActionSheet({
+      itemList: ['Chinese', 'English'],
+      success: function (res) {
+        util.showLoading()
+        if (res.tapIndex===0){
+          that.translate_request(that.data.contents[index].content, 'zh-CN', resultString=>{
+            util.hideLoading()
+            let contents = that.data.contents
+            contents[index].content = resultString
+            that.setData({ contents })
+          })
+        }else{
+          that.translate_request(that.data.contents[index].content, 'en', resultString => {
+            util.hideLoading()
+            let contents = that.data.contents
+            contents[index].content = resultString
+            that.setData({ contents })
+          })
+        }
+      },
+      fail: function (res) {
+        console.log(res.errMsg)
+      }
+    })
+  },
+  translateAll: function(language){
     this.setData({ isChooseLanguage: false })
     util.showLoading()
     let content = JSON.parse(this.data.ans.content)
     let textList = content.filter((item) => { return item.type == 'text' })
     const promise = textList.map((item) => {
       return new Promise((resolve, reject) => {
-        util.http_post(url.Translate, {
-          transText: item.content.toLowerCase(),
-          to: 'en'
-        }, (res) => {
-          const results = res.result
-          let resultString = ''
-          results.forEach((item) => {
-            resultString += item
-          })
+        this.translate_request(item.content, language, resultString => {
           item.content = resultString
           resolve()
         })
       })
     })
-    Promise.all(promise).then((results) => {
+    Promise.all(promise).then(() => {
       util.hideLoading()
       this.setData({ contents: content })
     })
+  },
+  translateChinese: function () {
+    this.translateAll('zh-CN')
+  },
+  translateEnglish: function () {
+    this.translateAll('en')
   }
 })

@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "Q&A"
+  "navigationBarTitleText": "Q&A",
+  "enablePullDownRefresh": true
 }

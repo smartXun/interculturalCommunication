@@ -74,6 +74,7 @@ Page({
     } else if (this.data.pwdValue !== this.data.pwd2Value) {
       util.showModel(errMsg.type.wrongValue, errMsg.account.pwdNotSame)
     }else{
+      util.showLoading()
       wx.uploadFile({
         url: urls.LocalRegister,
         filePath: this.data.userPhoto,
@@ -84,12 +85,13 @@ Page({
           email: this.data.emailValue
         },
         success: function (res) {
+          util.hideLoading()
           const data = JSON.parse(res.data)
           if (data.success){
             wx.setStorageSync('token', data.token);
             app.globalData.token = data.token
             app.globalData.userInfo = data.userInfo
-            that.globalData.userType = 'local'
+            app.globalData.userType = 'local'
             wx.switchTab({ url: '../MyAccount/MyAccount' })
           }else{
             util.showModel('注册失败', data.message || '')

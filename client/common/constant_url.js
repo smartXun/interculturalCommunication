@@ -3,16 +3,18 @@ var host = 'https://5pa2v70w.qcloud.la';
 module.exports = {
   Translate: host + '/weapp/translate',
 
-  UserInfo: host + '/weapp/user_info',
   WechatLogin: host + '/weapp/login_wechat',
   LocalLogin: host + '/weapp/login_local',
   LocalRegister: host + '/weapp/register_local',
   LocalChangePassword: host + '/weapp/change_pwd_local',
+
+  UserInfo: host + '/weapp/account/info',
   CommentToMe: host + '/weapp/account/comment/tome',
   MyComment: host + '/weapp/account/comment/my',
   Historical: host + '/weapp/account/historical/all',
 
   QueAdd: host + '/weapp/qa/q/add',
+  QueAddWidthImage: host + '/weapp/qa/q/addWithImage',
   QueDetail: host + '/weapp/qa/q',
   QueList: host + '/weapp/qa/q/list',
   QueLike: host + '/weapp/qa/q/like',
