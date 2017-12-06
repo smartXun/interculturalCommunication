@@ -43,7 +43,8 @@ const addWithImage = async (ctx, next) => {
             item.src = images[index].url
           })
           pageData = JSON.stringify(pageData)
-          await knex('forum_topic').insert({ title, user_id: user.u_id, content: pageData })
+          const topicId = await knex('forum_topic').insert({ title, user_id: user.u_id, content: pageData })
+          await knex('user_action').insert({ topic_id: topicId, user_id: user.u_id })
           delete cache[user.u_id]
           ctx.body = { success: true }
         }

@@ -9,8 +9,9 @@ const add = async (ctx, next) => {
   } else {
     const user = ctx.request.user
     const ans = await knex('qa_ans').where({ 'id': ansId }).first()
-    const comment = await knex('qa_comment').insert({ user_id: user.u_id, content: content, a_id: ansId, q_id: ans.q_id })
-    if (comment) {
+    const commentId = await knex('qa_comment').insert({ user_id: user.u_id, content: content, a_id: ansId, q_id: ans.q_id })
+    await knex('user_action').insert({ c_id: commentId, user_id: user.u_id })
+    if (commentId) {
       await knex('qa_ans').where({ 'id': ansId }).increment('comment_num', 1)
       ctx.body = { success: true }
     } else {

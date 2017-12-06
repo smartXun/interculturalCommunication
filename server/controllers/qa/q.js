@@ -6,8 +6,10 @@ const { getAnsCommentUserPhoto } = require('./a.js')
 const add = async (ctx, next) => {
   const { content } = ctx.request.body
   const user = ctx.request.user
-  const que = await knex('qa_que').insert({ user_id: user.u_id, content: content })
-  if (que) {
+  const queId = await knex('qa_que').insert({ user_id: user.u_id, content: content })
+  await knex('user_action').insert({ q_id: queId, user_id: user.u_id })
+  await knex('qa_que').insert({ user_id: user.u_id, content: content })
+  if (queId) {
     ctx.body = { success: true }
   } else {
     ctx.body = { success: false, message: "Create Question Fail!" }

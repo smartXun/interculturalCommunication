@@ -11,7 +11,10 @@
 <view bindtap='toTopic' class='topic flex-h underline' wx:for="{{list}}" wx:key="id" data-id='{{item.id}}'>
   <image class='userPhoto' src='{{item.userPhotos}}'></image>
   <view class='flex-v flex1'>
-    <text class='fz-15'>{{item.title}}</text>
+    <text class='fz-15' style='width:100%;'>{{item.title}}</text>
+    <view  class='list_image flex-h fullWidth' wx:if="{{item.images.length>0}}">
+      <image class='flex1' mode="aspectFill" wx:for="{{item.images}}" wx:key="{{index}}" src="{{item.src}}"></image>
+    </view>
     <view class='flex-h' style='width:100%;margin-top:20rpx;'>
       <image class='icon' src='../../assets/icon/Clock@3x.png'></image>
       <text class='flex1 fz-11' style='color:#999999;'>{{item.create_time}}</text>

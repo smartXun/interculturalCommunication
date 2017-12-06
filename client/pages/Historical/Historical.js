@@ -1,66 +1,35 @@
-// pages/Historical/Historical.js
+const util = require('../../common/util.js')
+const url = require('../../common/constant_url.js')
+const app = getApp()
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-  
+    loaded:false,
+    list:[]
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-  
+    this.setData({ userInfo:app.globalData.userInfo })
+    this.getData()
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  getData: function(){
+    util.showLoading()
+    util.http_get(url.Historical, res => {
+      util.hideLoading()
+      if(res.data && res.data.length>0){
+        let list = this.data.list
+        let data = res.data
+        console.log(data)
+        data.forEach((item)=>{
+          item.create_time = util.diffDate(new Date(), new Date(item.create_time))
+          if (item.type=="ans"){
+            item.content = JSON.parse(item.content).filter((item) => { return item.type == 'text' })[0].content.replace(/^(\&nbsp\;)/, '')
+          }
+        })
+        list = list.concat(data)
+        this.setData({ list })
+      }else{
+        this.setData({ loaded:true })
+      }
+    })
   }
 })

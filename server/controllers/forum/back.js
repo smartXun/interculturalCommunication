@@ -9,8 +9,9 @@ const add = async (ctx, next) => {
   } else {
     const user = ctx.request.user
     const topic = await knex('forum_topic').where({ id: topicId }).first()
-    const back = await knex('forum_topic_back').insert({ author_id: topic.user_id, user_id: user.u_id, content: content, topic_id: topicId })
-    if (back) {
+    const backId = await knex('forum_topic_back').insert({ author_id: topic.user_id, user_id: user.u_id, content: content, topic_id: topicId })
+    await knex('user_action').insert({ back_id: backId, user_id: user.u_id })
+    if (backId) {
       await knex('forum_topic').where({ 'id': topicId }).increment('back_num', 1)
       ctx.body = { success: true }
     } else {

@@ -10,6 +10,7 @@ module.exports = {
   LocalChangePassword: host + '/weapp/change_pwd_local',
   CommentToMe: host + '/weapp/account/comment/tome',
   MyComment: host + '/weapp/account/comment/my',
+  Historical: host + '/weapp/account/historical/all',
 
   QueAdd: host + '/weapp/qa/q/add',
   QueDetail: host + '/weapp/qa/q',
