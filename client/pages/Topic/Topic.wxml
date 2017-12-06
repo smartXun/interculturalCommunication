@@ -9,7 +9,7 @@
       <view catchtap='translateEnglish' hidden="{{!isChooseLanguage}}" class='language' style='transform:translateY(100%);'>English</view>
     </view>
   </view>
-  <text class='fz-15'>{{topic.title}}</text>
+  <view style='margin-bottom:20rpx;'><text class='fz-15'>{{topic.title}}</text></view>
   <view class='text_view' wx:for="{{contents}}" wx:key="{{index}}">
     <text wx-if="{{item.type=='text'}}" decode space class='fz-12' bindlongtap=''>{{item.content}}</text>
     <image mode="widthFix" class='contentImg' wx-if="{{item.type=='image'}}" src='{{item.src}}'></image>

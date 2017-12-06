@@ -58,3 +58,38 @@
   height: 20rpx;
   margin-right: 13rpx;
 }
+
+.topic_wrapper{
+  padding: 20rpx 30rpx 20rpx 30rpx;
+  align-items: flex-start;
+}
+.topic_wrapper .userPhoto{
+  margin-left:0;
+  margin-right:20rpx;
+  margin-top: 0;
+}
+.topic_wrapper .icon{
+  width: 20rpx;
+  height: 20rpx;
+  margin-right: 13rpx;
+}
+.time{
+  color:#999999;
+}
+
+
+.comment_wrapper{
+  padding: 20rpx 0 0 30rpx;
+  align-items: flex-start;
+}
+.comment_wrapper .userPhoto{
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 20rpx;
+  margin-left: 0;
+}
+.comment_wrapper .icon{
+  width: 20rpx;
+  height: 20rpx;
+  margin-right: 13rpx;
+}

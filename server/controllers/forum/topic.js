@@ -1,6 +1,7 @@
 const knex = require('../../knex.js')
 const cos = require('../../cos.js')
 const conf = require('../../config.js')
+const jwt = require('jsonwebtoken')
 const fs = require('fs')
 
 var cache = {}
@@ -60,7 +61,6 @@ const addWithImage = async (ctx, next) => {
 const addWithoutImage = async (ctx, next) => {
   const { title, pageData } = ctx.request.body
   const user = ctx.request.user
-  console.log(111)
   const topic = await knex('forum_topic').insert({ title, user_id: user.u_id, content: pageData })
   if (topic) {
     ctx.body = { success: true }

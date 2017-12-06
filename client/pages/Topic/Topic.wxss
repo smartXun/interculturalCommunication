@@ -13,6 +13,12 @@
   height: 28rpx;
   margin-right: 40rpx;
 }
+.text_view{
+  margin-bottom: 20rpx;
+}
+.contentImg{
+  width: 100%;
+}
 
 .drawer_screen {  
   width: 100%;  
