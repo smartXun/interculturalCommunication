@@ -39,14 +39,8 @@ const addWithImage = async (ctx, next) => {
 const item = async (ctx, next) => {
   const id = ctx.params.id
   const que = await knex('qa_que').where({ id: id }).first()
-  let ansList = await knex('qa_ans').where({ q_id: id })
-  const promises = ansList.map((ans, index, array) => {
-    return knex('mUser').where({ 'u_id': ans.user_id }).first().then((user) => {
-      ans.userAvatar = user.image_url
-    })
-  })
-  await Promise.all(promises)
-  ctx.body = { data: { que, ansList } }
+  const ans = await knex('qa_ans').join('mUser', 'u_id', 'qa_ans.user_id').select('qa_ans.*', 'mUser.image_url').where({ q_id: id }).first()
+  ctx.body = { data: { que, ans } }
 }
 
 const like = async (ctx, next) => {
