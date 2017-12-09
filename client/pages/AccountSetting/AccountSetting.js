@@ -12,7 +12,7 @@ Page({
     app.globalData.token = null
     app.globalData.userInfo = null
     app.globalData.userType = null
-    util.showSuccess('Loged Out!')
+    util.showSuccess('Logged Out!')
   },
   toChangePassword: function () {
     if (!app.globalData.token || !app.globalData.userInfo || !app.globalData.userType){

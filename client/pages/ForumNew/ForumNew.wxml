@@ -1,4 +1,4 @@
-<input bindinput='headlineInput' class='headline' placeholder='Headline' style='padding:20rpx;'></input>
+<input bindinput='headlineInput' class='headline' placeholder='Post a topic' style='padding:20rpx;'></input>
 <view class='content_wrapper'>
   <block wx:for="{{pageData}}" wx:key="{{index}}">
     <view bindtap='edit' data-index="{{index}}" style='position:relative'>

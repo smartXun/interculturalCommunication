@@ -2,7 +2,7 @@
   <view class='header-top blue flex-h'>
     <view class='search flex1 flex-h'>
     <image class='search_icon' src='../../assets/icon/search@3x.png'></image>
-    <input class='flex1 fz-12' bindinput="searchKeyInput" type="text" placeholder="Search" />
+    <input class='flex1 fz-12' bindinput="searchKeyInput" type="text" placeholder="Search Key Words" />
     </view>
     <image bindtap="forumnew" class='pen' src='../../assets/icon/pen.png'></image>
   </view>
