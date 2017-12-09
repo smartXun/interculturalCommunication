@@ -99,7 +99,7 @@ module.exports = {
   }),
   showLoading: () => {
     wx.showToast({
-      title: 'Loding',
+      title: 'Loading',
       icon: 'loading',
       mask: true,
       duration: 10000
