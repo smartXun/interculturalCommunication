@@ -17,32 +17,53 @@ const categoryList = {
   'Food': 8,
 }
 
-const add = async (ctx, next) => {
+var cache = {}
+const preAddWithImage = async (ctx, next) => {
+  const { title, category, pageData, imageCount } = ctx.request.body
+  const user = ctx.request.user
+  if (cache[user.u_id]){
+    ctx.body = { success: false }
+  }else{
+    let images = []
+    for (var i = 0; i < imageCount; i++) { images.push({}) }
+    cache[user.u_id] = { title, category, pageData, imageCount, images }
+    ctx.body = { success: true }
+  }
+}
+const addWithImage = async (ctx, next) => {
   if (ctx.req.headers && ctx.req.headers.authorization) {
     const decoded = jwt.verify(ctx.req.headers.authorization, conf.jwtSecret)
     if (decoded.id) {
       const user = await knex('aUser').where({ u_id: decoded.id }).first()
-      let { title, pageData, category } = ctx.req.body
-      const files = ctx.req.files
-      if (!title || !pageData || !category){
-        files.forEach((item) => { fs.unlinkSync(item.path)})
+      const { imageIndex } = ctx.req.body
+      const { filename, path, mimetype } = ctx.req.file
+      let article = cache[user.u_id]
+      if (!article) {
+        fs.unlinkSync(path)
         ctx.body = { success: false, message: 'Bad request' }
-      }else{
-        const promises = files.map((file, index, array) => {
-          return cos.up(file.filename, file.path).then((data) => {
-            file.url = "http://" + data.Location
+      } else {
+        article.images[imageIndex] = { filename, path }
+        if (!cache[user.u_id].complete && article.images.every((value, index, arr) => {
+          return value && value.filename && value.path
+        })) {
+          cache[user.u_id].complete = true
+          let { title, category, pageData, images } = article
+          const promises = images.map((image, index, array) => {
+            return cos.up(image.filename, image.path).then((data) => {
+              image.url = "http://" + data.Location
+            })
           })
-        })
-        await Promise.all(promises)
-        pageData = JSON.parse(pageData)
-        pageData.filter((item, index, arr) => {
-          return item.type == 'image'
-        }).forEach((item, index, arr) => {
-          item.src = files[index].url
-        })
-        pageData = JSON.stringify(pageData)
-        await knex('kit_article').insert({ title, content: pageData, category })
-        ctx.body = { success: true }
+          await Promise.all(promises)
+          pageData.filter((item, index, arr) => {
+            return item.type == 'image'
+          }).forEach((item, index, arr) => {
+            item.src = images[index].url
+          })
+          pageData = JSON.stringify(pageData)
+          await knex('kit_article').insert({ title, content: pageData, category })
+          delete cache[user.u_id]
+          ctx.body = { success: true }
+        }
       }
     } else {
       ctx.body = { code: -1, message: 'token invalid' }
@@ -50,6 +71,13 @@ const add = async (ctx, next) => {
   } else {
     ctx.body = { code: -1, message: 'User authentication failed' }
   }
+}
+
+const addWithoutImage = async (ctx, next) => {
+  const { title, category, pageData } = ctx.request.body
+  const user = ctx.request.user
+  await knex('kit_article').insert({ title, content: pageData, category })
+  ctx.body = { success: true }
 }
 
 const list = async (ctx, next) => {
