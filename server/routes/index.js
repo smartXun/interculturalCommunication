@@ -74,6 +74,9 @@ router.post('/system/qa/c/delete', admin, controllers.admin.qa.c.delete_item)
 router.get('/system/forum/topic/list/:offset/:pageSize', admin, controllers.admin.forum.topic.list)
 router.get('/system/forum/back/list/:offset/:pageSize', admin, controllers.admin.forum.back.list)
 router.get('/system/kit/article/list/:offset/:pageSize', admin, controllers.admin.kit.article.list)
-router.put('/system/kit/article/add', upload.array('files'), controllers.admin.kit.article.add)
+router.post('/system/kit/article/preAddWithImage', admin, controllers.admin.kit.article.preAddWithImage)
+router.put('/system/kit/article/addWithImage', upload.single('article_image'), controllers.admin.kit.article.addWithImage)
+router.put('/system/kit/article/addWithoutImage', admin, controllers.admin.kit.article.addWithoutImage)
+
 
 module.exports = router

@@ -10,7 +10,11 @@ const serve = require('koa-static');
 
 app.use(cors());
 app.use(response)
-app.use(bodyParser())
+app.use(bodyParser({
+  "formLimit": "5mb",
+  "jsonLimit": "5mb",
+  "textLimit": "5mb"
+}))
 app.use(router.routes())
 
 app.use(serve(__dirname + '/public/'));

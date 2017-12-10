@@ -54,6 +54,7 @@ const addWithImage = async (ctx, next) => {
             })
           })
           await Promise.all(promises)
+          pageData = JSON.parse(pageData)
           pageData.filter((item, index, arr) => {
             return item.type == 'image'
           }).forEach((item, index, arr) => {
@@ -99,4 +100,4 @@ const list = async (ctx, next) => {
   ctx.body = { success: true, data: articles, total }
 }
 
-module.exports = { add, list }
+module.exports = { preAddWithImage, addWithImage, addWithoutImage, list }
