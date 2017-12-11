@@ -43,7 +43,7 @@
   </view>
 </view>
 
-<view class='flex-h actionBar'>
+<view class='flex-h actionBar fullWidth'>
   <view bindtap='like' class='flex1 flex-h'>
     <image src='../../assets/icon/like_3@3x.png'></image>
     <text class='fz-12'>Like</text>

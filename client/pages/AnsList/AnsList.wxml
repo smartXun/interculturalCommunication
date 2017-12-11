@@ -17,10 +17,6 @@
     <image src='../../assets/icon/Clock@3x.png'></image>
     <text class='fz-11' style='margin-right:30rpx;'>{{que.create_time}}</text>
   </view>
-  <view class='flex-h underline' style='text-align:center;'>
-    <view class='flex1 fz-15' style='border-right:solid 1px #DBDBDB;padding:16rpx 0;' bindtap='like'>I Like</view>
-    <view class='flex1 fz-15' bindtap='toNewA'>Answer</view>
-  </view>
 </view>
 
 <view wx:for="{{ansList}}" wx:key="id" class='answer_wrapper' bindtap='toAnswer' data-id='{{item.id}}'>
@@ -37,4 +33,9 @@
     <image src='../../assets/icon/Clock@3x.png'></image>
     <text class='fz-11' style='margin-right:30rpx;'>{{item.create_time}}</text>
   </view>
+</view>
+
+<view class='flex-h bottomGroup fullWidth'>
+  <view class='flex1 fz-15' style='border-right:solid 1px #DBDBDB;padding:16rpx 0;' bindtap='like'>I Like</view>
+  <view class='flex1 fz-15' bindtap='toNewA'>Answer</view>
 </view>

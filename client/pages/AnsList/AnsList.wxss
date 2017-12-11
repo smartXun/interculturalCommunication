@@ -50,3 +50,11 @@
   word-break: break-all;
   text-overflow:ellipsis;
 }
+
+.bottomGroup{
+  text-align:center;
+  position:fixed;
+  bottom:0;
+  background: #FFFFFF;
+  border-top: solid 1px #DBDBDB;
+}

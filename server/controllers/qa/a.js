@@ -7,11 +7,16 @@ const fs = require('fs')
 var cache = {}
 const preAddWithImage = async (ctx, next) => {
   const { pageData, imageCount, queId } = ctx.request.body
-  const user = ctx.request.user
-  let images = []
-  for (var i = 0; i < imageCount; i++ ){ images.push({}) }
-  cache[queId + '_' + user.u_id] = { pageData, imageCount, images }
-  ctx.body = { success: true }
+  const que = await knex('qa_que').where({ id: queId }).first()
+  if (que.ans_num>0){
+    ctx.body = { success: false, message:'This Question has been answered!' }
+  }else{
+    const user = ctx.request.user
+    let images = []
+    for (var i = 0; i < imageCount; i++) { images.push({}) }
+    cache[queId + '_' + user.u_id] = { pageData, imageCount, images }
+    ctx.body = { success: true }
+  }
 }
 const addWithImage = async (ctx, next) => {
   if (ctx.req.headers && ctx.req.headers.authorization) {

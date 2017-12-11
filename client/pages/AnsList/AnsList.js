@@ -19,13 +19,28 @@ Page({
       wx.stopPullDownRefresh()
       let que = res.data.que
       que.create_time = util.diffDate(new Date(), new Date(que.create_time))
-      let ans = res.data.ans
-      let ansList = res.data.ans
-      this.setData({ que, ans })
+      let ansList = res.data.ansList
+      ansList.forEach((ans) => {
+        ans.create_time = util.diffDate(new Date(), new Date(ans.create_time))
+        const content = JSON.parse(ans.content)
+        let firstText = content.filter((item) => {
+          return item.type == 'text'
+        })[0]
+        if (firstText) {
+          ans.content = firstText.content.replace(/^(\&nbsp\;)/, '')
+        } else {
+          ans.content = ''
+        }
+      })
+      this.setData({ que, ansList })
     })
   },
   toNewA: function(){
-    wx.navigateTo({ url: '../NewA/NewA?id=' + this.data.que.id })
+    if (this.data.ansList && this.data.ansList.length > 0) {
+      util.showModel('Notice', 'This Question has been answered!')
+    } else {
+      wx.navigateTo({ url: '../NewA/NewA?id=' + this.data.que.id })
+    }
   },
   like: function(){
     util.http_post(url.QueLike, { queId: this.data.que.id } ,(res) => {

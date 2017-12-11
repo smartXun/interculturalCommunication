@@ -4,9 +4,9 @@ const app = getApp()
 
 Page({
   data: {
-    pageData: [],
-    isEditing: false,
-    editingIndex: 0,
+    pageData: [{
+      index:0,type:'text',content:''
+    }],
     showModalStatus: false,
     linkValue: '',
     uploadProgress: [],
@@ -18,19 +18,11 @@ Page({
     this.setData({ queId: options.id })
   },
   changeBlur: function (e) {
-    let newData = this.data.pageData
-    const index = this.data.editingIndex
-    if (e.detail.value.trim() == '') {
-      newData.splice(index, 1)
-    } else {
-      newData[index].content = e.detail.value.replace(/^ +/gm, function (all) {
-        return all.replace(/ /g, '&nbsp;');
-      })
-    }
-    this.setData({
-      pageData: newData,
-      isEditing: false
+    let pageData = this.data.pageData
+    pageData[0].content = e.detail.value.replace(/^ +/gm, function (all) {
+      return all.replace(/ /g, '&nbsp;');
     })
+    this.setData({ pageData })
   },
   edit: function (e) {
     const index = e.currentTarget.dataset.index
@@ -43,15 +35,6 @@ Page({
     this.setData({
       isEditing: true,
       editingIndex: index
-    })
-  },
-  addText: function () {
-    let newData = this.data.pageData
-    newData.push({ index: newData.length, type: 'text', content: '' })
-    this.setData({
-      pageData: newData,
-      isEditing: true,
-      editingIndex: newData.length - 1
     })
   },
   linkInput: function (e) {
