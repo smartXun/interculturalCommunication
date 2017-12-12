@@ -5,9 +5,9 @@ const app = getApp()
 Page({
   data: {
     headlineValue:'',
-    pageData: [],
-    isEditing: false,
-    editingIndex: 0,
+    pageData: [{
+      index: 0, type: 'text', content: ''
+    }],
     showModalStatus: false,
     linkValue: '',
     uploadProgress: [],
@@ -18,19 +18,11 @@ Page({
     this.setData({ headlineValue: e.detail.value })
   },
   changeBlur: function (e) {
-    let newData = this.data.pageData
-    const index = this.data.editingIndex
-    if (e.detail.value.trim() == '') {
-      newData.splice(index, 1)
-    } else {
-      newData[index].content = e.detail.value.replace(/^ +/gm, function (all) {
-        return all.replace(/ /g, '&nbsp;');
-      })
-    }
-    this.setData({
-      pageData: newData,
-      isEditing: false
+    let pageData = this.data.pageData
+    pageData[0].content = e.detail.value.replace(/^ +/gm, function (all) {
+      return all.replace(/ /g, '&nbsp;');
     })
+    this.setData({ pageData })
   },
   edit: function (e) {
     const index = e.currentTarget.dataset.index
@@ -43,15 +35,6 @@ Page({
     this.setData({
       isEditing: true,
       editingIndex: index
-    })
-  },
-  addText: function () {
-    let newData = this.data.pageData
-    newData.push({ index: newData.length, type: 'text', content: '' })
-    this.setData({
-      pageData: newData,
-      isEditing: true,
-      editingIndex: newData.length - 1
     })
   },
   linkInput: function (e) {
@@ -100,39 +83,6 @@ Page({
         _this.setData({ pageData: newData })
       }
     })
-  },
-  handBlockUp: function (e) {
-    const index = e.target.dataset.index;
-    if (index == 0) return;
-    let newData = this.data.pageData;
-    newData[index - 1].index += 1;
-    newData[index].index -= 1;
-    newData.sort(function (a, b) { return a.index - b.index; })
-    this.setData({ pageData: newData })
-  },
-  handBlockDown: function (e) {
-    const index = e.target.dataset.index;
-    let newData = this.data.pageData;
-    if (index == newData.length - 1) return;
-    newData[index + 1].index -= 1;
-    newData[index].index += 1;
-    newData.sort(function (a, b) { return a.index - b.index; })
-    this.setData({ pageData: newData })
-  },
-  handBlockClose: function (e) {
-    let index = e.target.dataset.index;
-    let newData = this.data.pageData;
-    let self = this;
-    wx.showModal({
-      title: '确定要删除吗？',
-      success: function (res) {
-        if (res.confirm) {
-          newData.splice(index, 1);
-          newData.map(function (n, i) { n.index = i })
-          self.setData({ pageData: newData })
-        }
-      }
-    });
   },
   submit: function () {
     const pageData = this.data.pageData

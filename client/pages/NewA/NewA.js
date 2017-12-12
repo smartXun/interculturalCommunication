@@ -136,36 +136,39 @@ Page({
         pageData: this.data.pageData,
         imageCount: images.length
       },(res)=>{
-        if(!res.success)return;
-        images.forEach((image, index) => {
-          uploadProgress.push(0)
-          const formData = {
-            queId: this.data.queId,
-            imageIndex: index,
-          }
-          const uploadTask = wx.uploadFile({
-            url: url.AnsAddWithImage,
-            filePath: image.src,
-            name: 'file',
-            header:{ Authorization: getApp().globalData.token },
-            formData: formData,
-          })
-          uploadTask.onProgressUpdate((res) => {
-            let uploadProgress = this.data.uploadProgress
-            uploadProgress[index] = res.progress
-            if (uploadProgress.every((value, index, arr)=>{
-              return value == 100
-            })){
-              util.showSuccess('Success')
-              setTimeout(() => {
-                wx.navigateBack({ url: '../AnsList/AnsList?id=' + this.data.queId })
-              }, 1000)
-              this.setData({ uploadProgress, isUploading:false })
-            }else{
-              this.setData({ uploadProgress })
+        if(res.success){
+          images.forEach((image, index) => {
+            uploadProgress.push(0)
+            const formData = {
+              queId: this.data.queId,
+              imageIndex: index,
             }
+            const uploadTask = wx.uploadFile({
+              url: url.AnsAddWithImage,
+              filePath: image.src,
+              name: 'file',
+              header: { Authorization: getApp().globalData.token },
+              formData: formData,
+            })
+            uploadTask.onProgressUpdate((res) => {
+              let uploadProgress = this.data.uploadProgress
+              uploadProgress[index] = res.progress
+              if (uploadProgress.every((value, index, arr) => {
+                return value == 100
+              })) {
+                util.showSuccess('Success')
+                setTimeout(() => {
+                  wx.navigateBack({ url: '../AnsList/AnsList?id=' + this.data.queId })
+                }, 1000)
+                this.setData({ uploadProgress, isUploading: false })
+              } else {
+                this.setData({ uploadProgress })
+              }
+            })
           })
-        })
+        } else if (res.message) {
+          util.showModel("Notice", res.message)
+        }
       })
       this.setData({ uploadProgress, isUploading: true, uploadingImages: images })
     } else {
@@ -175,6 +178,8 @@ Page({
           setTimeout(() => {
             wx.navigateBack({ url: '../AnsList/AnsList?id=' + this.data.queId })
           }, 1000)
+        } else if (res.message){
+          util.showModel("Notice", res.message);
         }
       })
     }

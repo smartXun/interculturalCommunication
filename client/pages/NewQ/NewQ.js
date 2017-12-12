@@ -46,7 +46,7 @@ Page({
   addImage: function () {
     let _this = this;
     wx.showActionSheet({
-      itemList: ['从相册中选择', '拍照'],
+      itemList: ['Photo Library', 'Camera'],
       itemColor: "#f7982a",
       success: function (res) {
         if (!res.cancel) {

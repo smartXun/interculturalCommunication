@@ -1,4 +1,5 @@
 var host = 'https://5pa2v70w.qcloud.la';
+// var host = 'https://486236730.iegcrossculture.club';
 
 module.exports = {
   Translate: host + '/weapp/translate',
@@ -40,7 +41,8 @@ module.exports = {
   TopicAddWithoutImage: host + '/weapp/forum/topic/addWithoutImage',
 
   BackList: host + '/weapp/forum/back/list',
-  BackAddd: host + '/weapp/forum/back/add',
+  BackAdd: host + '/weapp/forum/back/add',
+  ReplyAdd: host + '/weapp/forum/reply/add',
 
   ArticleDetail: host + '/weapp/kit/article',
   ArticleList: host + '/weapp/kit/article/list/',

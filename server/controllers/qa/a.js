@@ -49,7 +49,6 @@ const addWithImage = async (ctx, next) => {
           })
           pageData = JSON.stringify(pageData)
           const ansID = await knex('qa_ans').insert({ q_id: queId, user_id: user.u_id, content: pageData })
-          await knex('user_action').insert({ a_id: ansID, user_id: user.u_id })
           await knex('qa_que').where({ 'id': queId }).increment('ans_num', 1)
           delete cache[queId + '_' + user.u_id]
           ctx.body = { success: true }
@@ -65,14 +64,14 @@ const addWithImage = async (ctx, next) => {
 
 const addWithoutImage = async (ctx, next) => {
   const { queId, pageData } = ctx.request.body
-  const user = ctx.request.user
-  const ansID = await knex('qa_ans').insert({ q_id: queId, user_id: user.u_id, content: pageData })
-  await knex('user_action').insert({ a_id: ansID, user_id: user.u_id })
-  await knex('qa_que').where({ 'id': queId }).increment('ans_num', 1)
-  if (ansID) {
+  const que = await knex('qa_que').where({ id: queId }).first()
+  if (que.ans_num > 0) {
+    ctx.body = { success: false, message: 'This Question has been answered!' }
+  }else{
+    const user = ctx.request.user
+    const ansID = await knex('qa_ans').insert({ q_id: queId, user_id: user.u_id, content: pageData })
+    await knex('qa_que').where({ 'id': queId }).increment('ans_num', 1)
     ctx.body = { success: true }
-  } else {
-    ctx.body = { success: false, message: "Create Answer Fail!" }
   }
 }
 

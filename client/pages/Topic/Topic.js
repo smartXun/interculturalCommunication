@@ -21,14 +21,6 @@ Page({
       this.setData({ backlist });
     })
   },
-  sendBack: function(e){
-    util.http_put(url.BackAddd, { topicId: this.data.topicId, content: e.detail.value } ,(res) => {
-      if(res.success){
-        util.showSuccess('Success')
-      }
-    })
-    this.setData({ backValue: '' })
-  },
   chooseLanguage: function () {
     this.setData({ isChooseLanguage: !this.data.isChooseLanguage })
   },
@@ -120,4 +112,40 @@ Page({
       })
     }
   },
+  backValueInput: function(e){
+    if (e.detail.value == ''){
+      this.setData({ isFocus: false, isReply: false })
+    }else{
+      this.setData({ backValue: e.detail.value })
+    }
+  },
+  reply: function(e){
+    const index = e.currentTarget.dataset.index;
+    const replyToName = this.data.backlist[index].name
+    const replyToId = this.data.backlist[index].user_id
+    const backId = this.data.backlist[index].id
+    this.setData({ isFocus: true, backId, replyToId, replyToName, isReply: true, backValue:'' })
+  },
+  sendBack: function () {
+    const content = this.data.backValue
+    if(!content){util.showModel('Notice','Please enter your reply');return;}
+    if (this.data.isReply){
+      util.showLoading();
+      const backId = this.data.replyToId
+      const replyToId = this.data.backId
+      util.http_put(url.ReplyAdd, { backId, replyToId, content }, (res) => {
+        if (res.success) {
+          util.showSuccess('Success')
+          this.setData({ isReply: false, backValue: '' })
+        }
+      })
+    }else{
+      util.http_put(url.BackAdd, { topicId: this.data.topicId, content}, (res) => {
+        if (res.success) {
+          util.showSuccess('Success')
+          this.setData({ backValue: '' })
+        }
+      })
+    }
+  }
 })

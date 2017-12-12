@@ -53,6 +53,7 @@ router.get('/forum/topic/:id', controllers.forum.topic.item)
 
 router.put('/forum/back/add', auth, controllers.forum.back.add)
 router.get('/forum/back/list/:id', controllers.forum.back.list)
+router.put('/forum/reply/add', auth, controllers.forum.reply.add)
 
 router.get('/kit/article/list/:category', controllers.kit.article.list)
 router.post('/kit/article/like', auth, controllers.kit.article.like)

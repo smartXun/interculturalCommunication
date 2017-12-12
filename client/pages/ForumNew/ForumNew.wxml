@@ -2,17 +2,11 @@
 <view class='content_wrapper'>
   <block wx:for="{{pageData}}" wx:key="{{index}}">
     <view bindtap='edit' data-index="{{index}}" style='position:relative'>
-      <block wx-if="{{!isEditing || editingIndex!=index || item.type!='text'}}">
-        <text wx-if="{{item.type=='text'}}" decode space class='fz-14'>{{item.content}}</text>
+      <block wx-if="{{item.type!='text'}}">
         <image mode="widthFix" class='contentImg' wx-if="{{item.type=='image'}}" src='{{item.src}}'></image>
         <video wx-if="{{item.type=='video'}}" controls objectFit='contain' src="{{item.src}}" ></video>
       </block>
-      <textarea wx-if="{{isEditing && editingIndex==index && item.type=='text'}}" maxlength="-1" focus auto-height bindblur='changeBlur' class="fz-14" value="{{item.content}}"></textarea>
-      <view class='flex-h editGroup'>
-        <view catchtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view>
-        <view catchtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view>
-        <view catchtap="handBlockClose" data-index="{{index}}" class="icon icon-close"></view>
-      </view>
+      <textarea wx-if="{{item.type=='text'}}" maxlength="-1" focus auto-height bindblur='changeBlur' placeholder='What would you like to share?' class="fz-14" value="{{item.content}}"></textarea>
     </view>
   </block>
 </view>
@@ -21,7 +15,6 @@
   <view class='flex1 flex'>
     <image bindtap='addImage' class='icon' src='../../assets/icon/photo@3x.png'></image>
     <image bindtap='showModel' class='icon' src='../../assets/icon/video@3x.png'></image>
-    <image bindtap='addText' class='icon' src='../../assets/icon/text@3x.png'></image>
   </view>
   <view bindtap='submit' class='button blue'><text class='fz-15'>Send</text></view>
 </view>

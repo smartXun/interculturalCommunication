@@ -71,7 +71,14 @@ var basicHttp = (method, requestUrl, data, successCallback, failCallback) => {
     method: method,
     header: header,
     success: function (res) {
-      if (successCallback) successCallback(res.data, res.errMsg, res.statusCode);
+      if (successCallback){
+        if (res.data.code==-1){
+          wx.hideToast();
+          wx.showModal({ title:'Notice', content: 'Please Login', showCancel: false })
+        }else{
+          successCallback(res.data);
+        }
+      }
     },
     fail: function (err) {
       if (failCallback) failCallback(err);

@@ -8,7 +8,6 @@ const add = async (ctx, next) => {
   const { content } = ctx.request.body
   const user = ctx.request.user
   const queId = await knex('qa_que').insert({ user_id: user.u_id, content: content })
-  await knex('user_action').insert({ q_id: queId, user_id: user.u_id })
   if (queId) {
     ctx.body = { success: true }
   } else {
@@ -26,7 +25,6 @@ const addWithImage = async (ctx, next) => {
       const data = await cos.up(filename, path)
       const imageUrl = "http://" + data.Location
       const queId = await knex('qa_que').insert({ user_id: user.u_id, content, image:imageUrl })
-      await knex('user_action').insert({ q_id: queId, user_id: user.u_id })
       ctx.body = { success: true }
     } else {
       ctx.body = { code: -1, message: 'token invalid' }

@@ -5,13 +5,15 @@ const knex = require('../knex.js')
 
 module.exports = async (ctx, next) => {
   if (ctx.req.headers && ctx.req.headers.authorization) {
-    const decoded = jwt.verify(ctx.req.headers.authorization, conf.jwtSecret)
-    if (decoded.id){
+    try {
+      const decoded = jwt.verify(ctx.req.headers.authorization, conf.jwtSecret)
       const user = await knex('mUser').where({ u_id: decoded.id }).first()
       ctx.request.user = user
       await next()
-    }else{
-      ctx.body = { code: -1, message: 'token invalid' }
+    } catch (err) {
+      if (err.name == "TokenExpiredError"){
+        ctx.body = { code: -1, message: 'TokenExpired' }
+      }
     }
   } else {
     ctx.body = { code: -1, message: 'User authentication failed' }

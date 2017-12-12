@@ -17,6 +17,9 @@ page{
 .content_wrapper textarea{
   border: 1px dashed #D8D8D8;
   line-height: 50rpx;
+  width: 670rpx;
+  padding: 20rpx;
+  min-height: 200rpx;
 }
 .content_wrapper text{
   max-width:710rpx;
