@@ -120,10 +120,9 @@ Page({
     }
   },
   reply: function(e){
-    const index = e.currentTarget.dataset.index;
-    const replyToName = this.data.backlist[index].name
-    const replyToId = this.data.backlist[index].user_id
-    const backId = this.data.backlist[index].id
+    const replyToName = e.currentTarget.dataset.name
+    const replyToId = e.currentTarget.dataset.replyid
+    const backId = e.currentTarget.dataset.id
     this.setData({ isFocus: true, backId, replyToId, replyToName, isReply: true, backValue:'' })
   },
   sendBack: function () {
@@ -131,8 +130,8 @@ Page({
     if(!content){util.showModel('Notice','Please enter your reply');return;}
     if (this.data.isReply){
       util.showLoading();
-      const backId = this.data.replyToId
-      const replyToId = this.data.backId
+      const backId = this.data.backId
+      const replyToId = this.data.replyToId
       util.http_put(url.ReplyAdd, { backId, replyToId, content }, (res) => {
         if (res.success) {
           util.showSuccess('Success')

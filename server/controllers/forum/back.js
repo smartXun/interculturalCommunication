@@ -19,14 +19,13 @@ const list = async (ctx, next) => {
   if (!topicId) {
     ctx.body = { success: false, message: "Parameter Error!" }
   } else {
-    let backs = await knex('forum_topic_back').where({ topic_id: topicId })
-    const promises = backs.map((back, index, array) => {
-      return knex('mUser').where({ 'u_id': back.user_id }).first().then((user) => {
-        back.userAvatar = user.image_url
-        back.name = user.name
+    const backs = await knex.select('forum_topic_back.*', 'mUser.image_url as userAvatar', 'mUser.name').from('forum_topic_back').join('mUser', 'u_id', 'forum_topic_back.user_id').where({ topic_id: topicId })
+    const promise = backs.map((item)=>{
+      return knex.select('forum_back_reply.*', 't2.name as replierName', 't1.name as replyToName').from('forum_back_reply').join('mUser as t1', 't1.u_id', 'forum_back_reply.reply_user_id').join('mUser as t2', 't2.u_id', 'forum_back_reply.user_id').where({'back_id':item.id}).then((replies)=>{
+        item.replies = replies;
       })
     })
-    await Promise.all(promises)
+    await Promise.all(promise)
     ctx.body = { data: backs }
   }
 }
