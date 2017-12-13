@@ -30,14 +30,18 @@
       </view>
       <text style='margin-bottom:20rpx;width:100%;word-break:break-all;' class='flex1 answer fz-12' decode='{{true}}'>{{backItem.content}}</text>
       <view style='width:100%;margin-bottom:10rpx;'>
-        <image bindtap='reply' data-id="{{backItem.id}}" data-replyid="{{backItem.user_id}}" data-name="{{backItem.name}}" style='width:26rpx;height:26rpx;float:right;' src='../../assets/icon/Comment@3x.png'></image>
+        <image bindtap='reply' data-id="{{backItem.id}}" data-replyid="{{backItem.user_id}}" data-name="{{backItem.name}}" style='width:26rpx;height:26rpx;float:right;' src='../../assets/icon/Reply_to_comment@3x.png'></image>
+        <image bindtap='comment_like' data-id="{{backItem.id}}" style='width:26rpx;height:26rpx;float:right;margin-right:30rpx;' src='../../assets/icon/Reply_to_comments_thumb up@3x.png'></image>
+        <text class='fz-12' style='line-height:20rpx;float:right;margin-right:30rpx;'>CITE</text>
       </view>
       <view class='flex-v' style='width:100%;'>
         <view wx:for="{{backItem.replies}}" wx:key="{{index}}" class="flex-v {{index==backItem.replies.length-1?'':'underline'}}" style='width:100%;align-items:flex-start;'>
           <text class='fz-12' style='margin-bottom:10rpx;'>{{item.replierName}}</text>
           <text class='fz-12' style='margin-bottom:10rpx;'>reply to@{{item.replyToName}}: {{item.content}}</text>
           <view style='width:100%;margin-bottom:10rpx;'>
-            <image bindtap='reply' data-id="{{backItem.id}}" data-replyid="{{item.user_id}}" data-name="{{item.replierName}}"  style='width:26rpx;height:26rpx;float:right;' src='../../assets/icon/Comment@3x.png'></image>
+            <image bindtap='reply' data-id="{{backItem.id}}" data-replyid="{{backItem.user_id}}" data-name="{{backItem.name}}" style='width:26rpx;height:26rpx;float:right;' src='../../assets/icon/Reply_to_comment@3x.png'></image>
+        <image bindtap='comment_like' data-id="{{backItem.id}}" style='width:26rpx;height:26rpx;float:right;margin-right:30rpx;' src='../../assets/icon/Reply_to_comments_thumb up@3x.png'></image>
+        <text class='fz-12' style='line-height:20rpx;float:right;margin-right:30rpx;'>CITE</text>
           </view>
         </view>
       </view>
@@ -45,10 +49,17 @@
   </view>
 </view>
 
-<view class='backInput flex-h'>
-  <view class='flex-h container flex1'>
-    <text wx:if='{{isReply}}' class='fz-12'>reply to@{{replyToName}}:</text>
-    <input value='{{backValue}}' focus='{{isFocus}}' bindinput='backValueInput' confirm-type="send" class='flex1 fz-12' placeholder='Type Something'></input>
-  </view>
-  <view class='fz-12' style='margin-right:30rpx;' bindtap='sendBack'>Send</view>
+<view class='flex-h actionBar fullWidth'>
+  <button bindtap='like' class='flex1 flex-h'>
+    <image src='../../assets/icon/like_3@3x.png'></image>
+    <text class='fz-12'>Like</text>
+  </button>
+  <button bindtap='comment' class='flex1 flex-h' style='border-style:solid;border-width: 0 1px 0 1px;border-color:#DBDBDB;'>
+    <image src='../../assets/icon/Comment_2@3x.png'></image>
+    <text class='fz-12'>Comment</text>
+  </button>
+  <button class='flex1 flex-h' open-type="share">
+    <image src='../../assets/icon/share_3@3x.png'></image>
+    <text class='fz-12'>Share</text>
+  </button>
 </view>

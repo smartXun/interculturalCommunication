@@ -44,18 +44,18 @@
 </view>
 
 <view class='flex-h actionBar fullWidth'>
-  <view bindtap='like' class='flex1 flex-h'>
+  <button bindtap='like' class='flex1 flex-h'>
     <image src='../../assets/icon/like_3@3x.png'></image>
     <text class='fz-12'>Like</text>
-  </view>
-  <view bindtap='comment' class='flex1 flex-h' style='border-style:solid;border-width: 0 1px 0 1px;border-color:#DBDBDB;'>
+  </button>
+  <button bindtap='comment' class='flex1 flex-h' style='border-style:solid;border-width: 0 1px 0 1px;border-color:#DBDBDB;'>
     <image src='../../assets/icon/Comment_2@3x.png'></image>
     <text class='fz-12'>Comment</text>
-  </view>
-  <view class='flex1 flex-h'>
+  </button>
+  <button class='flex1 flex-h' open-type="share">
     <image src='../../assets/icon/share_3@3x.png'></image>
     <text class='fz-12'>Share</text>
-  </view>
+  </button>
 </view>
 
 <view class='comments' wx:if="{{comments&&comments.length>0}}">

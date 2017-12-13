@@ -123,28 +123,9 @@ Page({
     const replyToName = e.currentTarget.dataset.name
     const replyToId = e.currentTarget.dataset.replyid
     const backId = e.currentTarget.dataset.id
-    this.setData({ isFocus: true, backId, replyToId, replyToName, isReply: true, backValue:'' })
+    wx.navigateTo({ url: '../Comment/Comment?id=' + this.data.topicId + '&type=reply&replyToName=' + replyToName + '&replyToId=' + replyToId + '&backId=' + this.data.backId})
   },
-  sendBack: function () {
-    const content = this.data.backValue
-    if(!content){util.showModel('Notice','Please enter your reply');return;}
-    if (this.data.isReply){
-      util.showLoading();
-      const backId = this.data.backId
-      const replyToId = this.data.replyToId
-      util.http_put(url.ReplyAdd, { backId, replyToId, content }, (res) => {
-        if (res.success) {
-          util.showSuccess('Success')
-          this.setData({ isReply: false, backValue: '' })
-        }
-      })
-    }else{
-      util.http_put(url.BackAdd, { topicId: this.data.topicId, content}, (res) => {
-        if (res.success) {
-          util.showSuccess('Success')
-          this.setData({ backValue: '' })
-        }
-      })
-    }
+  comment: function(){
+    wx.navigateTo({ url: '../Comment/Comment?id=' + this.data.topicId + '&type=topic' })
   }
 })

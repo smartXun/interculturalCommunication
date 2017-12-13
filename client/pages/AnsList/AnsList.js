@@ -36,11 +36,7 @@ Page({
     })
   },
   toNewA: function(){
-    if (this.data.ansList && this.data.ansList.length > 0) {
-      util.showModel('Notice', 'This Question has been answered!')
-    } else {
-      wx.navigateTo({ url: '../NewA/NewA?id=' + this.data.que.id })
-    }
+    wx.navigateTo({ url: '../NewA/NewA?id=' + this.data.que.id })
   },
   like: function(){
     util.http_post(url.QueLike, { queId: this.data.que.id } ,(res) => {

@@ -7,16 +7,11 @@ const fs = require('fs')
 var cache = {}
 const preAddWithImage = async (ctx, next) => {
   const { pageData, imageCount, queId } = ctx.request.body
-  const que = await knex('qa_que').where({ id: queId }).first()
-  if (que.ans_num>0){
-    ctx.body = { success: false, message:'This Question has been answered!' }
-  }else{
-    const user = ctx.request.user
-    let images = []
-    for (var i = 0; i < imageCount; i++) { images.push({}) }
-    cache[queId + '_' + user.u_id] = { pageData, imageCount, images }
-    ctx.body = { success: true }
-  }
+  const user = ctx.request.user
+  let images = []
+  for (var i = 0; i < imageCount; i++) { images.push({}) }
+  cache[queId + '_' + user.u_id] = { pageData, imageCount, images }
+  ctx.body = { success: true }
 }
 const addWithImage = async (ctx, next) => {
   if (ctx.req.headers && ctx.req.headers.authorization) {
@@ -64,15 +59,10 @@ const addWithImage = async (ctx, next) => {
 
 const addWithoutImage = async (ctx, next) => {
   const { queId, pageData } = ctx.request.body
-  const que = await knex('qa_que').where({ id: queId }).first()
-  if (que.ans_num > 0) {
-    ctx.body = { success: false, message: 'This Question has been answered!' }
-  }else{
-    const user = ctx.request.user
-    const ansID = await knex('qa_ans').insert({ q_id: queId, user_id: user.u_id, content: pageData })
-    await knex('qa_que').where({ 'id': queId }).increment('ans_num', 1)
-    ctx.body = { success: true }
-  }
+  const user = ctx.request.user
+  const ansID = await knex('qa_ans').insert({ q_id: queId, user_id: user.u_id, content: pageData })
+  await knex('qa_que').where({ 'id': queId }).increment('ans_num', 1)
+  ctx.body = { success: true }
 }
 
 const item = async (ctx, next) => {

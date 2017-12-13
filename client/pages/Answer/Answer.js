@@ -29,7 +29,7 @@ Page({
     })
   },
   comment: function(){
-    wx.navigateTo({ url: '../Comment/Comment?id=' + this.data.ansId })
+    wx.navigateTo({ url: '../Comment/Comment?id=' + this.data.ansId+'&type=answer' })
   },
   like:function(){
     util.http_post(url.AnsLike, { ansId: this.data.ansId }, (res) => {
@@ -113,5 +113,13 @@ Page({
   },
   translateEnglish: function () {
     this.translateAll('en')
+  },
+  onShareAppMessage: function (res) {
+    return {
+      title: this.data.que.content,
+      path: '/pages/Answer/Answer?id=' + this.data.ansId,
+      success: function (res) { },
+      fail: function (res) { }
+    }
   }
 })

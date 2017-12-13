@@ -93,9 +93,14 @@ page{
   position: fixed;
   bottom: 0;
 }
-.actionBar view{
+.actionBar button{
+  background:#4C98E1;
+  border-radius:0;
+  color:#FFFFFF;
   height:80rpx;
-  text-align:center;
+}
+.actionBar button::after{
+  border: none;
 }
 .actionBar image{
   width: 44rpx;

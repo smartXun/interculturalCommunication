@@ -71,20 +71,23 @@
   margin-right: 13rpx;
 }
 
-.backInput{
+.actionBar{
+  background:#4C98E1;
+  color:#FFF;
   position: fixed;
   bottom: 0;
-  z-index: 1000;
-  padding: 18rpx 0;
-  width: 100%;
-  background: #FFFFFF;
 }
-.backInput .container{
-  padding-left: 20rpx;
-  margin: 0 30rpx;
-  background: #F1F1F1;
-  border: solid 1px #DBDBDB;
+.actionBar button{
+  background:#4C98E1;
+  border-radius:0;
+  color:#FFFFFF;
+  height:80rpx;
 }
-.backInput input{
-  padding-left: 10rpx;
+.actionBar button::after{
+  border: none;
+}
+.actionBar image{
+  width: 44rpx;
+  height: 44rpx;
+  margin-right: 16rpx;
 }
