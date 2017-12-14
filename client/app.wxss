@@ -43,18 +43,23 @@ page{
 
 .fz-11{
   font-size: 22rpx;
+  line-height:22rpx;
 }
 .fz-12{
   font-size: 24rpx;
+  line-height:24rpx;
 }
 .fz-14{
   font-size: 28rpx;
+  line-height:28rpx;
 }
 .fz-15{
   font-size: 30rpx;
+  line-height:30rpx;
 }
 .fz-16{
   font-size: 32rpx;
+  line-height:32rpx;
 }
 
 .mt-15{

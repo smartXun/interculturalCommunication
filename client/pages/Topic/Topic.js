@@ -3,7 +3,6 @@ const url = require('../../common/constant_url.js')
 
 Page({
   data: {
-    backValue: '',
     isChooseLanguage: false
   },
   onLoad: function (options) {
@@ -17,7 +16,18 @@ Page({
     const BackListUrl = url.BackList + "/" + options.id
     util.http_get(BackListUrl, (res) => {
       let backlist = res.data
-      backlist.forEach((back) => { back.create_time = util.diffDate(new Date(), new Date(back.create_time)) })
+      backlist.forEach((back) => { 
+        back.create_time = util.diffDate(new Date(), new Date(back.create_time))
+        if (back.cite_id){
+          for (var i = 0; i < backlist.length;i++){
+            if (backlist[i].id == back.cite_id){
+              back.cite = backlist[i]
+              break
+            }
+          }
+        }
+      })
+      console.log(backlist)
       this.setData({ backlist });
     })
   },
@@ -112,20 +122,17 @@ Page({
       })
     }
   },
-  backValueInput: function(e){
-    if (e.detail.value == ''){
-      this.setData({ isFocus: false, isReply: false })
-    }else{
-      this.setData({ backValue: e.detail.value })
-    }
-  },
   reply: function(e){
     const replyToName = e.currentTarget.dataset.name
     const replyToId = e.currentTarget.dataset.replyid
     const backId = e.currentTarget.dataset.id
-    wx.navigateTo({ url: '../Comment/Comment?id=' + this.data.topicId + '&type=reply&replyToName=' + replyToName + '&replyToId=' + replyToId + '&backId=' + this.data.backId})
+    wx.navigateTo({ url: '../Comment/Comment?id=' + this.data.topicId + '&type=reply&replyToName=' + replyToName + '&replyToId=' + replyToId + '&backId=' + backId})
   },
   comment: function(){
     wx.navigateTo({ url: '../Comment/Comment?id=' + this.data.topicId + '&type=topic' })
+  },
+  comment_cite: function(e){
+    const cite_id = e.currentTarget.dataset.id
+    wx.navigateTo({ url: '../Comment/Comment?id=' + this.data.topicId + '&type=topic&cite=' + cite_id })
   }
 })

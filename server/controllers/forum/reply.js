@@ -3,7 +3,7 @@ const conf = require('../../config.js')
 
 const add = async (ctx, next) => {
   const { backId, replyToId, content } = ctx.request.body
-  if (!backId || !replyToId || !content) {
+  if (!backId || !content) {
     ctx.body = { success: false, message: "Parameter Error!" }
   } else {
     const user = ctx.request.user

@@ -78,6 +78,7 @@ router.get('/system/kit/article/list/:offset/:pageSize', admin, controllers.admi
 router.post('/system/kit/article/preAddWithImage', admin, controllers.admin.kit.article.preAddWithImage)
 router.put('/system/kit/article/addWithImage', upload.single('article_image'), controllers.admin.kit.article.addWithImage)
 router.put('/system/kit/article/addWithoutImage', admin, controllers.admin.kit.article.addWithoutImage)
+router.post('/system/kit/article/delete', admin, controllers.admin.kit.article.delete_item)
 
 
 module.exports = router

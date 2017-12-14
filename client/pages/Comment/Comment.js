@@ -6,8 +6,11 @@ Page({
     content: ''
   },
   onLoad: function (options) {
-    const { id, type, replyToName, replyToId, backId } = options
-    this.setData({ id, type, replyToName, replyToId, backId })
+    let { id, type, replyToName, replyToId, backId, cite } = options
+    replyToName = replyToName == 'undefined' ? undefined : replyToName
+    replyToId = replyToId == 'undefined' ? undefined : replyToId
+    cite = cite == 'undefined' ? undefined : cite
+    this.setData({ id, type, replyToName, replyToId, backId, cite })
   },
   contentInput: function (e) {
     this.setData({ content: e.detail.value })
@@ -29,7 +32,7 @@ Page({
         }
       })
     } else if (type == 'topic') {
-      util.http_put(url.BackAdd, { topicId: this.data.id, content }, (res) => {
+      util.http_put(url.BackAdd, { topicId: this.data.id, content, citeId: this.data.cite}, (res) => {
         if (res.success) {
           util.showSuccess('Success')
           setTimeout(() => {

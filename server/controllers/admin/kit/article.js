@@ -21,14 +21,10 @@ var cache = {}
 const preAddWithImage = async (ctx, next) => {
   const { title, category, pageData, imageCount } = ctx.request.body
   const user = ctx.request.user
-  if (cache[user.u_id]){
-    ctx.body = { success: false }
-  }else{
-    let images = []
-    for (var i = 0; i < imageCount; i++) { images.push({}) }
-    cache[user.u_id] = { title, category, pageData, imageCount, images }
-    ctx.body = { success: true }
-  }
+  let images = []
+  for (var i = 0; i < imageCount; i++) { images.push({}) }
+  cache[user.u_id] = { title, category, pageData, imageCount, images }
+  ctx.body = { success: true }
 }
 const addWithImage = async (ctx, next) => {
   if (ctx.req.headers && ctx.req.headers.authorization) {
@@ -55,9 +51,10 @@ const addWithImage = async (ctx, next) => {
           })
           await Promise.all(promises)
           pageData = JSON.parse(pageData)
-          pageData.filter((item, index, arr) => {
+          let pageImages = pageData.filter((item, index, arr) => {
             return item.type == 'image'
-          }).forEach((item, index, arr) => {
+          })
+          pageImages.forEach((item, index, arr) => {
             item.src = images[index].url
           })
           pageData = JSON.stringify(pageData)
@@ -100,4 +97,10 @@ const list = async (ctx, next) => {
   ctx.body = { success: true, data: articles, total }
 }
 
-module.exports = { preAddWithImage, addWithImage, addWithoutImage, list }
+const delete_item = async (ctx, next) => {
+  const { id } = ctx.request.body
+  await knex('kit_article').where({ 'id': id }).del()
+  ctx.body = { success: true }
+}
+
+module.exports = { preAddWithImage, addWithImage, addWithoutImage, list, delete_item }

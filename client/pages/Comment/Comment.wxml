@@ -1,3 +1,6 @@
+<view wx:if="{{replyToId && replyToName}}" style='margin-left:20rpx;margin-top:20rpx;'>
+  <text>reply to@{{replyToName}}:</text>
+</view>
 <view class='content_wrapper'>
   <textarea focus auto-height bindinput='contentInput' class="fz-14" placeholder="Write your comment"></textarea>
 </view>

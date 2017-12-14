@@ -22,26 +22,32 @@
 <view class='comment_wrapper underline'>
   <view wx:for="{{backlist}}" wx:for-item="backItem" wx:key="id" class='comment flex-h'>
     <image class='userPhoto' src="{{backItem.userAvatar}}"></image>
-    <view class="flex-v flex1 {{index==backlist.length-1?'':'underline'}}" style='padding-right:30rpx;'>
+    <view class="flex-v flex1 {{index==backlist.length-1?'':'underline'}}" style='padding-right:30rpx;align-items:flex-start;'>
       <view class='flex-h' style='width:100%;margin-bottom:20rpx;'>
         <text class='fz-12 flex1'>{{backItem.name}}</text>
         <image class='icon' src='../../assets/icon/Clock@3x.png'></image>
         <text class='fz-11'>{{backItem.create_time}}</text>
       </view>
+      <view wx:if="{{backItem.cite}}" class='fz-12' style='background:#EEEEEE;padding:10rpx;margin-bottom:20rpx;'>
+        <text style='display:block;margin-bottom:10rpx;'>CITE {{backItem.cite.name}}</text>
+        <text>"{{backItem.cite.content}}"</text>
+      </view>
       <text style='margin-bottom:20rpx;width:100%;word-break:break-all;' class='flex1 answer fz-12' decode='{{true}}'>{{backItem.content}}</text>
       <view style='width:100%;margin-bottom:10rpx;'>
-        <image bindtap='reply' data-id="{{backItem.id}}" data-replyid="{{backItem.user_id}}" data-name="{{backItem.name}}" style='width:26rpx;height:26rpx;float:right;' src='../../assets/icon/Reply_to_comment@3x.png'></image>
+        <image bindtap='reply' data-id="{{backItem.id}}" style='width:26rpx;height:26rpx;float:right;' src='../../assets/icon/Reply_to_comment@3x.png'></image>
         <image bindtap='comment_like' data-id="{{backItem.id}}" style='width:26rpx;height:26rpx;float:right;margin-right:30rpx;' src='../../assets/icon/Reply_to_comments_thumb up@3x.png'></image>
-        <text class='fz-12' style='line-height:20rpx;float:right;margin-right:30rpx;'>CITE</text>
+        <text bindtap='comment_cite' data-id="{{backItem.id}}" class='fz-12' style='line-height:20rpx;float:right;margin-right:30rpx;'>CITE</text>
       </view>
       <view class='flex-v' style='width:100%;'>
         <view wx:for="{{backItem.replies}}" wx:key="{{index}}" class="flex-v {{index==backItem.replies.length-1?'':'underline'}}" style='width:100%;align-items:flex-start;'>
-          <text class='fz-12' style='margin-bottom:10rpx;'>{{item.replierName}}</text>
-          <text class='fz-12' style='margin-bottom:10rpx;'>reply to@{{item.replyToName}}: {{item.content}}</text>
+          <view class='flex-h' style='align-items:flex-start;margin:10rpx 0;'>
+            <text class='fz-12' style='margin-right:10rpx;'>{{item.replierName}}</text>
+            <text class='fz-12 flex1'><text wx:if="{{item.replyToName}}">reply to@{{item.replyToName}}: </text>{{item.content}}</text>
+          </view>
           <view style='width:100%;margin-bottom:10rpx;'>
-            <image bindtap='reply' data-id="{{backItem.id}}" data-replyid="{{backItem.user_id}}" data-name="{{backItem.name}}" style='width:26rpx;height:26rpx;float:right;' src='../../assets/icon/Reply_to_comment@3x.png'></image>
-        <image bindtap='comment_like' data-id="{{backItem.id}}" style='width:26rpx;height:26rpx;float:right;margin-right:30rpx;' src='../../assets/icon/Reply_to_comments_thumb up@3x.png'></image>
-        <text class='fz-12' style='line-height:20rpx;float:right;margin-right:30rpx;'>CITE</text>
+            <image bindtap='reply' data-id="{{item.back_id}}" data-replyid="{{item.user_id}}" data-name="{{item.replierName}}" style='width:26rpx;height:26rpx;float:right;' src='../../assets/icon/Reply_to_comment@3x.png'></image>
+            <image bindtap='comment_like' data-id="{{backItem.id}}" style='width:26rpx;height:26rpx;float:right;margin-right:30rpx;' src='../../assets/icon/Reply_to_comments_thumb up@3x.png'></image>
+            <text class='fz-12' style='line-height:20rpx;float:right;margin-right:30rpx;'>CITE</text>
           </view>
         </view>
       </view>
