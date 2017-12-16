@@ -72,7 +72,7 @@ var basicHttp = (method, requestUrl, data, successCallback, failCallback) => {
     header: header,
     success: function (res) {
       if (successCallback){
-        if (res.data.code==-1){
+        if (res.data.code==-2){
           wx.hideToast();
           wx.showModal({ title:'Notice', content: 'Please Login', showCancel: false })
         }else{

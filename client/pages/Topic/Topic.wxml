@@ -35,14 +35,15 @@
       <text style='margin-bottom:20rpx;width:100%;word-break:break-all;' class='flex1 answer fz-12' decode='{{true}}'>{{backItem.content}}</text>
       <view style='width:100%;margin-bottom:10rpx;'>
         <image bindtap='reply' data-id="{{backItem.id}}" style='width:26rpx;height:26rpx;float:right;' src='../../assets/icon/Reply_to_comment@3x.png'></image>
-        <image bindtap='comment_like' data-id="{{backItem.id}}" style='width:26rpx;height:26rpx;float:right;margin-right:30rpx;' src='../../assets/icon/Reply_to_comments_thumb up@3x.png'></image>
+        <image wx:if="{{!backItem.isLike}}" bindtap='comment_like' data-id="{{backItem.id}}" style='width:26rpx;height:26rpx;float:right;margin-right:30rpx;' src='../../assets/icon/Reply_to_comments_thumb_up@3x.png'></image>
+        <image wx:if="{{backItem.isLike}}" bindtap='comment_canclelike' data-id="{{backItem.id}}" style='width:26rpx;height:26rpx;float:right;margin-right:30rpx;' src='../../assets/icon/Reply_comment_thumb_up_state@3x.png'></image>
         <text bindtap='comment_cite' data-id="{{backItem.id}}" class='fz-12' style='line-height:20rpx;float:right;margin-right:30rpx;'>CITE</text>
       </view>
       <view class='flex-v' style='width:100%;'>
         <view wx:for="{{backItem.replies}}" wx:key="{{index}}" class="flex-v {{index==backItem.replies.length-1?'':'underline'}}" style='width:100%;align-items:flex-start;'>
           <view class='flex-h' style='align-items:flex-start;margin:10rpx 0;'>
             <text class='fz-12' style='margin-right:10rpx;margin-top:10rpx;'>{{item.replierName}}</text>
-            <view class='flex-v' style='align-items:flex-start;margin:10rpx 0;'>
+            <view class='flex-v flex1' style='align-items:flex-start;margin:10rpx 0;'>
               <view wx:if="{{item.cite}}" class='fz-12' style='background:#EEEEEE;padding:10rpx;margin-bottom:20rpx;'>
                 <text style='display:block;margin-bottom:10rpx;'>CITE {{item.cite.replierName}}</text>
                 <text>"{{item.cite.content}}"</text>
@@ -52,7 +53,8 @@
           </view>
           <view style='width:100%;margin-bottom:10rpx;'>
             <image bindtap='reply' data-id="{{item.back_id}}" data-replyid="{{item.user_id}}" data-name="{{item.replierName}}" style='width:26rpx;height:26rpx;float:right;' src='../../assets/icon/Reply_to_comment@3x.png'></image>
-            <image bindtap='comment_like' data-id="{{backItem.id}}" style='width:26rpx;height:26rpx;float:right;margin-right:30rpx;' src='../../assets/icon/Reply_to_comments_thumb up@3x.png'></image>
+            <image wx:if="{{!item.isLike}}" bindtap='reply_like' data-id="{{item.id}}" style='width:26rpx;height:26rpx;float:right;margin-right:30rpx;' src='../../assets/icon/Reply_to_comments_thumb_up@3x.png'></image>
+            <image wx:if="{{item.isLike}}" bindtap='reply_canclelike' data-id="{{item.id}}" style='width:26rpx;height:26rpx;float:right;margin-right:30rpx;' src='../../assets/icon/Reply_comment_thumb_up_state@3x.png'></image>
             <text bindtap='reply_cite' data-backid="{{item.back_id}}" data-citeid="{{item.id}}" class='fz-12' style='line-height:20rpx;float:right;margin-right:30rpx;'>CITE</text>
           </view>
         </view>

@@ -11,9 +11,9 @@ module.exports = async (ctx, next) => {
       ctx.request.user = user
       await next()
     } else {
-      ctx.body = { code: -1, message: 'token invalid' }
+      ctx.body = { code: -2, message: 'token invalid' }
     }
   } else {
-    ctx.body = { code: -1, message: 'User authentication failed' }
+    ctx.body = { code: -2, message: 'User authentication failed' }
   }
 }

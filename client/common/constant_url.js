@@ -43,7 +43,13 @@ module.exports = {
 
   BackList: host + '/weapp/forum/back/list',
   BackAdd: host + '/weapp/forum/back/add',
+  BackLike: host + '/weapp/forum/back/like',
+  BackDisLike: host + '/weapp/forum/back/dislike',
+  BackLikeList: host + '/weapp/forum/back/likelist',
   ReplyAdd: host + '/weapp/forum/reply/add',
+  ReplyLike: host + '/weapp/forum/reply/like',
+  ReplyDisLike: host + '/weapp/forum/reply/dislike',
+  ReplyLikeList: host + '/weapp/forum/reply/likelist',
 
   ArticleDetail: host + '/weapp/kit/article',
   ArticleList: host + '/weapp/kit/article/list/',

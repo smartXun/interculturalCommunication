@@ -1,5 +1,6 @@
 const util = require('../../common/util.js')
 const url = require('../../common/constant_url.js')
+const app = getApp()
 
 Page({
   data: {
@@ -16,31 +17,40 @@ Page({
     const BackListUrl = url.BackList + "/" + options.id
     util.http_get(BackListUrl, (res) => {
       let backlist = res.data
-      backlist.forEach((back) => { 
+      backlist.forEach((back) => {
         back.create_time = util.diffDate(new Date(), new Date(back.create_time))
-        if (back.cite_id){
-          for (var i = 0; i < backlist.length;i++){
-            if (backlist[i].id == back.cite_id){
-              back.cite = backlist[i]
-              break
-            }
+      })
+      this.data.backlist = backlist
+      this.parseBackList()
+    })
+  },
+  parseBackList: function(){
+    let backlist = this.data.backlist
+    backlist.forEach((back) => {
+      if (app.globalData.backLikeList.includes(back.id)) { back.isLike = true } else { back.isLike = false }
+      if (back.cite_id) {
+        for (var i = 0; i < backlist.length; i++) {
+          if (backlist[i].id == back.cite_id) {
+            back.cite = backlist[i]
+            break
           }
         }
-        if(back.replies){
-          back.replies.forEach((reply)=>{
-            if (reply.cite_id){
-              for (var i = 0; i < back.replies.length; i++) {
-                if (back.replies[i].id == reply.cite_id) {
-                  reply.cite = back.replies[i]
-                  break
-                }
+      }
+      if (back.replies) {
+        back.replies.forEach((reply) => {
+          if (app.globalData.replyLikeList.includes(reply.id)) { reply.isLike = true } else { reply.isLike = false }
+          if (reply.cite_id) {
+            for (var i = 0; i < back.replies.length; i++) {
+              if (back.replies[i].id == reply.cite_id) {
+                reply.cite = back.replies[i]
+                break
               }
             }
-          })
-        }
-      })
-      this.setData({ backlist });
+          }
+        })
+      }
     })
+    this.setData({ backlist });
   },
   chooseLanguage: function () {
     this.setData({ isChooseLanguage: !this.data.isChooseLanguage })
@@ -150,5 +160,51 @@ Page({
     const backId = e.currentTarget.dataset.backid
     const cite_id = e.currentTarget.dataset.citeid
     wx.navigateTo({ url: '../Comment/Comment?backId=' + backId + '&type=reply&cite=' + cite_id })
+  },
+  comment_like: function(e){
+    const backId = e.currentTarget.dataset.id
+    util.showLoading()
+    util.http_post(url.BackLike, { backId }, res=>{
+      util.hideLoading()
+      if(res.success){
+        app.globalData.backLikeList.push(backId)
+        this.parseBackList()
+      }
+    })
+  },
+  comment_canclelike: function(e){
+    const backId = e.currentTarget.dataset.id
+    util.showLoading()
+    util.http_post(url.BackDisLike, { backId }, res => {
+      util.hideLoading()
+      if (res.success) {
+        const index = app.globalData.backLikeList.findIndex(val => { return val === backId })
+        app.globalData.backLikeList.splice(index,1)
+        this.parseBackList()
+      }
+    })
+  },
+  reply_like: function (e) {
+    const replyId = e.currentTarget.dataset.id
+    util.showLoading()
+    util.http_post(url.ReplyLike, { replyId }, res => {
+      util.hideLoading()
+      if (res.success) {
+        app.globalData.replyLikeList.push(replyId)
+        this.parseBackList()
+      }
+    })
+  },
+  reply_canclelike: function (e) {
+    const replyId = e.currentTarget.dataset.id
+    util.showLoading()
+    util.http_post(url.ReplyDisLike, { replyId }, res => {
+      util.hideLoading()
+      if (res.success) {
+        const index = app.globalData.replyLikeList.findIndex(val=>{ return val===replyId })
+        app.globalData.replyLikeList.splice(index, 1)
+        this.parseBackList()
+      }
+    })
   },
 })

@@ -27,10 +27,10 @@ const addWithImage = async (ctx, next) => {
       const queId = await knex('qa_que').insert({ user_id: user.u_id, content, image:imageUrl })
       ctx.body = { success: true }
     } else {
-      ctx.body = { code: -1, message: 'token invalid' }
+      ctx.body = { code: -2, message: 'token invalid' }
     }
   } else {
-    ctx.body = { code: -1, msg: 'User authentication failed' }
+    ctx.body = { code: -2, msg: 'User authentication failed' }
   }
 }
 

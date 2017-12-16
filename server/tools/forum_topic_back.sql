@@ -11,6 +11,7 @@ CREATE TABLE `forum_topic_back` (
   `user_id` mediumint(9) NOT NULL,
   `topic_id` mediumint(9) NOT NULL,
   `cite_id` mediumint(9),
+  `like_num` mediumint(9) NOT NULL DEFAULT 0,
   `reply_num` mediumint(9) NOT NULL DEFAULT 0,
   `content` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

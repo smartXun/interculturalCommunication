@@ -13,4 +13,30 @@ const add = async (ctx, next) => {
   }
 }
 
-module.exports = { add }
+const like = async (ctx, next) => {
+  const { replyId } = ctx.request.body
+  const user = ctx.request.user
+  const replyLike = await knex('forum_back_reply_like').where({ 'reply_id': replyId, user_id: user.u_id }).first()
+  if (replyLike) {
+    ctx.body = { success: false, message: "You've liked it!" }
+  } else {
+    await knex('forum_back_reply_like').insert({ user_id: user.u_id, reply_id: replyId })
+    await knex('forum_back_reply').where({ 'id': replyId }).increment('like_num', 1)
+    ctx.body = { success: true }
+  }
+}
+
+const dislike = async (ctx, next) => {
+  const { replyId } = ctx.request.body
+  const user = ctx.request.user
+  await knex('forum_back_reply_like').where({ 'reply_id': replyId, user_id: user.u_id }).del()
+  ctx.body = { success: true }
+}
+
+const likelist = async (ctx, next) => {
+  const user = ctx.request.user
+  const list = await knex('forum_back_reply_like').where({ user_id: user.u_id })
+  ctx.body = { success: true, data: list }
+}
+
+module.exports = { add, like, dislike, likelist }

@@ -12,10 +12,10 @@ module.exports = async (ctx, next) => {
       await next()
     } catch (err) {
       if (err.name == "TokenExpiredError"){
-        ctx.body = { code: -1, message: 'TokenExpired' }
+        ctx.body = { code: -2, message: 'TokenExpired' }
       }
     }
   } else {
-    ctx.body = { code: -1, message: 'User authentication failed' }
+    ctx.body = { code: -2, message: 'User authentication failed' }
   }
 }

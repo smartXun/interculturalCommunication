@@ -1,5 +1,5 @@
 const util = require('./common/util.js')
-const urls = require('./common/constant_url.js')
+const url = require('./common/constant_url.js')
 
 App({
   onLaunch: function () {
@@ -21,15 +21,11 @@ App({
               nickName: userInfo.nickName,
               avatarUrl: userInfo.avatarUrl,
             }
-            util.http_post(urls.WechatLogin, data, (res) => {
+            util.http_post(url.WechatLogin, data, (res) => {
               if (res && res.success) {
                 wx.setStorageSync('token', res.token);
                 that.globalData.token = res.token
-                that.globalData.userInfo = userInfo
-                that.globalData.userType = 'wechat'
-                if (that.userInfoReadyCallback) {
-                  that.userInfoReadyCallback(res)
-                }
+                that.handleLoginSuccess()
               }
             });
           },
@@ -45,7 +41,7 @@ App({
   getUserInfo: function(){
     var that = this
     wx.request({
-      url: urls.UserInfo,
+      url: url.UserInfo,
       method: 'GET',
       header: {
         'Accept': 'application/json',
@@ -55,10 +51,36 @@ App({
       success: function (res) {
         const data = res.data
         if (data.success){
-          that.globalData.userInfo = data.userInfo
-          that.globalData.userType = data.userType
+          that.handleLoginSuccess(data)
         }
       }
+    })
+  },
+  handleLoginSuccess:function(res){
+    this.globalData.userType = res.userType
+    this.globalData.userInfo = res.userInfo
+    this.getBackLikeList()
+    this.getReplyLikeList()
+    if (this.userInfoReadyCallback) {
+      this.userInfoReadyCallback(res)
+    }
+  },
+  getBackLikeList: function () {
+    util.http_get(url.BackLikeList, res => {
+      let likelist = []
+      res.data.forEach(like => {
+        likelist.push(like.back_id)
+      })
+      this.globalData.backLikeList = likelist
+    })
+  },
+  getReplyLikeList: function () {
+    util.http_get(url.ReplyLikeList, res => {
+      let likelist = []
+      res.data.forEach(like=>{
+        likelist.push(like.reply_id)
+      })
+      this.globalData.replyLikeList = likelist
     })
   },
   globalData:{
