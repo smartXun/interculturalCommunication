@@ -10,6 +10,7 @@ Page({
     replyToName = replyToName == 'undefined' ? undefined : replyToName
     replyToId = replyToId == 'undefined' ? undefined : replyToId
     cite = cite == 'undefined' ? undefined : cite
+    backId = backId == 'undefined' ? undefined : backId
     this.setData({ id, type, replyToName, replyToId, backId, cite })
   },
   contentInput: function (e) {
@@ -43,7 +44,8 @@ Page({
     } else if (type == 'reply') {
       const backId = this.data.backId
       const replyToId = this.data.replyToId
-      util.http_put(url.ReplyAdd, { backId, replyToId, content }, (res) => {
+      const citeId = this.data.cite
+      util.http_put(url.ReplyAdd, { backId, replyToId, content, citeId }, (res) => {
         if (res.success) {
           util.showSuccess('Success')
           setTimeout(() => {

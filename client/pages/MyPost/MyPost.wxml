@@ -1,0 +1,27 @@
+<view bindtap='toTopic' class='topic flex-h underline' wx:for="{{list}}" wx:key="id" data-id='{{item.id}}'>
+  <image class='userPhoto' src='{{item.image_url}}'></image>
+  <view class='flex-v flex1'>
+    <view class='flex-h' style='width:100%;'>
+      <text class='fz-15 flex1'>{{item.title}}</text>
+      <image class='icon' src='../../assets/icon/Clock@3x.png'></image>
+      <text class='fz-11' style='color:#999999;'>{{item.create_time}}</text>
+    </view>
+    <view class='list_image flex-h' style='width:594rpx;margin-top:16rpx;' wx:if="{{item.images.length>0}}">
+      <image class='flex1' mode="aspectFill" wx:for="{{item.images}}" wx:key="{{index}}" src="{{item.src}}"></image>
+    </view>
+    <view class='flex-h' style='width:100%;margin-top:10rpx;'>
+      <text class='fz-11 flex1'>{{item.firstText}}</text>
+    </view>
+    <image bindtap='delete_item_pop' data-id='{{item.id}}' style='align-self:flex-end;width:30rpx;height:30rpx;' src='../../assets/icon/Deleting@3x.png'></image>
+  </view>
+</view>
+
+<view class="drawer_screen" wx:if="{{showModalStatus}}"></view>  
+<view class="drawer_box" wx:if="{{showModalStatus}}">  
+  <view class="fz-15" style='margin:50rpx;text-align:center;line-height:40rpx;'>Are you sure you want to delete this post?</view>  
+  <view class="drawer_content"></view>  
+  <view class='flex-h'>
+    <view bindtap="delete_item" class='flex1 sure_btn'>Yes</view>
+    <view bindtap="hideModel" class='flex1 cancle_btn'>No</view>
+  </view>
+</view>  

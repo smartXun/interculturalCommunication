@@ -12,7 +12,8 @@ module.exports = {
   UserInfo: host + '/weapp/account/info',
   CommentToMe: host + '/weapp/account/comment/tome',
   MyComment: host + '/weapp/account/comment/my',
-  Historical: host + '/weapp/account/historical/all',
+  MyPostList: host + '/weapp/account/post/list',
+  MyPostDelete: host + '/weapp/account/post/delete',
 
   QueAdd: host + '/weapp/qa/q/add',
   QueAddWidthImage: host + '/weapp/qa/q/addWithImage',

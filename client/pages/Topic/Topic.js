@@ -26,8 +26,19 @@ Page({
             }
           }
         }
+        if(back.replies){
+          back.replies.forEach((reply)=>{
+            if (reply.cite_id){
+              for (var i = 0; i < back.replies.length; i++) {
+                if (back.replies[i].id == reply.cite_id) {
+                  reply.cite = back.replies[i]
+                  break
+                }
+              }
+            }
+          })
+        }
       })
-      console.log(backlist)
       this.setData({ backlist });
     })
   },
@@ -134,5 +145,10 @@ Page({
   comment_cite: function(e){
     const cite_id = e.currentTarget.dataset.id
     wx.navigateTo({ url: '../Comment/Comment?id=' + this.data.topicId + '&type=topic&cite=' + cite_id })
-  }
+  },
+  reply_cite: function (e) {
+    const backId = e.currentTarget.dataset.backid
+    const cite_id = e.currentTarget.dataset.citeid
+    wx.navigateTo({ url: '../Comment/Comment?backId=' + backId + '&type=reply&cite=' + cite_id })
+  },
 })

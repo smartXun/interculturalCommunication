@@ -1,4 +1,4 @@
-<view class='title_header flex-v'>
+<!-- <view class='title_header flex-v'>
   <text style='font-size:60rpx;'>{{article.title}}</text>
   <view class='flex-h' style='width:100%;'>
     <image class='icon' src='../../assets/icon/Heart@3x.png'></image>
@@ -12,7 +12,7 @@
       <view catchtap='translateEnglish' hidden="{{!isChooseLanguage}}" class='language' style='transform:translateY(100%);'>English</view>
     </view>
   </view>
-</view>
+</view> -->
 <view class='content_wrapper'>
   <view wx:if="reloadContent" wx:for="{{article.content}}" wx:key="{{index}}">
     <view class='text_view'>
@@ -22,7 +22,7 @@
     </view>
   </view>
 </view>
-
+<!-- 
 <view class='flex-h actionBar'>
   <view bindtap='like' class='flex1 flex-h'>
     <image src='../../assets/icon/like_3@3x.png'></image>
@@ -36,4 +36,4 @@
     <image src='../../assets/icon/share_3@3x.png'></image>
     <text class='fz-12'>Share</text>
   </view>
-</view>
+</view> -->

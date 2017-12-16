@@ -13,10 +13,10 @@
     <image class='item_icon' src='../../assets/icon/Comment@3x.png'></image>
     <text class='fz-15'>Comments</text>
   </view>
-  <!-- <view class='item' bindtap='toHistorical'>
-    <image class='item_icon' src='../../assets/icon/HistoricalRecords@3x.png'></image>
-    <text class='fz-15'>Historical Records</text>
-  </view> -->
+   <view class='item' bindtap='toMyPost'>
+    <image class='item_icon' src='../../assets/icon/my_post@3x.png'></image>
+    <text class='fz-15'>My Post</text>
+  </view> 
   <view class='item' bindtap='toAccountSetting'>
     <image class='item_icon' src='../../assets/icon/Account@3x.png'></image>
     <text class='fz-15'>Account</text>

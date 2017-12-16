@@ -16,7 +16,7 @@
     "pages/ChangePassword/ChangePassword",
     "pages/AccountSetting/AccountSetting",
     "pages/MyComment/MyComment",
-    "pages/Historical/Historical",
+    "pages/MyPost/MyPost",
     "pages/ILikeSelect/ILikeSelect",
     "pages/QuestionLike/QuestionLike",
     "pages/AnswerLike/AnswerLike",
